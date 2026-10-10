@@ -83,20 +83,35 @@ function mostrarPestana(tabId, btn) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Banner superior dinámico
+// Banner superior dinámico (Dashboard del Paciente)
 function actualizarBanner() {
-  const nombre = document.getElementById("filiacionNombre").value || "Paciente sin nombre";
-  const edad = document.getElementById("filiacionEdad").value || "--";
-  const sexo = document.getElementById("filiacionSexo").value;
+  const nombre = document.getElementById("filiacionNombre")?.value || "Paciente sin nombre";
+  const edad = document.getElementById("filiacionEdad")?.value || "--";
+  const sexo = document.getElementById("filiacionSexo")?.value;
   const sexoStr = sexo === "femenino" ? "Femenino" : "Masculino";
-  const peso = document.getElementById("antropoPesoActual").value || "--";
-  const talla = document.getElementById("antropoTalla").value || "--";
-  const via = document.getElementById("intervVia").value || "Soporte Nutricional";
+  const peso = document.getElementById("antropoPesoActual")?.value || "--";
+  const talla = document.getElementById("antropoTalla")?.value || "--";
+  const via = document.getElementById("intervVia")?.value || "Soporte Nutricional";
 
-  document.getElementById("bannerNombre").textContent = nombre;
-  document.getElementById("bannerEdadSexo").textContent = `${edad} años • ${sexoStr}`;
-  document.getElementById("bannerPesoTalla").textContent = `${peso} kg • ${talla} cm`;
-  document.getElementById("bannerVia").textContent = via;
+  const elNombre = document.getElementById("bannerNombre");
+  if (elNombre) elNombre.textContent = nombre;
+
+  const elEdadSexo = document.getElementById("bannerEdadSexo");
+  if (elEdadSexo) elEdadSexo.textContent = `${edad} años • ${sexoStr}`;
+
+  const elPesoTalla = document.getElementById("bannerPesoTalla");
+  if (elPesoTalla) elPesoTalla.textContent = `${peso} kg • ${talla} cm`;
+
+  const elVia = document.getElementById("bannerVia");
+  if (elVia) elVia.textContent = via;
+
+  // Actualizar avatar con iniciales
+  const elAvatar = document.getElementById("bannerAvatar");
+  if (elAvatar) {
+    const parts = nombre.trim().split(/\s+/).filter(Boolean);
+    const inits = parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : (parts[0] ? parts[0][0].toUpperCase() : "P");
+    elAvatar.textContent = inits;
+  }
 }
 
 // ============================================================================

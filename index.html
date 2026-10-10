@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proceso de Atención Nutricional (PAN) - Nutrición Clínica USIL</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261010_ui3">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
   <script src="pdf.min.js"></script>
   <script>
@@ -31,7 +31,7 @@
         <div class="brand-badge">USIL</div>
         <div class="brand-text">
           <h1>Proceso de Atención Nutricional (PAN)</h1>
-          <p>Nutrición Clínica Especializada • Formato Académico Hospitalario</p>
+          <p>Nutrición Clínica Especializada • Estación Médica Hospitalaria</p>
         </div>
       </div>
       <div class="header-actions">
@@ -59,66 +59,70 @@
 
   <main class="main-layout">
 
-    <!-- Resumen Rápido del Paciente -->
+    <!-- Resumen Rápido del Paciente - Clinical Dashboard Bar -->
     <section class="patient-quick-banner" id="patientSummaryBanner">
-      <div class="patient-chips">
-        <div class="chip-item">
-          <span class="chip-label">Paciente</span>
-          <span class="chip-val" id="bannerNombre">María Infanta</span>
-        </div>
-        <div class="chip-item">
-          <span class="chip-label">Edad / Sexo</span>
-          <span class="chip-val" id="bannerEdadSexo">45 años • Femenino</span>
-        </div>
-        <div class="chip-item">
-          <span class="chip-label">Peso / Talla</span>
-          <span class="chip-val" id="bannerPesoTalla">57.3 kg • 145.3 cm</span>
-        </div>
-        <div class="chip-item">
-          <span class="chip-label">IMC</span>
-          <span class="chip-val" id="bannerIMC">25.9 kg/m² (Sobrepeso)</span>
-        </div>
-        <div class="chip-item">
-          <span class="chip-label">Vía Nutricional</span>
-          <span class="chip-val" id="bannerVia">Sonda Nasoyeyunal (SNY)</span>
+      <div class="patient-profile-block">
+        <div class="patient-avatar" id="bannerAvatar">MI</div>
+        <div class="patient-main-info">
+          <div class="patient-name-row">
+            <h2 class="patient-name" id="bannerNombre">María Infanta</h2>
+            <span class="patient-tag" id="bannerVia">Sonda Nasoyeyunal (SNY)</span>
+          </div>
+          <p class="patient-meta" id="bannerEdadSexo">45 años • Femenino • Cama 402-A</p>
         </div>
       </div>
-      <div>
-        <span class="badge badge-normal" id="serverStatusBadge">🟢 Motor Clínico Activo</span>
+      <div class="patient-metrics-strip">
+        <div class="metric-pill">
+          <span class="metric-pill-label">Antropometría</span>
+          <span class="metric-pill-val" id="bannerPesoTalla">57.3 kg • 145.3 cm</span>
+        </div>
+        <div class="metric-pill">
+          <span class="metric-pill-label">IMC / Estado</span>
+          <span class="metric-pill-val" id="bannerIMC">25.9 kg/m² (Sobrepeso)</span>
+        </div>
+        <div class="metric-pill">
+          <span class="metric-pill-label">Prescripción</span>
+          <span class="metric-pill-val" id="bannerKcalPrescrita">1635 kcal/día • Vital 1.5</span>
+        </div>
+      </div>
+      <div class="patient-status-block">
+        <span class="badge badge-normal badge-live" id="serverStatusBadge">
+          <span class="live-dot"></span> TiDB Cloud Conectado
+        </span>
       </div>
     </section>
 
     <!-- Navegación por Pestañas del Proceso -->
     <nav class="tabs-nav no-print" id="mainTabsNav" role="tablist" aria-label="Etapas del Proceso de Atención Nutricional">
       <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-filiacion" onclick="mostrarPestana('tab-filiacion', this)">
-        <span>📋</span> Historia Clínica
+        <span class="tab-step">0</span> <span class="tab-title">Historia Clínica</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-nrs" onclick="mostrarPestana('tab-nrs', this)">
-        <span>🔍</span> 1. NRS-2002
+        <span class="tab-step">1</span> <span class="tab-title">NRS-2002</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-antropo" onclick="mostrarPestana('tab-antropo', this)">
-        <span>📏</span> 2.1 Antropometría
+        <span class="tab-step">2.1</span> <span class="tab-title">Antropometría</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-bioquimica" onclick="mostrarPestana('tab-bioquimica', this)">
-        <span>🧪</span> 2.2 Bioquímica
+        <span class="tab-step">2.2</span> <span class="tab-title">Bioquímica</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-clinico-diet" onclick="mostrarPestana('tab-clinico-diet', this)">
-        <span>🥗</span> 2.3–2.5 Clínico & Bristol
+        <span class="tab-step">2.3</span> <span class="tab-title">Clínico & Bristol</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-funcional" onclick="mostrarPestana('tab-funcional', this)">
-        <span>⚡</span> 2.6 Funcional (Marcha/SARC)
+        <span class="tab-step">2.6</span> <span class="tab-title">Funcional</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-diagnostico" onclick="mostrarPestana('tab-diagnostico', this)">
-        <span>🩺</span> 3. Diagnóstico (PES)
+        <span class="tab-step">3</span> <span class="tab-title">Diagnóstico PES</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-intervencion" onclick="mostrarPestana('tab-intervencion', this)">
-        <span>🥣</span> 4. Intervención
+        <span class="tab-step">4</span> <span class="tab-title">Intervención</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-monitoreo" onclick="mostrarPestana('tab-monitoreo', this)">
-        <span>📊</span> 5. Monitoreo
+        <span class="tab-step">5</span> <span class="tab-title">Monitoreo</span>
       </button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-informe" onclick="mostrarPestana('tab-informe', this)">
-        <span>📑</span> 6. Informe Final
+        <span class="tab-step">6</span> <span class="tab-title">Informe Final</span>
       </button>
     </nav>
 
@@ -1321,6 +1325,6 @@ La integración de la evaluación funcional (marcha de 0.5 m/s, SARC-F de 4 punt
   <!-- Contenedor accesible para notificaciones tipo Toast -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20261010_ui3"></script>
 </body>
 </html>

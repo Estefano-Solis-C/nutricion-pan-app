@@ -2,23 +2,21 @@
    styles.css - Sistema de Proceso de Atención Nutricional (PAN) USIL
    Diseño de Interfaz e Ingeniería de UI basado en jakubkrehel/skills
    (better-interface, better-ui, better-layout, better-typography, better-colors)
+   Version: 20261010_ui3
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. SISTEMA DE TOKENS SEMÁNTICOS (better-colors & better-typography)
    -------------------------------------------------------------------------- */
 :root {
-  /* Paleta Primitiva Institucional USIL */
-  --blue-950: #001e38;
-  --blue-900: #002e52;
-  --blue-850: #003865; /* Azul Institucional USIL Primario */
-  --blue-700: #02659e;
-  --blue-600: #0284c7; /* Azul Interactivo / Acento */
-  --blue-500: #0ea5e9;
-  --blue-100: #e0f2fe;
-  --blue-50:  #f0f9ff;
+  /* Identidad Cromática Institucional USIL */
+  --brand-navy-deep:   #001e38;
+  --brand-navy-main:   #003865; /* Azul USIL Oficial */
+  --brand-navy-light:  #00508f;
+  --brand-cyan-accent: #0284c7; /* Azul Interactivo / Acento */
+  --brand-cyan-light:  #38bdf8;
 
-  /* Escala de Neutros (OKLCH lightness balanceada) */
+  /* Escala de Neutros Modernos (Slate - OKLCH Lightness calibrada) */
   --slate-900: #0f172a;
   --slate-800: #1e293b;
   --slate-700: #334155;
@@ -29,113 +27,80 @@
   --slate-200: #e2e8f0;
   --slate-100: #f1f5f9;
   --slate-50:  #f8fafc;
-  --pure-white: #ffffff;
+  --white:     #ffffff;
 
-  /* Rango Semántico de Estados Clínicos (WCAG 2.2 AA Contrast >= 4.5:1) */
-  --emerald-900: #064e3b;
-  --emerald-800: #065f46;
-  --emerald-600: #059669;
-  --emerald-100: #d1fae5;
-  --emerald-50:  #ecfdf5;
+  /* Estados Clínicos Semánticos (WCAG 2.2 AA Contrast >= 4.5:1) */
+  --status-success-bg:     #ecfdf5;
+  --status-success-text:   #065f46;
+  --status-success-border: #a7f3d0;
+  --status-success-solid:  #059669;
 
-  --amber-900: #78350f;
-  --amber-800: #92400e;
-  --amber-600: #d97706;
-  --amber-100: #fef3c7;
-  --amber-50:  #fffbeb;
+  --status-warning-bg:     #fffbeb;
+  --status-warning-text:   #92400e;
+  --status-warning-border: #fde68a;
+  --status-warning-solid:  #d97706;
 
-  --rose-900: #881337;
-  --rose-800: #991b1b;
-  --rose-600: #dc2626;
-  --rose-100: #fee2e2;
-  --rose-50:  #fef2f2;
+  --status-danger-bg:      #fef2f2;
+  --status-danger-text:    #991b1b;
+  --status-danger-border:  #fecaca;
+  --status-danger-solid:   #dc2626;
 
-  /* Tokens de Superficie y Contenedores */
-  --color-bg-app: var(--slate-100);
-  --color-surface-card: var(--pure-white);
-  --color-surface-subtle: var(--slate-50);
-  --color-surface-elevated: var(--pure-white);
+  --status-info-bg:        #eff6ff;
+  --status-info-text:      #1e40af;
+  --status-info-border:    #bfdbfe;
+  --status-info-solid:     #2563eb;
 
-  /* Tokens de Texto (Relación de contraste >= 4.5:1 en todos los niveles) */
-  --color-text-primary: var(--slate-900);   /* 15.8:1 sobre blanco */
-  --color-text-secondary: var(--slate-700); /* 9.4:1 sobre blanco */
-  --color-text-muted: var(--slate-500);     /* 4.6:1 sobre blanco */
-  --color-text-inverse: var(--pure-white);
-
-  /* Tokens de Bordes y Contornos */
-  --color-border-subtle: var(--slate-200);
-  --color-border-medium: var(--slate-300);
-  --color-border-strong: var(--slate-400);
-  --color-border-focus: var(--blue-850);
-
-  /* Acentos y Roles Activos */
-  --color-accent-solid: var(--blue-850);
-  --color-accent-hover: var(--blue-900);
-  --color-accent-subtle: var(--blue-50);
-  --color-accent-text: var(--blue-850);
-  --color-secondary-solid: var(--blue-600);
-  --color-secondary-hover: var(--blue-700);
-
-  /* Tokens Semánticos de Diagnóstico Nutricional */
-  --color-status-success-bg: var(--emerald-50);
-  --color-status-success-text: var(--emerald-800);
-  --color-status-success-border: var(--emerald-100);
-
-  --color-status-warning-bg: var(--amber-50);
-  --color-status-warning-text: var(--amber-800);
-  --color-status-warning-border: var(--amber-100);
-
-  --color-status-danger-bg: var(--rose-50);
-  --color-status-danger-text: var(--rose-800);
-  --color-status-danger-border: var(--rose-100);
-
-  --color-status-info-bg: var(--blue-50);
-  --color-status-info-text: var(--blue-850);
-  --color-status-info-border: var(--blue-100);
+  /* Asignaciones de Tokens Semánticos */
+  --color-bg-app:          var(--slate-50);
+  --color-surface-card:    var(--white);
+  --color-surface-subtle:  var(--slate-100);
+  --color-text-primary:    var(--slate-900);
+  --color-text-secondary:  var(--slate-700);
+  --color-text-muted:      var(--slate-500);
+  --color-border-subtle:   var(--slate-200);
+  --color-border-medium:   var(--slate-300);
+  --color-accent-solid:    var(--brand-navy-main);
 
   /* Compatibilidad con variables previas */
-  --primary: var(--blue-850);
-  --primary-dark: var(--blue-950);
-  --primary-light: var(--blue-50);
-  --secondary: var(--blue-600);
-  --secondary-light: var(--blue-100);
-  --accent: var(--emerald-600);
-  --accent-light: var(--emerald-100);
-  --danger: var(--rose-600);
-  --danger-light: var(--rose-100);
-  --warning: var(--amber-600);
-  --warning-light: var(--amber-100);
-  --info: var(--blue-600);
-  --info-light: var(--blue-100);
-  --dark: var(--slate-900);
-  --gray-700: var(--slate-700);
-  --gray-600: var(--slate-600);
-  --gray-400: var(--slate-400);
-  --gray-200: var(--slate-200);
-  --gray-100: var(--slate-100);
-  --gray-50:  var(--slate-50);
-  --white: var(--pure-white);
+  --primary:         var(--brand-navy-main);
+  --primary-dark:    var(--brand-navy-deep);
+  --primary-light:   #e6f0fa;
+  --secondary:       var(--brand-cyan-accent);
+  --secondary-light: #e0f2fe;
+  --accent:          var(--status-success-solid);
+  --accent-light:    var(--status-success-bg);
+  --danger:          var(--status-danger-solid);
+  --danger-light:    var(--status-danger-bg);
+  --warning:         var(--status-warning-solid);
+  --warning-light:   var(--status-warning-bg);
+  --dark:            var(--slate-900);
+  --gray-700:        var(--slate-700);
+  --gray-600:        var(--slate-600);
+  --gray-400:        var(--slate-400);
+  --gray-200:        var(--slate-200);
+  --gray-100:        var(--slate-100);
+  --gray-50:         var(--slate-50);
 
-  /* Sombras Estratificadas (Elevación Visual) */
-  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.06);
-  --shadow-card: 0 1px 3px 0 rgb(15 23 42 / 0.08), 0 1px 2px -1px rgb(15 23 42 / 0.06);
-  --shadow-md: 0 4px 6px -1px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.06);
-  --shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.1), 0 4px 6px -4px rgb(15 23 42 / 0.1);
-  --shadow-modal: 0 20px 25px -5px rgb(15 23 42 / 0.2), 0 8px 10px -6px rgb(15 23 42 / 0.2);
+  /* Sombras Modernas Multicapa */
+  --shadow-sm:    0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-card:  0 2px 8px -2px rgb(15 23 42 / 0.06), 0 1px 3px 0 rgb(15 23 42 / 0.04);
+  --shadow-hover: 0 10px 20px -3px rgb(15 23 42 / 0.08), 0 4px 6px -2px rgb(15 23 42 / 0.04);
+  --shadow-modal: 0 25px 50px -12px rgb(15 23 42 / 0.25);
 
-  /* Jerarquía de Radios Anidados Matemáticamente: R_inner = R_outer - Padding */
-  --radius-lg: 12px;
-  --radius-md: 8px;
-  --radius-sm: 6px;
+  /* Radios de Curvatura Matemáticamente Anidados */
+  --radius-xl:   16px;
+  --radius-lg:   12px;
+  --radius-md:   8px;
+  --radius-sm:   6px;
   --radius-pill: 9999px;
 
-  /* Espaciado de Layout y Compensación de Encabezado */
+  /* Compensación de Encabezado Fijo */
   --header-height: 72px;
   --scroll-padding-offset: 88px;
 }
 
 /* --------------------------------------------------------------------------
-   2. RESETEO BASE & TIPOGRAFÍA GLOBAL (better-typography)
+   2. RESETEO BASE & TIPOGRAFÍA (better-typography)
    -------------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -160,27 +125,25 @@ body {
   min-height: 100dvh;
 }
 
-/* Balanceo tipográfico para títulos y texto descriptivo */
-h1, h2, h3, h4, .card-title, .brand-text h1 {
+h1, h2, h3, h4, .card-title {
   text-wrap: balance;
   color: var(--color-text-primary);
   letter-spacing: -0.015em;
-  line-height: 1.25;
+  font-weight: 700;
 }
 
 p, .card-subtitle, .alert-box, .pes-text, .ecf-desc, .bristol-desc p {
   text-wrap: pretty;
-  line-height: 1.5;
 }
 
-/* Tabular numbers en todas las mediciones numéricas clínicas */
+/* Números tabulares para evitar saltos oscilatorios en datos clínicos */
 .clinical-table td,
 .metric-value,
+.metric-pill-val,
 .calc-val-large,
 .chip-val,
 .adequacy-pct,
 input[type="number"],
-.sarc-score-display,
 .timer-count {
   font-variant-numeric: tabular-nums;
 }
@@ -189,30 +152,16 @@ input[type="number"],
    3. ACCESIBILIDAD UNIVERSAL & FOCO (better-accessibility)
    -------------------------------------------------------------------------- */
 :focus-visible {
-  outline: 2px solid var(--color-accent-solid);
+  outline: 2px solid var(--brand-cyan-accent);
   outline-offset: 2px;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Prevención de auto-zoom abrupto en iOS Safari */
 @media (max-width: 640px) {
   input, select, textarea {
     font-size: 16px !important;
   }
 }
 
-/* Respeto estricto a preferencia de reducción de movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -223,21 +172,21 @@ input[type="number"],
 }
 
 /* --------------------------------------------------------------------------
-   4. ENCABEZADO Y BARRA INSTITUCIONAL (better-layout & better-ui)
+   4. ENCABEZADO INSTITUCIONAL DE ALTA GAMA (better-layout & better-colors)
    -------------------------------------------------------------------------- */
 .app-header {
-  background: linear-gradient(135deg, var(--blue-850) 0%, var(--blue-950) 100%);
-  color: var(--pure-white);
-  padding: 0.85rem 1.5rem;
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(180deg, var(--brand-navy-deep) 0%, var(--brand-navy-main) 100%);
+  color: var(--white);
+  padding: 0.85rem 1.75rem;
+  box-shadow: 0 4px 14px 0 rgba(0, 30, 56, 0.25);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header-container {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -253,13 +202,13 @@ input[type="number"],
 }
 
 .brand-badge {
-  background: var(--pure-white);
-  color: var(--blue-850);
+  background: var(--white);
+  color: var(--brand-navy-main);
   font-weight: 800;
   font-size: 1.25rem;
-  padding: 0.3rem 0.75rem;
+  padding: 0.28rem 0.8rem;
   border-radius: var(--radius-sm);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
   box-shadow: var(--shadow-sm);
   display: inline-flex;
   align-items: center;
@@ -267,14 +216,15 @@ input[type="number"],
 }
 
 .brand-text h1 {
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 700;
-  color: var(--pure-white);
+  color: var(--white);
+  line-height: 1.2;
 }
 
 .brand-text p {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
 }
 
@@ -286,17 +236,17 @@ input[type="number"],
 }
 
 /* --------------------------------------------------------------------------
-   5. BOTONES Y CONTROLES (better-ui: press scales to 0.96, verb-first)
+   5. BOTONES Y CONTROLES HÁPTICOS (better-ui: press 0.96, verb-first)
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  padding: 0.5rem 0.95rem;
+  padding: 0.5rem 1rem;
   min-height: 38px;
   border-radius: var(--radius-md);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
   cursor: pointer;
   border: 1px solid transparent;
@@ -309,7 +259,6 @@ input[type="number"],
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Efecto táctil: Escala a 0.96 sobre elementos habilitados */
 .btn:not(:disabled):active {
   transform: scale(0.96);
 }
@@ -320,106 +269,162 @@ input[type="number"],
   transform: none !important;
 }
 
-/* Botón Primario: Una acción destacada por vista */
+/* Botón Primario: Una sola acción principal destacada */
 .btn-primary {
-  background-color: var(--color-secondary-solid);
-  color: var(--pure-white);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--brand-cyan-accent);
+  color: var(--white);
+  box-shadow: 0 2px 6px 0 rgba(2, 132, 199, 0.3);
 }
 
-/* Botón Secundario Translúcido para Cabecera */
+/* Botones Secundarios Translúcidos para Cabecera */
 .btn-secondary {
-  background-color: rgba(255, 255, 255, 0.14);
-  color: var(--pure-white);
-  border-color: rgba(255, 255, 255, 0.28);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(4px);
 }
 
-/* Botón de Éxito / Acción Positiva */
+/* Botón Positivo / Guardar */
 .btn-success {
-  background-color: var(--emerald-600);
-  color: var(--pure-white);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Botón Neutro de Contorno */
-.btn-outline {
-  background-color: var(--pure-white);
-  color: var(--color-text-secondary);
-  border-color: var(--color-border-medium);
+  background-color: var(--status-success-solid);
+  color: var(--white);
+  box-shadow: 0 2px 6px 0 rgba(5, 150, 105, 0.3);
 }
 
 .btn-outline-white {
   background-color: transparent;
-  color: var(--pure-white);
-  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.btn-outline {
+  background-color: var(--white);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-medium);
 }
 
 .btn-sm {
-  padding: 0.35rem 0.7rem;
+  padding: 0.35rem 0.75rem;
   min-height: 32px;
   font-size: 0.8rem;
 }
 
-/* Efectos Hover protegidos para evitar estados pegados en pantallas táctiles */
 @media (hover: hover) {
   .btn-primary:hover {
-    background-color: var(--color-secondary-hover);
-    box-shadow: var(--shadow-md);
+    background-color: #0369a1;
+    box-shadow: 0 4px 12px 0 rgba(2, 132, 199, 0.4);
   }
   .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.35);
   }
   .btn-success:hover {
-    background-color: var(--emerald-800);
-    box-shadow: var(--shadow-md);
+    background-color: #047857;
+  }
+  .btn-outline-white:hover {
+    background-color: rgba(255, 255, 255, 0.15);
   }
   .btn-outline:hover {
     background-color: var(--slate-100);
     border-color: var(--slate-400);
-    color: var(--color-text-primary);
-  }
-  .btn-outline-white:hover {
-    background-color: rgba(255, 255, 255, 0.16);
   }
 }
 
 /* --------------------------------------------------------------------------
-   6. CONTENEDOR PRINCIPAL Y BANNER CLÍNICO (better-layout)
+   6. CONTENEDOR PRINCIPAL
    -------------------------------------------------------------------------- */
 .main-layout {
-  max-width: 1400px;
-  margin: 1.25rem auto 3rem;
+  max-width: 1440px;
+  margin: 1.25rem auto 3.5rem;
   padding: 0 1.25rem;
 }
 
+/* --------------------------------------------------------------------------
+   7. DASHBOARD DEL PACIENTE (PATIENT QUICK BANNER REDISEÑADO)
+   -------------------------------------------------------------------------- */
 .patient-quick-banner {
-  background: var(--color-surface-card);
-  border-radius: var(--radius-lg);
-  padding: 1rem 1.35rem;
-  margin-bottom: 1.25rem;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 1.15rem 1.5rem;
+  margin-bottom: 1.35rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.25rem;
   box-shadow: var(--shadow-card);
   border: 1px solid var(--color-border-subtle);
-  border-left: 5px solid var(--color-accent-solid);
 }
 
-.patient-chips {
+.patient-profile-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-navy-main) 0%, var(--brand-cyan-accent) 100%);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 56, 101, 0.25);
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.patient-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.patient-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.patient-tag {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid #bae6fd;
+}
+
+.patient-meta {
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+.patient-metrics-strip {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 0.75rem;
 }
 
-.chip-item {
+.metric-pill {
+  background: var(--slate-50);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.85rem;
   display: flex;
   flex-direction: column;
 }
 
-.chip-label {
-  font-size: 0.7rem;
+.metric-pill-label {
+  font-size: 0.68rem;
   text-transform: uppercase;
   color: var(--color-text-muted);
   font-weight: 700;
@@ -427,36 +432,74 @@ input[type="number"],
   margin-bottom: 0.15rem;
 }
 
-.chip-val {
+.metric-pill-val {
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--color-text-primary);
-  font-size: 0.95rem;
+}
+
+.patient-status-block {
+  display: flex;
+  align-items: center;
+}
+
+/* Indicador de TiDB en Vivo con Luz Pulsante */
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 /* --------------------------------------------------------------------------
-   7. BARRA DE PESTAÑAS CLÍNICAS (better-layout & better-ui)
+   8. NAVEGACIÓN SEGMENTADA POR ETAPAS (STEPPER CONTROL)
    -------------------------------------------------------------------------- */
 .tabs-nav {
   display: flex;
-  background: var(--color-surface-card);
-  border-radius: var(--radius-lg);
+  background: var(--white);
+  border-radius: var(--radius-xl);
   padding: 0.4rem;
-  gap: 0.3rem;
+  gap: 0.25rem;
   box-shadow: var(--shadow-card);
   border: 1px solid var(--color-border-subtle);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
   overflow-x: auto;
-  scrollbar-width: thin;
+  scrollbar-width: none; /* Ocultar scrollbar pero mantener scroll */
   overscroll-behavior: contain;
+}
+
+.tabs-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-btn {
   background: transparent;
   border: none;
-  padding: 0.6rem 0.9rem;
-  min-height: 38px;
-  border-radius: var(--radius-md);
-  font-size: 0.86rem;
+  padding: 0.55rem 0.85rem;
+  min-height: 40px;
+  border-radius: var(--radius-lg);
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-text-secondary);
   cursor: pointer;
@@ -466,34 +509,33 @@ input[type="number"],
   gap: 0.4rem;
   transition-property: background-color, color, box-shadow;
   transition-duration: 120ms;
-  transition-timing-function: ease-out;
   user-select: none;
+  flex-shrink: 0;
 }
 
-@media (hover: hover) {
-  .tab-btn:hover {
-    background-color: var(--slate-100);
-    color: var(--color-accent-solid);
-  }
-}
-
-.tab-btn.active {
-  background-color: var(--color-accent-solid);
-  color: var(--pure-white);
-  box-shadow: var(--shadow-sm);
-}
-
-.tab-badge {
-  background: rgba(15, 23, 42, 0.08);
-  padding: 0.12rem 0.45rem;
-  border-radius: var(--radius-pill);
-  font-size: 0.74rem;
+.tab-step {
+  background: var(--slate-100);
+  color: var(--brand-navy-main);
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
-.tab-btn.active .tab-badge {
+.tab-btn:hover {
+  background-color: var(--slate-100);
+  color: var(--brand-navy-main);
+}
+
+.tab-btn.active {
+  background-color: var(--brand-navy-main);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 56, 101, 0.25);
+}
+
+.tab-btn.active .tab-step {
   background: rgba(255, 255, 255, 0.22);
-  color: var(--pure-white);
+  color: var(--white);
 }
 
 .tab-pane {
@@ -511,54 +553,53 @@ input[type="number"],
 }
 
 /* --------------------------------------------------------------------------
-   8. TARJETAS Y SECCIONES (better-layout: espacio > líneas)
+   9. TARJETAS CLÍNICAS (better-layout: espacio > líneas)
    -------------------------------------------------------------------------- */
 .card {
-  background: var(--color-surface-card);
-  border-radius: var(--radius-lg);
-  padding: 1.35rem;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
   box-shadow: var(--shadow-card);
   border: 1px solid var(--color-border-subtle);
-  margin-bottom: 1.35rem;
+  margin-bottom: 1.5rem;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.15rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--color-border-subtle);
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
 .card-title {
-  font-size: 1.12rem;
-  font-weight: 700;
-  color: var(--color-accent-solid);
+  font-size: 1.15rem;
+  color: var(--brand-navy-main);
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .card-subtitle {
-  font-size: 0.82rem;
+  font-size: 0.83rem;
   color: var(--color-text-muted);
   margin-top: 0.15rem;
 }
 
-/* Grillas Responsivas con minmax(0, 1fr) para evitar desbordes */
+/* Grillas Fluidas */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.15rem;
+  gap: 1.25rem;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.15rem;
+  gap: 1.25rem;
 }
 
 .grid-4 {
@@ -567,36 +608,36 @@ input[type="number"],
   gap: 1rem;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .grid-2, .grid-3, .grid-4 {
     grid-template-columns: 1fr;
   }
 }
 
 /* --------------------------------------------------------------------------
-   9. FORMULARIOS E INPUTS CLÍNICOS
+   10. FORMULARIOS E INPUTS CLÍNICOS
    -------------------------------------------------------------------------- */
 .form-group {
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.95rem;
 }
 
 .form-group label {
   display: block;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-text-secondary);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
 }
 
 .form-control {
   width: 100%;
-  padding: 0.55rem 0.75rem;
-  min-height: 38px;
+  padding: 0.58rem 0.85rem;
+  min-height: 40px;
   border: 1px solid var(--color-border-medium);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   font-size: 0.9rem;
   color: var(--color-text-primary);
-  background-color: var(--pure-white);
+  background-color: var(--white);
   transition-property: border-color, box-shadow;
   transition-duration: 120ms;
   font-family: inherit;
@@ -604,12 +645,12 @@ input[type="number"],
 
 .form-control:focus {
   outline: none;
-  border-color: var(--color-accent-solid);
-  box-shadow: 0 0 0 3px rgba(0, 56, 101, 0.12);
+  border-color: var(--brand-cyan-accent);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
 }
 
 textarea.form-control {
-  min-height: 85px;
+  min-height: 90px;
   resize: vertical;
   line-height: 1.45;
 }
@@ -626,65 +667,64 @@ textarea.form-control {
 .input-group-addon {
   display: flex;
   align-items: center;
-  padding: 0 0.75rem;
+  padding: 0 0.85rem;
   background-color: var(--slate-100);
   border: 1px solid var(--color-border-medium);
   border-left: 0;
-  border-top-right-radius: var(--radius-sm);
-  border-bottom-right-radius: var(--radius-sm);
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
   color: var(--color-text-muted);
-  font-size: 0.83rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------
-   10. AVISOS Y CALLOUTS (WCAG 2.2 AA Contrast validado)
+   11. AVISOS Y CALLOUTS (WCAG 2.2 AA Contrast)
    -------------------------------------------------------------------------- */
 .alert-box {
-  padding: 0.85rem 1.15rem;
-  border-radius: var(--radius-md);
-  margin-bottom: 1.15rem;
+  padding: 0.95rem 1.25rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.25rem;
   font-size: 0.88rem;
   display: flex;
-  gap: 0.65rem;
+  gap: 0.75rem;
   align-items: flex-start;
   border-left: 4px solid;
 }
 
 .alert-info {
-  background-color: var(--color-status-info-bg);
-  color: var(--color-status-info-text);
-  border-left-color: var(--color-accent-solid);
+  background-color: var(--status-info-bg);
+  color: var(--status-info-text);
+  border-left-color: var(--brand-navy-main);
 }
 
 .alert-warning {
-  background-color: var(--color-status-warning-bg);
-  color: var(--color-status-warning-text);
-  border-left-color: var(--amber-600);
+  background-color: var(--status-warning-bg);
+  color: var(--status-warning-text);
+  border-left-color: var(--status-warning-solid);
 }
 
 .alert-danger {
-  background-color: var(--color-status-danger-bg);
-  color: var(--color-status-danger-text);
-  border-left-color: var(--rose-600);
+  background-color: var(--status-danger-bg);
+  color: var(--status-danger-text);
+  border-left-color: var(--status-danger-solid);
 }
 
 .alert-success {
-  background-color: var(--color-status-success-bg);
-  color: var(--color-status-success-text);
-  border-left-color: var(--emerald-600);
+  background-color: var(--status-success-bg);
+  color: var(--status-success-text);
+  border-left-color: var(--status-success-solid);
 }
 
 /* --------------------------------------------------------------------------
-   11. TABLAS CLÍNICAS (better-typography: tabular-nums & alineación óptica)
+   12. TABLAS CLÍNICAS (better-typography: tabular-nums & alineación)
    -------------------------------------------------------------------------- */
 .table-responsive {
   overflow-x: auto;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border-subtle);
-  background: var(--pure-white);
-  box-shadow: var(--shadow-sm);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -697,40 +737,38 @@ textarea.form-control {
 
 .clinical-table th {
   background-color: var(--slate-50);
-  color: var(--color-accent-solid);
+  color: var(--brand-navy-main);
   font-weight: 700;
-  padding: 0.75rem 0.85rem;
+  padding: 0.8rem 0.95rem;
   border-bottom: 2px solid var(--color-border-subtle);
   white-space: nowrap;
 }
 
 .clinical-table td {
-  padding: 0.65rem 0.85rem;
+  padding: 0.7rem 0.95rem;
   border-bottom: 1px solid var(--color-border-subtle);
   vertical-align: middle;
   color: var(--color-text-secondary);
 }
 
-.clinical-table tbody tr:last-child td {
-  border-bottom: none;
+.clinical-table tbody tr:nth-child(even) {
+  background-color: #fafbfc;
 }
 
-@media (hover: hover) {
-  .clinical-table tbody tr:hover {
-    background-color: var(--slate-50);
-  }
+.clinical-table tbody tr:hover {
+  background-color: #f0f7ff;
 }
 
 /* --------------------------------------------------------------------------
-   12. BADGES & ESTADOS BIOQUÍMICOS (Color + Texto + Borde)
+   13. BADGES DE LABORATORIO
    -------------------------------------------------------------------------- */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.6rem;
   border-radius: var(--radius-pill);
-  font-size: 0.72rem;
+  font-size: 0.73rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -738,89 +776,87 @@ textarea.form-control {
 }
 
 .badge-elevado, .badge-muy_elevado, .badge-rojo {
-  background-color: var(--color-status-danger-bg);
-  color: var(--color-status-danger-text);
-  border-color: var(--color-status-danger-border);
+  background-color: var(--status-danger-bg);
+  color: var(--status-danger-text);
+  border-color: var(--status-danger-border);
 }
 
 .badge-disminuido, .badge-muy_disminuido, .badge-amarillo {
-  background-color: var(--color-status-warning-bg);
-  color: var(--color-status-warning-text);
-  border-color: var(--color-status-warning-border);
+  background-color: var(--status-warning-bg);
+  color: var(--status-warning-text);
+  border-color: var(--status-warning-border);
 }
 
 .badge-normal, .badge-verde {
-  background-color: var(--color-status-success-bg);
-  color: var(--color-status-success-text);
-  border-color: var(--color-status-success-border);
+  background-color: var(--status-success-bg);
+  color: var(--status-success-text);
+  border-color: var(--status-success-border);
 }
 
 .badge-azul {
-  background-color: var(--color-status-info-bg);
-  color: var(--color-status-info-text);
-  border-color: var(--color-status-info-border);
+  background-color: var(--status-info-bg);
+  color: var(--status-info-text);
+  border-color: var(--status-info-border);
 }
 
 /* --------------------------------------------------------------------------
-   13. TARJETAS CALCULADORAS INTERACTIVAS (Vidal, Marcha, Dinamometría)
+   14. TARJETAS CALCULADORAS INTERACTIVAS
    -------------------------------------------------------------------------- */
 .calc-card {
   background: var(--slate-50);
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  padding: 1rem;
+  border-radius: var(--radius-lg);
+  padding: 1.15rem;
 }
 
 .calc-result-display {
-  background: var(--pure-white);
-  border: 2px solid var(--color-secondary-solid);
-  border-radius: var(--radius-md);
-  padding: 1rem;
+  background: var(--white);
+  border: 2px solid var(--brand-cyan-accent);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem;
   text-align: center;
-  margin-top: 0.85rem;
+  margin-top: 1rem;
   box-shadow: var(--shadow-sm);
 }
 
 .calc-val-large {
-  font-size: 2.1rem;
+  font-size: 2.3rem;
   font-weight: 800;
-  color: var(--color-accent-solid);
+  color: var(--brand-navy-main);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
 
 .calc-unit {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--color-text-muted);
   font-weight: 600;
 }
 
 .calc-diag {
   margin-top: 0.45rem;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-text-primary);
 }
 
 /* --------------------------------------------------------------------------
-   14. ESCALA VISUAL DE BRISTOL INTERACTIVA
+   15. ESCALAS VISUALES - BRISTOL
    -------------------------------------------------------------------------- */
 .bristol-interactive-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.95rem;
   margin: 1rem 0;
 }
 
 .bristol-card {
-  background: var(--pure-white);
+  background: var(--white);
   border: 2px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 0.85rem;
+  border-radius: var(--radius-xl);
+  padding: 1rem;
   cursor: pointer;
   transition-property: border-color, transform, box-shadow, background-color;
   transition-duration: 150ms;
-  position: relative;
   user-select: none;
 }
 
@@ -830,41 +866,41 @@ textarea.form-control {
 
 @media (hover: hover) {
   .bristol-card:hover {
-    border-color: var(--color-secondary-solid);
-    box-shadow: var(--shadow-md);
+    border-color: var(--brand-cyan-accent);
+    box-shadow: var(--shadow-hover);
   }
 }
 
 .bristol-card.selected {
-  border-color: var(--emerald-600);
-  background-color: var(--emerald-50);
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+  border-color: var(--status-success-solid);
+  background-color: var(--status-success-bg);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.18);
 }
 
 .bristol-badge {
-  font-size: 0.72rem;
+  font-size: 0.73rem;
   font-weight: 700;
-  padding: 0.18rem 0.5rem;
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-pill);
   display: inline-block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
 /* --------------------------------------------------------------------------
-   15. ESCALA CLÍNICA DE FRAGILIDAD (ECF 9 ESTADIOS)
+   16. ESCALA DE FRAGILIDAD (ECF 9 ESTADIOS)
    -------------------------------------------------------------------------- */
 .ecf-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.85rem;
   margin: 1rem 0;
 }
 
 .ecf-card {
-  background: var(--pure-white);
+  background: var(--white);
   border: 2px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  padding: 0.85rem;
+  border-radius: var(--radius-lg);
+  padding: 0.95rem;
   cursor: pointer;
   transition-property: border-color, background-color, box-shadow, transform;
   transition-duration: 150ms;
@@ -878,21 +914,21 @@ textarea.form-control {
 
 @media (hover: hover) {
   .ecf-card:hover {
-    border-color: var(--color-secondary-solid);
+    border-color: var(--brand-cyan-accent);
     box-shadow: var(--shadow-sm);
   }
 }
 
 .ecf-card.selected {
-  border-color: var(--color-accent-solid);
-  background-color: var(--blue-50);
-  box-shadow: 0 0 0 3px rgba(0, 56, 101, 0.15);
+  border-color: var(--brand-navy-main);
+  background-color: var(--status-info-bg);
+  box-shadow: 0 0 0 3px rgba(0, 56, 101, 0.18);
 }
 
 .ecf-num {
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  color: var(--color-accent-solid);
+  color: var(--brand-navy-main);
   margin-bottom: 0.2rem;
 }
 
@@ -904,70 +940,70 @@ textarea.form-control {
 }
 
 .ecf-desc {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: var(--color-text-muted);
   line-height: 1.35;
 }
 
 /* --------------------------------------------------------------------------
-   16. DINAMOMETRÍA & SEMÁFORO DE SCHLÜSSEL
+   17. DINAMOMETRÍA - SEMÁFORO DE SCHLÜSSEL
    -------------------------------------------------------------------------- */
 .dinamo-semaforo-box {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.85rem;
   margin: 1rem 0;
 }
 
 .semaforo-card {
-  padding: 0.85rem 1rem;
-  border-radius: var(--radius-md);
+  padding: 0.95rem 1.15rem;
+  border-radius: var(--radius-lg);
   font-size: 0.86rem;
   border-left: 5px solid;
-  background: var(--pure-white);
-  box-shadow: var(--shadow-sm);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
   transition-property: transform, box-shadow;
   transition-duration: 150ms;
 }
 
 .semaforo-card.critico {
-  border-left-color: var(--rose-600);
-  background: var(--rose-50);
-  color: var(--rose-900);
+  border-left-color: var(--status-danger-solid);
+  background: var(--status-danger-bg);
+  color: var(--status-danger-text);
 }
 
 .semaforo-card.moderado {
-  border-left-color: var(--amber-600);
-  background: var(--amber-50);
-  color: var(--amber-900);
+  border-left-color: var(--status-warning-solid);
+  background: var(--status-warning-bg);
+  color: var(--status-warning-text);
 }
 
 .semaforo-card.optimo {
-  border-left-color: var(--emerald-600);
-  background: var(--emerald-50);
-  color: var(--emerald-900);
+  border-left-color: var(--status-success-solid);
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
 }
 
 .semaforo-card.elevado {
-  border-left-color: var(--blue-600);
-  background: var(--blue-50);
-  color: var(--blue-900);
+  border-left-color: var(--brand-cyan-accent);
+  background: var(--status-info-bg);
+  color: var(--status-info-text);
 }
 
 .semaforo-card.active-match {
   transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
   font-weight: 600;
 }
 
 /* --------------------------------------------------------------------------
-   17. CUESTIONARIO SARC-F
+   18. CUESTIONARIO SARC-F
    -------------------------------------------------------------------------- */
 .sarc-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: 0.85rem 0;
   border-bottom: 1px solid var(--color-border-subtle);
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -995,7 +1031,7 @@ textarea.form-control {
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border-medium);
   cursor: pointer;
-  background: var(--pure-white);
+  background: var(--white);
   transition: background-color 120ms ease;
 }
 
@@ -1004,33 +1040,33 @@ textarea.form-control {
 }
 
 .sarc-radio-label input {
-  accent-color: var(--color-accent-solid);
+  accent-color: var(--brand-navy-main);
 }
 
 /* --------------------------------------------------------------------------
-   18. DIAGNÓSTICO NUTRICIONAL PES (Problema - Etiología - Signos)
+   19. DIAGNÓSTICO NUTRICIONAL PES
    -------------------------------------------------------------------------- */
 .pes-card {
-  background: var(--pure-white);
+  background: var(--white);
   border: 1px solid var(--color-border-subtle);
-  border-left: 5px solid var(--color-accent-solid);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.15rem;
-  margin-bottom: 0.85rem;
-  box-shadow: var(--shadow-sm);
+  border-left: 5px solid var(--brand-navy-main);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.25rem;
+  margin-bottom: 0.95rem;
+  box-shadow: var(--shadow-card);
 }
 
 .pes-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
 .pes-code {
   font-weight: 800;
-  color: var(--color-accent-solid);
-  font-size: 0.86rem;
+  color: var(--brand-navy-main);
+  font-size: 0.88rem;
   letter-spacing: 0.02em;
 }
 
@@ -1041,12 +1077,12 @@ textarea.form-control {
 }
 
 /* --------------------------------------------------------------------------
-   19. BARRA DE ADECUACIÓN NUTRICIONAL
+   20. BARRA DE ADECUACIÓN NUTRICIONAL
    -------------------------------------------------------------------------- */
 .adequacy-bar-wrapper {
   background: var(--slate-200);
   border-radius: var(--radius-pill);
-  height: 9px;
+  height: 10px;
   overflow: hidden;
   margin-top: 0.35rem;
 }
@@ -1057,20 +1093,20 @@ textarea.form-control {
   transition: width 250ms ease-out;
 }
 
-.adequacy-optimal { background-color: var(--emerald-600); }
-.adequacy-warning { background-color: var(--amber-600); }
-.adequacy-danger { background-color: var(--rose-600); }
+.adequacy-optimal { background-color: var(--status-success-solid); }
+.adequacy-warning { background-color: var(--status-warning-solid); }
+.adequacy-danger  { background-color: var(--status-danger-solid); }
 
 /* --------------------------------------------------------------------------
-   20. CARGA DE HISTORIA CLÍNICA PDF (DRAG & DROP)
+   21. CARGA DE HISTORIA CLÍNICA PDF (DRAG & DROP)
    -------------------------------------------------------------------------- */
 .pdf-upload-card {
-  border: 2px dashed var(--color-secondary-solid);
-  background: var(--blue-50);
-  border-radius: var(--radius-lg);
-  padding: 1.75rem 1.5rem;
+  border: 2px dashed var(--brand-cyan-accent);
+  background: #f0f9ff;
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.5rem;
   text-align: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
   transition-property: border-color, background-color, transform;
   transition-duration: 150ms;
   position: relative;
@@ -1078,28 +1114,31 @@ textarea.form-control {
 }
 
 .pdf-upload-card:hover, .pdf-upload-card.dragover {
-  border-color: var(--color-accent-solid);
-  background: var(--blue-100);
+  border-color: var(--brand-navy-main);
+  background: #e0f2fe;
   transform: translateY(-2px);
 }
 
 .pdf-upload-icon {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   margin-bottom: 0.45rem;
-  color: var(--color-secondary-solid);
+  color: var(--brand-cyan-accent);
 }
 
 .pdf-upload-title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-accent-solid);
-  margin-bottom: 0.2rem;
+  color: var(--brand-navy-main);
+  margin-bottom: 0.25rem;
 }
 
 .pdf-upload-desc {
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   color: var(--color-text-muted);
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pdf-upload-btn-group {
@@ -1109,50 +1148,15 @@ textarea.form-control {
   flex-wrap: wrap;
 }
 
-.pdf-status-alert {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  font-size: 0.88rem;
-  display: none;
-  animation: tabFadeIn 180ms ease-out;
-}
-
-/* Contenedores de imágenes oficiales */
-.scale-image-container {
-  background: var(--pure-white);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 0.75rem;
-  margin: 1rem 0;
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-}
-
-.scale-image-container img {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--radius-sm);
-  display: block;
-  margin: 0 auto;
-}
-
-.scale-image-caption {
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  margin-top: 0.5rem;
-  font-style: italic;
-}
-
 /* --------------------------------------------------------------------------
-   21. MODAL ACCESIBLE (better-accessibility & better-ui: overscroll: contain)
+   22. MODAL ACCESIBLE CON OVERSCROLL CONTAIN
    -------------------------------------------------------------------------- */
 .modal-overlay {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
   z-index: 9999;
   justify-content: center;
   align-items: center;
@@ -1165,8 +1169,8 @@ textarea.form-control {
 }
 
 .modal-dialog {
-  background: var(--pure-white);
-  border-radius: var(--radius-lg);
+  background: var(--white);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-modal);
   max-width: 500px;
   width: 100%;
@@ -1181,9 +1185,9 @@ textarea.form-control {
 }
 
 .modal-header {
-  background: linear-gradient(135deg, var(--blue-850) 0%, var(--blue-900) 100%);
-  color: var(--pure-white);
-  padding: 1.1rem 1.35rem;
+  background: linear-gradient(135deg, var(--brand-navy-main) 0%, var(--brand-navy-deep) 100%);
+  color: var(--white);
+  padding: 1.15rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1192,16 +1196,13 @@ textarea.form-control {
 .modal-header h3 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--pure-white);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  color: var(--white);
 }
 
 .modal-close-btn {
   background: transparent;
   border: none;
-  color: var(--pure-white);
+  color: var(--white);
   font-size: 1.4rem;
   cursor: pointer;
   line-height: 1;
@@ -1218,15 +1219,15 @@ textarea.form-control {
 }
 
 .modal-body {
-  padding: 1.35rem;
+  padding: 1.5rem;
   text-align: center;
 }
 
 .qr-box {
   background: var(--slate-50);
   border: 2px dashed var(--color-border-medium);
-  border-radius: var(--radius-lg);
-  padding: 1.15rem;
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
   display: inline-block;
   margin: 0.85rem auto;
   box-shadow: inset 0 2px 4px 0 rgba(15, 23, 42, 0.04);
@@ -1239,7 +1240,7 @@ textarea.form-control {
 
 .url-copy-container {
   display: flex;
-  gap: 0.45rem;
+  gap: 0.5rem;
   margin: 0.85rem 0;
 }
 
@@ -1247,15 +1248,15 @@ textarea.form-control {
   flex: 1;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.88rem;
-  padding: 0.55rem 0.75rem;
+  padding: 0.6rem 0.85rem;
   border: 1px solid var(--color-border-medium);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--slate-50);
-  color: var(--color-accent-solid);
+  color: var(--brand-navy-main);
 }
 
 /* --------------------------------------------------------------------------
-   22. TOASTS Y NOTIFICACIONES CLÍNICAS (better-writing & better-ui)
+   23. TOASTS Y NOTIFICACIONES CLÍNICAS
    -------------------------------------------------------------------------- */
 .toast-container {
   position: fixed;
@@ -1271,32 +1272,32 @@ textarea.form-control {
 .toast {
   pointer-events: auto;
   background: var(--slate-900);
-  color: var(--pure-white);
-  padding: 0.75rem 1.15rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  color: var(--white);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
   font-size: 0.88rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   animation: toastSlideUp 180ms ease-out;
-  max-width: 380px;
+  max-width: 400px;
 }
 
 .toast.toast-success {
-  background: var(--emerald-800);
-  border-left: 4px solid var(--emerald-600);
+  background: #064e3b;
+  border-left: 5px solid #10b981;
 }
 
 .toast.toast-error {
-  background: var(--rose-800);
-  border-left: 4px solid var(--rose-600);
+  background: #881337;
+  border-left: 5px solid #f43f5e;
 }
 
 .toast.toast-info {
-  background: var(--blue-900);
-  border-left: 4px solid var(--blue-600);
+  background: #002e52;
+  border-left: 5px solid #38bdf8;
 }
 
 @keyframes toastSlideUp {
@@ -1305,13 +1306,13 @@ textarea.form-control {
 }
 
 /* --------------------------------------------------------------------------
-   23. FORMATO DE IMPRESIÓN OFICIAL (INFORME ACADÉMICO USIL)
+   24. FORMATO DE IMPRESIÓN OFICIAL USIL
    -------------------------------------------------------------------------- */
 @media print {
   body {
     background: #ffffff !important;
     color: #000000 !important;
-    font-size: 10.5pt;
+    font-size: 10pt;
   }
 
   .app-header, .tabs-nav, .header-actions, .no-print, button, .btn, .modal-overlay, .toast-container {
