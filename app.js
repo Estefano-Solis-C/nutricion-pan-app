@@ -1236,18 +1236,22 @@ async function abrirModalMovil() {
   const inputUrl = document.getElementById("mobileUrlInput");
   const qrContainer = document.getElementById("qrcodeContainer");
 
-  let urlDestino = `http://192.168.18.186:8080`;
+  let urlDestino = window.location.origin;
 
-  try {
-    const res = await fetch("/api/network");
-    if (res.ok) {
-      const data = await res.json();
-      if (data.qr_target) {
-        urlDestino = data.qr_target;
+  // Si estamos en localhost/127.0.0.1, consultar la IP de red local para compartir en Wi-Fi
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    urlDestino = `http://192.168.18.186:8080`;
+    try {
+      const res = await fetch("/api/network");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.qr_target) {
+          urlDestino = data.qr_target;
+        }
       }
+    } catch (e) {
+      console.warn("Usando IP por defecto para QR:", e);
     }
-  } catch (e) {
-    console.warn("Usando IP por defecto para QR:", e);
   }
 
   inputUrl.value = urlDestino;
