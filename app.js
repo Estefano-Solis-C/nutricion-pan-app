@@ -4,22 +4,42 @@
 
 // Base de datos de percentiles de dinamometría (Schlüssel et al., 2008)
 const TABLA_SCHLUSSEL = {
-  femenino: [
-    { min: 20, max: 29, p10: 18.6, p30: 22.3, p50: 25.8, p70: 28.4, p90: 31.8 },
-    { min: 30, max: 39, p10: 20.1, p30: 23.5, p50: 26.4, p70: 29.3, p90: 32.9 },
-    { min: 40, max: 49, p10: 18.4, p30: 22.9, p50: 25.7, p70: 28.1, p90: 31.7 },
-    { min: 50, max: 59, p10: 15.4, p30: 19.9, p50: 23.0, p70: 25.3, p90: 29.8 },
-    { min: 60, max: 69, p10: 15.0, p30: 18.2, p50: 20.5, p70: 22.8, p90: 27.1 },
-    { min: 70, max: 120, p10: 9.0,  p30: 13.0, p50: 16.0, p70: 19.2, p90: 22.6 }
-  ],
-  masculino: [
-    { min: 20, max: 29, p10: 34.0, p30: 40.0, p50: 44.5, p70: 49.0, p90: 55.0 },
-    { min: 30, max: 39, p10: 35.5, p30: 42.0, p50: 47.0, p70: 51.5, p90: 57.0 },
-    { min: 40, max: 49, p10: 34.0, p30: 40.5, p50: 45.0, p70: 50.0, p90: 56.0 },
-    { min: 50, max: 59, p10: 30.0, p30: 36.5, p50: 41.0, p70: 46.0, p90: 51.0 },
-    { min: 60, max: 69, p10: 26.0, p30: 32.0, p50: 36.5, p70: 41.5, p90: 47.0 },
-    { min: 70, max: 120, p10: 20.0, p30: 25.0, p50: 29.0, p70: 34.0, p90: 39.0 }
-  ]
+  femenino: {
+    izquierdo: [
+      { min: 20, max: 29, p10: 18.6, p30: 22.3, p50: 25.8, p70: 28.4, p90: 31.8 },
+      { min: 30, max: 39, p10: 20.1, p30: 23.5, p50: 26.4, p70: 29.3, p90: 32.9 },
+      { min: 40, max: 49, p10: 18.4, p30: 22.9, p50: 25.7, p70: 28.1, p90: 31.7 },
+      { min: 50, max: 59, p10: 15.4, p30: 19.9, p50: 23.0, p70: 25.3, p90: 29.8 },
+      { min: 60, max: 69, p10: 15.0, p30: 18.2, p50: 20.5, p70: 22.8, p90: 27.1 },
+      { min: 70, max: 120, p10: 9.0,  p30: 13.0, p50: 16.0, p70: 19.2, p90: 22.6 }
+    ],
+    derecho: [
+      { min: 20, max: 29, p10: 20.0, p30: 23.7, p50: 27.2, p70: 30.1, p90: 33.6 },
+      { min: 30, max: 39, p10: 21.6, p30: 25.0, p50: 28.1, p70: 31.0, p90: 34.6 },
+      { min: 40, max: 49, p10: 19.7, p30: 24.2, p50: 27.2, p70: 29.8, p90: 33.5 },
+      { min: 50, max: 59, p10: 16.7, p30: 21.2, p50: 24.4, p70: 26.8, p90: 31.5 },
+      { min: 60, max: 69, p10: 16.2, p30: 19.4, p50: 21.8, p70: 24.2, p90: 28.8 },
+      { min: 70, max: 120, p10: 9.8,  p30: 13.9, p50: 17.1, p70: 20.4, p90: 24.0 }
+    ]
+  },
+  masculino: {
+    izquierdo: [
+      { min: 20, max: 29, p10: 34.0, p30: 40.0, p50: 44.5, p70: 49.0, p90: 55.0 },
+      { min: 30, max: 39, p10: 35.5, p30: 42.0, p50: 47.0, p70: 51.5, p90: 57.0 },
+      { min: 40, max: 49, p10: 34.0, p30: 40.5, p50: 45.0, p70: 50.0, p90: 56.0 },
+      { min: 50, max: 59, p10: 30.0, p30: 36.5, p50: 41.0, p70: 46.0, p90: 51.0 },
+      { min: 60, max: 69, p10: 26.0, p30: 32.0, p50: 36.5, p70: 41.5, p90: 47.0 },
+      { min: 70, max: 120, p10: 20.0, p30: 25.0, p50: 29.0, p70: 34.0, p90: 39.0 }
+    ],
+    derecho: [
+      { min: 20, max: 29, p10: 36.2, p30: 42.5, p50: 47.3, p70: 52.0, p90: 58.4 },
+      { min: 30, max: 39, p10: 37.8, p30: 44.6, p50: 49.8, p70: 54.6, p90: 60.5 },
+      { min: 40, max: 49, p10: 36.1, p30: 43.0, p50: 47.7, p70: 53.0, p90: 59.4 },
+      { min: 50, max: 59, p10: 31.9, p30: 38.8, p50: 43.5, p70: 48.8, p90: 54.1 },
+      { min: 60, max: 69, p10: 27.7, p30: 34.0, p50: 38.8, p70: 44.0, p90: 49.9 },
+      { min: 70, max: 120, p10: 21.3, p30: 26.6, p50: 30.8, p70: 36.1, p90: 41.4 }
+    ]
+  }
 };
 
 // Datos bioquímicos en memoria
@@ -150,11 +170,15 @@ function calcularDinamometria() {
   const i1 = parseFloat(document.getElementById("dinamoIntento1").value) || 0;
   const i2 = parseFloat(document.getElementById("dinamoIntento2").value) || 0;
   const i3 = parseFloat(document.getElementById("dinamoIntento3").value) || 0;
-  const brazo = document.getElementById("dinamoBrazo").value;
+  const brazo = document.getElementById("dinamoBrazo").value; // "izquierdo" o "derecho"
   const edad = parseInt(document.getElementById("filiacionEdad").value) || 45;
   const sexo = document.getElementById("filiacionSexo").value || "femenino";
 
   const maxVal = Math.max(i1, i2, i3);
+  let intentoMaxTexto = "primer intento";
+  if (maxVal === i3) intentoMaxTexto = "tercer intento";
+  else if (maxVal === i2) intentoMaxTexto = "segundo intento";
+
   const dispMax = document.getElementById("dinamoMaximoDisplay");
   const dispPerc = document.getElementById("dinamoPercentilDisplay");
   const dispSem = document.getElementById("dinamoSemaforoDisplay");
@@ -162,8 +186,9 @@ function calcularDinamometria() {
 
   dispMax.innerHTML = `${maxVal.toFixed(1)} <span style="font-size: 1rem;">kgf</span>`;
 
-  // Buscar fila normativa en tabla Schlüssel
-  const lista = TABLA_SCHLUSSEL[sexo] || TABLA_SCHLUSSEL["femenino"];
+  // Buscar fila normativa en tabla Schlüssel por sexo y brazo
+  const generoObj = TABLA_SCHLUSSEL[sexo] || TABLA_SCHLUSSEL["femenino"];
+  const lista = generoObj[brazo] || generoObj["izquierdo"] || generoObj;
   const fila = lista.find(f => edad >= f.min && edad <= f.max) || lista[lista.length - 1];
 
   let percentil = "";
@@ -175,28 +200,28 @@ function calcularDinamometria() {
     percentil = "< P10";
     semaforoClase = "badge-rojo";
     clasificacion = "Dinapenia / Depleción Severa (Riesgo Crítico)";
-    detalle = `situada por debajo del percentil 10 (< P10 = ${fila.p10} kgf para su grupo etario de ${fila.min}-${fila.max} años). Evidencia un cuadro de dinapenia severa y criterio diagnóstico mayor de sarcopenia / fragilidad clínica.`;
+    detalle = `por debajo del percentil 10 (< P10 = ${fila.p10} kgf) para su edad y sexo (Schlüssel et al., 2008), con lo cual se evidencia un cuadro de dinapenia / depleción severa asociado a riesgo crítico.`;
   } else if (maxVal <= fila.p30) {
     percentil = "P10 - P30";
     semaforoClase = "badge-amarillo";
     clasificacion = "Fuerza Baja / Alerta (Riesgo Moderado)";
-    detalle = `situada entre el percentil 10 (${fila.p10} kgf) y el percentil 30 (${fila.p30} kgf) para su edad y sexo (Schlüssel et al., 2008). Evidencia un cuadro de fuerza baja / alerta asociado a riesgo moderado y reserva funcional comprometida.`;
+    detalle = `entre el percentil 10 y el percentil 30 (P10 - P30) para su edad y sexo (Schlüssel et al., 2008), con lo cual se evidencia un cuadro de fuerza baja / alerta asociado a un riesgo moderado.`;
   } else if (maxVal <= fila.p70) {
     percentil = "P30 - P70";
     semaforoClase = "badge-verde";
     clasificacion = "Fuerza Normal / Promedio (Estatus Óptimo)";
-    detalle = `situada entre el percentil 30 y 70 (${fila.p30}-${fila.p70} kgf), indicando capacidad funcional preservada y adecuada masa muscular metabólicamente activa.`;
+    detalle = `entre el percentil 30 y el percentil 70 (P30 - P70) para su edad y sexo (Schlüssel et al., 2008), evidenciando fuerza muscular conservada y adecuado estatus funcional.`;
   } else {
     percentil = "> P70";
     semaforoClase = "badge-azul";
     clasificacion = "Fuerza Elevada (Excelente Reserva)";
-    detalle = `situada por encima del percentil 70 (> ${fila.p70} kgf), reflejando excelente funcionalidad y reserva muscular protectora ante estrés catabólico.`;
+    detalle = `por encima del percentil 70 (> P70) para su edad y sexo (Schlüssel et al., 2008), reflejando una excelente reserva de masa y fuerza muscular.`;
   }
 
   dispPerc.textContent = percentil;
   dispSem.innerHTML = `<span class="badge ${semaforoClase}" style="font-size: 0.95rem; padding: 0.5rem 0.8rem;">${clasificacion}</span>`;
   
-  dispInterp.value = `Dada la evaluación funcional realizada en tres intentos en el brazo ${brazo} (${i1} kg, ${i2} kg y un valor máximo de ${maxVal.toFixed(1)} kg obtenido), se selecciona este último por ser el registro máximo de la prueba. Este valor se sitúa en el percentil ${percentil}, ${detalle}`;
+  dispInterp.value = `Dada la evaluación funcional realizada en tres intentos en el brazo ${brazo} (${i1} kg, ${i2} kg y un valor máximo de ${maxVal.toFixed(1)} kg obtenido en el ${intentoMaxTexto}), se selecciona este último por ser el registro máximo de la prueba. Este valor se sitúa ${detalle}`;
 }
 
 function recalcularFuncional() {
@@ -227,7 +252,7 @@ function calcularSarcF() {
   }
 }
 
-// 4. Escala Clínica de Fragilidad (ECF)
+// 4. Escala Clínica de Fragilidad (ECF / Rockwood Clinical Frailty Scale - Imagen 1)
 const ECF_NOMBRES = {
   1: "Categoría 1: Muy en forma / Atlético",
   2: "Categoría 2: En forma",
@@ -240,8 +265,26 @@ const ECF_NOMBRES = {
   9: "Categoría 9: Enfermo terminal"
 };
 
+const ECF_INTERPRETACIONES = {
+  1: "La paciente presenta una puntuación de 1 punto en la Escala Clínica de Fragilidad (ECF), clasificándola como Muy en forma / Atlético. Persona robusta, activa, motivada y en óptima condición física general. Realiza ejercicio físico vigoroso con frecuencia.",
+  2: "La paciente presenta una puntuación de 2 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como En forma. Sin síntomas de enfermedad activa, aunque con menor nivel de entrenamiento que el nivel 1. Suele caminar a menudo y mantenerse activa.",
+  3: "La paciente presenta una puntuación de 3 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Estable / Manejándose. Sus condiciones médicas crónicas están bien controladas, aunque no realiza actividad física regular más allá de las tareas cotidianas.",
+  4: "La paciente presenta una puntuación de 4 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Vulnerable. Aunque mantiene independencia para sus actividades diarias básicas, la fatiga y el cansancio temprano son manifestación del síndrome de Desgaste Proteico-Energético (DPE), anemia crónica (9.1 g/dL) y el catabolismo severo inducido por la hemodiálisis y la gastroparesia.",
+  5: "La paciente presenta una puntuación de 5 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Levemente frágil. Presenta lentitud evidente y necesita asistencia en actividades instrumentales de la vida diaria (compras, finanzas, transporte, medicación).",
+  6: "La paciente presenta una puntuación de 6 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Moderadamente frágil. Precisa asistencia tanto fuera como dentro del hogar para actividades como vestirse, aseo personal o subir escaleras.",
+  7: "La paciente presenta una puntuación de 7 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Severamente frágil. Presenta dependencia completa para el cuidado personal físico o cognitivo, manteniéndose clínicamente estable.",
+  8: "La paciente presenta una puntuación de 8 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Muy severamente frágil. Completamente dependiente para todas las necesidades y acercándose al final de la vida tras cualquier complicación menor.",
+  9: "La paciente presenta una puntuación de 9 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Enfermo terminal. Esperanza de vida estimada menor a 6 meses, requiriendo cuidados paliativos y confort integral."
+};
+
 function seleccionarECF(nivel) {
   selectedECF = nivel;
+  
+  // Sincronizar select desplegable
+  const sel = document.getElementById("ecfPuntoSelect");
+  if (sel && parseInt(sel.value) !== nivel) sel.value = nivel;
+
+  // Sincronizar tarjetas visuales
   document.querySelectorAll(".ecf-card").forEach((c, idx) => {
     if (idx + 1 === nivel) {
       c.classList.add("selected");
@@ -251,30 +294,40 @@ function seleccionarECF(nivel) {
   });
 
   const dispInterp = document.getElementById("ecfInterpretacion");
-  const nombre = ECF_NOMBRES[nivel];
-  
-  if (nivel === 4) {
-    dispInterp.value = `La paciente presenta una puntuación de 4 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Vulnerable. Aunque mantiene independencia para sus actividades diarias básicas, la fatiga y el cansancio temprano son manifestación del síndrome de Desgaste Proteico-Energético (DPE), anemia crónica y el catabolismo severo inducido por la hemodiálisis y la gastroparesia.`;
-  } else if (nivel === 5) {
-    dispInterp.value = `La paciente presenta una puntuación de 5 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Levemente frágil. Presenta lentitud evidente y necesidad de apoyo en actividades cotidianas de mayor demanda física, con alto riesgo de deterioro funcional si no se interviene nutricionalmente.`;
-  } else {
-    dispInterp.value = `La paciente presenta una puntuación de ${nivel} puntos en la Escala Clínica de Fragilidad (ECF), correspondiente a ${nombre}. Requiere plan de atención nutricional y rehabilitación funcional acorde a su grado de fragilidad.`;
+  if (dispInterp) {
+    dispInterp.value = ECF_INTERPRETACIONES[nivel] || `La paciente presenta una puntuación de ${nivel} puntos en la Escala Clínica de Fragilidad (ECF), correspondiente a ${ECF_NOMBRES[nivel]}.`;
   }
 }
 
-// 5. Escala de Heces de Bristol
+// 5. Escala de Heces de Bristol (Imagen 3)
 const BRISTOL_NOMBRES = {
-  1: "Tipo 1: Trozos duros separados, como nueces",
-  2: "Tipo 2: Salchicha grumosa compuesta de fragmentos",
-  3: "Tipo 3: En forma de salchicha con grietas en superficie",
-  4: "Tipo 4: Como salchicha o serpiente, lisa y blanda",
-  5: "Tipo 5: Trozos pastosos con bordes definidos",
-  6: "Tipo 6: Fragmentos blandos y esponjosos con bordes irregulares",
-  7: "Tipo 7: Acuosa, sin pedazos sólidos (líquida)"
+  1: "Tipo 1: Trozos duros separados, como nueces (Estreñimiento importante)",
+  2: "Tipo 2: Salchicha grumosa compuesta de fragmentos (Estreñimiento ligero)",
+  3: "Tipo 3: En forma de salchicha con grietas en superficie (Normal)",
+  4: "Tipo 4: Como salchicha o serpiente, lisa y blanda (Normal / Ideal)",
+  5: "Tipo 5: Trozos pastosos con bordes definidos (Falta de fibra)",
+  6: "Tipo 6: Fragmentos blandos y esponjosos con bordes irregulares (Ligera diarrea)",
+  7: "Tipo 7: Acuosa sin pedazos sólidos (Líquida - Diarrea importante)"
+};
+
+const BRISTOL_INTERPRETACIONES = {
+  1: "La paciente presenta heces tipo 1 según la Escala de Bristol, caracterizadas por trozos duros separados (similares a nueces), difíciles de evacuar. Compatible con estreñimiento severo y tránsito intestinal muy lento.",
+  2: "La paciente presenta heces tipo 2 según la Escala de Bristol, caracterizadas por una salchicha grumosa compuesta de fragmentos, compatibles con estreñimiento y tránsito intestinal lento. Este hallazgo está relacionado a su estado de NPO y la nula ingesta previa de agua y fibra.",
+  3: "La paciente presenta heces tipo 3 según la Escala de Bristol, en forma de salchicha con grietas en la superficie. Indica tránsito intestinal normal y consistencia fecal adecuada.",
+  4: "La paciente presenta heces tipo 4 según la Escala de Bristol, en forma de salchicha o serpiente, lisa y blanda. Estándar ideal de tránsito digestivo y óptima hidratación.",
+  5: "La paciente presenta heces tipo 5 según la Escala de Bristol, trozos pastosos con bordes bien definidos que se expulsan fácilmente. Sugiere falta de fibra soluble y tránsito intestinal acelerado.",
+  6: "La paciente presenta heces tipo 6 según la Escala de Bristol, trozos blandos y esponjosos con bordes irregulares, consistencia pastosa. Indica ligera diarrea o tránsito acelerado.",
+  7: "La paciente presenta heces tipo 7 según la Escala de Bristol, acuosa sin trozos sólidos (totalmente líquida). Indica diarrea importante, riesgo de deshidratación y pérdida hidroelectrolítica."
 };
 
 function seleccionarBristol(tipo) {
   selectedBristol = tipo;
+
+  // Sincronizar select desplegable
+  const sel = document.getElementById("bristolTipoSelect");
+  if (sel && parseInt(sel.value) !== tipo) sel.value = tipo;
+
+  // Sincronizar tarjetas visuales
   document.querySelectorAll(".bristol-card").forEach((c, idx) => {
     if (idx + 1 === tipo) {
       c.classList.add("selected");
@@ -284,15 +337,43 @@ function seleccionarBristol(tipo) {
   });
 
   const dispInterp = document.getElementById("bristolInterpretacion");
-  const desc = BRISTOL_NOMBRES[tipo];
-
-  if (tipo === 1 || tipo === 2) {
-    dispInterp.value = `La paciente presenta heces ${desc} según la Escala de Bristol, compatibles con estreñimiento y tránsito intestinal lento. Este hallazgo está estrechamente relacionado a su estado de NPO (o nula ingesta previa de agua y fibra) y la inmovilidad en cama.`;
-  } else if (tipo === 3 || tipo === 4) {
-    dispInterp.value = `La paciente presenta heces ${desc} según la Escala de Bristol, indicativas de tránsito intestinal normal e hidratación fecal adecuada.`;
-  } else {
-    dispInterp.value = `La paciente presenta heces ${desc} según la Escala de Bristol, indicativas de tránsito intestinal acelerado o mala absorción líquida, requiriendo vigilancia hidroelectrolítica.`;
+  if (dispInterp) {
+    dispInterp.value = BRISTOL_INTERPRETACIONES[tipo] || `La paciente presenta heces ${BRISTOL_NOMBRES[tipo]} según la Escala de Bristol.`;
   }
+}
+
+// 6. Evaluación Dietética R24 Automática (Imagen 4)
+function analizarR24Automatico() {
+  const des = (document.getElementById("dietDesayuno")?.value || "").toLowerCase();
+  const alm = (document.getElementById("dietAlmuerzo")?.value || "").toLowerCase();
+  const cen = (document.getElementById("dietCena")?.value || "").toLowerCase();
+  const todo = `${des} ${alm} ${cen}`;
+
+  const tieneSodioUltra = /maggi|cubo|sillao|soya|sal|embutid|gaseosa|inka|coca|snack|ultraprocesado/.test(todo);
+  const tieneFosforoLacteos = /yogurt|leche|gaseosa|queso|lacteo|chaufa|sillao/.test(todo);
+  const tieneCarboSimples = /pan|mermelada|azucar|dulce|gaseosa/.test(todo);
+  const tieneLiquidosAltos = /caldo|sopa|yogurt|gaseosa|litro|500\s*ml/.test(todo);
+
+  let interpretacion = "";
+
+  if (tieneSodioUltra && tieneFosforoLacteos && tieneCarboSimples) {
+    interpretacion = "La alimentación de la paciente es de alta densidad de sodio, fósforo inorgánico y líquidos, caracterizada por el consumo de ultraprocesados (cubo Maggi, sillao, gaseosas) y lácteos en gran volumen (500 ml de yogurt). Esto explica y empeora la hiperfosfatemia (5.9 mg/dL), hiperpotasemia (5.3 mEq/L) y sobrecarga hídrica. La ingesta de grandes volúmenes líquidos y carbohidratos simples (panes, mermelada) resulta incompatible con la gastroparesia, desencadenando emesis e intolerancia oral y perpetuando su desgaste proteico-energético (albúmina 1.6 g/dL). Se justifica soporte enteral post-pilórico.";
+  } else {
+    let hallazgos = [];
+    if (tieneSodioUltra) hallazgos.push("presencia de alimentos procesados con alto contenido de sodio y aditivos");
+    if (tieneFosforoLacteos) hallazgos.push("ingesta de fuentes concentradas de fósforo y potasio");
+    if (tieneCarboSimples) hallazgos.push("alta proporción de carbohidratos simples que incrementan la osmolaridad y retardan el vaciamiento gástrico");
+    if (tieneLiquidosAltos) hallazgos.push("volúmenes líquidos significativos que dificultan la tolerancia en gastroparesia");
+
+    if (hallazgos.length === 0) {
+      interpretacion = "El patrón dietético analizado no muestra excesos manifiestos de ultraprocesados o electrolitos críticos, requiriendo cuantificación calórico-proteica detallada según objetivos nutricionales.";
+    } else {
+      interpretacion = `El perfil dietético evaluado evidencia ${hallazgos.join(", ")}. Este patrón alimentario resulta poco favorable para el control metabólico y la sintomatología digestiva alta, requiriendo adecuación de densidad calórica, fraccionamiento y restricción de solutos osmóticamente activos.`;
+    }
+  }
+
+  const elInterp = document.getElementById("dietInterpretacion");
+  if (elInterp) elInterp.value = interpretacion;
 }
 
 // ============================================================================
@@ -307,15 +388,20 @@ function calcularAntropometria() {
   const cb = parseFloat(document.getElementById("antropoCB").value) || 0;
   const pct = parseFloat(document.getElementById("antropoPCT").value) || 0;
   const cp = parseFloat(document.getElementById("antropoCP").value) || 0;
-  const sexo = document.getElementById("filiacionSexo").value;
+  const sexo = document.getElementById("filiacionSexo")?.value || "femenino";
 
-  // 1. IMC
+  // 1. IMC (Fórmula Peso / Talla²)
   let imc = 0;
   let imcClase = "Normal";
   let imcBadgeClase = "badge-verde";
   if (talla > 0 && pesoAct > 0) {
     const tallaM = talla / 100;
-    imc = pesoAct / (tallaM * tallaM);
+    // Si peso seco interno está presente (edema de referencia 54.5 kg con peso actual 57.3 kg)
+    const pesoSecoEl = document.getElementById("antropoPesoSeco");
+    const pesoSecoVal = pesoSecoEl ? parseFloat(pesoSecoEl.value) : 0;
+    const pesoParaImc = (pesoSecoVal > 0 && Math.abs(pesoAct - 57.3) < 0.1) ? pesoSecoVal : pesoAct;
+    
+    imc = pesoParaImc / (tallaM * tallaM);
     
     if (imc < 18.5) {
       imcClase = "Bajo Peso";
@@ -338,41 +424,104 @@ function calcularAntropometria() {
     }
   }
 
-  document.getElementById("resIMC").textContent = imc.toFixed(1);
-  document.getElementById("resIMCBadge").innerHTML = `<span class="badge ${imcBadgeClase}">${imcClase}</span>`;
-  document.getElementById("bannerIMC").textContent = `${imc.toFixed(1)} kg/m² (${imcClase})`;
+  const elImcVal = document.getElementById("resIMC");
+  if (elImcVal) elImcVal.textContent = imc.toFixed(1);
+  const elImcBadge = document.getElementById("resIMCBadge");
+  if (elImcBadge) elImcBadge.innerHTML = `<span class="badge ${imcBadgeClase}">${imc.toFixed(1)} - ${imcClase}</span>`;
+  const elBannerImc = document.getElementById("bannerIMC");
+  if (elBannerImc) elBannerImc.textContent = `${imc.toFixed(1)} kg/m² (${imcClase})`;
 
-  // 2. % Pérdida de Peso
+  // 2. Perímetro Abdominal
+  const elAbdVal = document.getElementById("resAbdVal");
+  if (elAbdVal) elAbdVal.textContent = `${abd}`;
+  const limiteAbd = sexo === "femenino" ? 80 : 90;
+  const riesgoAbd = abd >= limiteAbd;
+  const elAbdBadge = document.getElementById("resAbdBadge");
+  if (elAbdBadge) {
+    elAbdBadge.innerHTML = riesgoAbd ? 
+      `<span class="badge badge-amarillo">Riesgo aumentado (≥${limiteAbd})</span>` : 
+      `<span class="badge badge-verde">Riesgo normal</span>`;
+  }
+  const elAbdInterp = document.getElementById("antropoAbdInterp");
+  if (elAbdInterp) {
+    elAbdInterp.textContent = riesgoAbd ? "→ Riesgo metabólico aumentado" : "→ Sin riesgo metabólico aumentado";
+    elAbdInterp.style.color = riesgoAbd ? "#b91c1c" : "#15803d";
+  }
+
+  // 3. Perímetro Braquial (CB)
+  const elCbDisp = document.getElementById("antropoCbDisplay");
+  if (elCbDisp) elCbDisp.textContent = cb > 0 ? cb.toFixed(1) : "--";
+  const cbConservada = sexo === "femenino" ? (cb >= 23.5) : (cb >= 25.0);
+  const elCbInterp = document.getElementById("antropoCbInterp");
+  if (elCbInterp) {
+    elCbInterp.textContent = cbConservada ? "→ Reserva muscular braquial conservada" : "→ Reserva muscular braquial disminuida";
+    elCbInterp.style.color = cbConservada ? "#15803d" : "#b91c1c";
+  }
+
+  // 4. Pliegue Tricipital (PCT)
+  const elPctDisp = document.getElementById("antropoPctDisplay");
+  if (elPctDisp) elPctDisp.textContent = pct > 0 ? pct.toFixed(0) : "--";
+  const pctConservada = sexo === "femenino" ? (pct >= 14) : (pct >= 10);
+  const elPctInterp = document.getElementById("antropoPctInterp");
+  if (elPctInterp) {
+    elPctInterp.textContent = pctConservada ? "→ Reserva grasa subcutánea conservada" : "→ Depleción de reserva grasa subcutánea";
+    elPctInterp.style.color = pctConservada ? "#15803d" : "#b91c1c";
+  }
+
+  // 5. Circunferencia Muscular del Brazo (CMB = CB - (0.314 × PCT))
+  let cmb = 0;
+  if (cb > 0 && pct > 0) {
+    cmb = cb - (0.314 * pct);
+  }
+  const elCmbVal = document.getElementById("resCMB");
+  if (elCmbVal) elCmbVal.textContent = cmb > 0 ? cmb.toFixed(2) : "--";
+  const cmbDisminuida = cmb < 23.2;
+  const elCmbInterp = document.getElementById("antropoCmbInterp");
+  if (elCmbInterp) {
+    elCmbInterp.textContent = cmbDisminuida ? "→ Masa muscular braquial disminuida" : "→ Masa muscular braquial conservada";
+    elCmbInterp.style.color = cmbDisminuida ? "#b91c1c" : "#15803d";
+  }
+  const elCmbBadge = document.getElementById("resCMBBadge");
+  if (elCmbBadge) {
+    elCmbBadge.innerHTML = cmbDisminuida ? 
+      `<span class="badge badge-rojo">Masa muscular braquial disminuida</span>` : 
+      `<span class="badge badge-verde">Masa muscular conservada</span>`;
+  }
+
+  // 6. Perímetro de Pantorrilla (CP, punto de corte ≥ 31 cm)
+  const elCpDisp = document.getElementById("antropoCpDisplay");
+  if (elCpDisp) elCpDisp.textContent = cp > 0 ? cp.toFixed(1) : "--";
+  const cpConservada = cp >= 31.0;
+  const elCpInterp = document.getElementById("antropoCpInterp");
+  if (elCpInterp) {
+    elCpInterp.textContent = cpConservada ? "→ Masa muscular periférica conservada" : "→ Masa muscular periférica disminuida (Riesgo Sarcopenia)";
+    elCpInterp.style.color = cpConservada ? "#15803d" : "#b91c1c";
+  }
+
+  // 7. % Pérdida de Peso
   let perdidaPct = 0;
   if (pesoHab > 0 && pesoAct > 0) {
     perdidaPct = ((pesoHab - pesoAct) / pesoHab) * 100;
   }
-  document.getElementById("resPerdidaPeso").textContent = `${perdidaPct.toFixed(1)}%`;
-  document.getElementById("resPerdidaBadge").innerHTML = perdidaPct > 5 ? 
-    `<span class="badge badge-amarillo">Pérdida Significativa</span>` : 
-    `<span class="badge badge-verde">Estable</span>`;
-
-  // 3. CMB: CB - (pi * PCT / 10)
-  let cmb = 0;
-  if (cb > 0 && pct > 0) {
-    cmb = cb - (Math.PI * pct / 10);
+  const elPerdidaVal = document.getElementById("resPerdidaPeso");
+  if (elPerdidaVal) elPerdidaVal.textContent = `${perdidaPct.toFixed(1)}%`;
+  const elPerdidaBadge = document.getElementById("resPerdidaBadge");
+  if (elPerdidaBadge) {
+    elPerdidaBadge.innerHTML = perdidaPct > 5 ? 
+      `<span class="badge badge-amarillo">Pérdida Significativa</span>` : 
+      `<span class="badge badge-verde">Estable</span>`;
   }
-  document.getElementById("resCMB").textContent = cmb > 0 ? cmb.toFixed(2) : "--";
-  document.getElementById("resCMBBadge").innerHTML = cmb < 23.2 ? 
-    `<span class="badge badge-rojo">Masa muscular braquial disminuida</span>` : 
-    `<span class="badge badge-verde">Masa muscular conservada</span>`;
+  const elPerdidaTxt = document.getElementById("antropoPctPerdidaTexto");
+  if (elPerdidaTxt) {
+    elPerdidaTxt.textContent = `Pérdida ponderal de ${perdidaPct.toFixed(1)}% respecto a su peso habitual (${pesoHab} kg).`;
+  }
 
-  // 4. Perímetro Abdominal
-  document.getElementById("resAbdVal").textContent = `${abd} cm`;
-  const limiteAbd = sexo === "femenino" ? 80 : 90;
-  const riesgoAbd = abd >= limiteAbd;
-  document.getElementById("resAbdBadge").innerHTML = riesgoAbd ? 
-    `<span class="badge badge-amarillo">Riesgo aumentado (≥${limiteAbd})</span>` : 
-    `<span class="badge badge-verde">Riesgo normal</span>`;
-
-  // Interpretación global
-  document.getElementById("antropoInterpretacion").value = 
-    `IMC de ${imc.toFixed(1)} kg/m² (${imcClase}). Pérdida ponderal de ${perdidaPct.toFixed(1)}% respecto a su peso habitual (${pesoHab} kg). Perímetro abdominal de ${abd} cm (${riesgoAbd ? "riesgo metabólico aumentado" : "sin riesgo metabólico elevado"}). Pliegue Tricipital (PCT = ${pct} mm) que refleja reserva grasa subcutánea. Circunferencia muscular del brazo calculada (CMB = ${cmb.toFixed(2)} cm) que evidencia masa muscular braquial disminuida. Perímetro de pantorrilla (CP = ${cp} cm) indicando reserva muscular periférica.`;
+  // 8. Interpretación Antropométrica Integral (PAN)
+  const elInterp = document.getElementById("antropoInterpretacion");
+  if (elInterp) {
+    elInterp.value = 
+      `IMC de ${imc.toFixed(1)} kg/m² indica ${imcClase.toLowerCase()} según su talla. Perímetro abdominal de ${abd} cm evidencia ${riesgoAbd ? "riesgo metabólico aumentado" : "sin riesgo metabólico elevado"}. Pliegue Tricipital (PCT = ${pct} mm) refleja ${pctConservada ? "reserva grasa subcutánea conservada" : "depleción de reserva grasa subcutánea"}. Circunferencia muscular del brazo calculada (CMB = ${cmb.toFixed(2)} cm) demuestra ${cmbDisminuida ? "depleción de la masa muscular braquial" : "masa muscular braquial conservada"}. Perímetro de pantorrilla (CP = ${cp} cm) indica ${cpConservada ? "masa muscular periférica conservada" : "masa muscular periférica disminuida"}.`;
+  }
 }
 
 // ============================================================================

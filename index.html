@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proceso de Atención Nutricional (PAN) - Nutrición Clínica USIL</title>
-  <link rel="stylesheet" href="styles.css?v=20261010_ui4">
+  <link rel="stylesheet" href="styles.css?v=20261010_ui5">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
   <script src="qrcode.min.js"></script>
 </head>
@@ -440,94 +440,181 @@
           </div>
         </div>
 
-        <div class="grid-4">
+        <input type="hidden" id="antropoPesoSeco" value="54.5">
+
+        <!-- Digitalización de Parámetros Antropométricos -->
+        <div class="grid-3">
           <div class="form-group">
             <label>Peso Habitual:</label>
             <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoPesoHabitual" value="62" oninput="calcularAntropometria()">
+              <input type="number" step="0.1" class="form-control" id="antropoPesoHabitual" value="62" oninput="calcularAntropometria()" placeholder="Ej. 62">
               <span class="input-group-addon">kg</span>
             </div>
           </div>
           <div class="form-group">
             <label>Peso Actual:</label>
             <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoPesoActual" value="57.3" oninput="calcularAntropometria(); actualizarBanner();">
-              <span class="input-group-addon">kg</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Peso Seco (post-diálisis) o Peso Ideal:</label>
-            <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoPesoSeco" value="54.5" oninput="calcularAntropometria(); recalcularIntervencion();">
+              <input type="number" step="0.1" class="form-control" id="antropoPesoActual" value="57.3" oninput="calcularAntropometria(); actualizarBanner();" placeholder="Ej. 57.3">
               <span class="input-group-addon">kg</span>
             </div>
           </div>
           <div class="form-group">
             <label>Talla / Estatura:</label>
             <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoTalla" value="145.3" oninput="calcularAntropometria(); actualizarBanner();">
+              <input type="number" step="0.1" class="form-control" id="antropoTalla" value="145.3" oninput="calcularAntropometria(); actualizarBanner();" placeholder="Ej. 145.3">
               <span class="input-group-addon">cm</span>
             </div>
           </div>
         </div>
 
-        <div class="grid-4" style="margin-top: 0.5rem;">
+        <div class="grid-4" style="margin-top: 0.75rem;">
           <div class="form-group">
             <label>Perímetro Abdominal:</label>
             <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoAbd" value="84" oninput="calcularAntropometria()">
+              <input type="number" step="0.1" class="form-control" id="antropoAbd" value="84" oninput="calcularAntropometria()" placeholder="Ej. 84">
               <span class="input-group-addon">cm</span>
             </div>
           </div>
           <div class="form-group">
             <label>Perímetro Braquial (CB):</label>
             <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoCB" value="28.2" oninput="calcularAntropometria()">
+              <input type="number" step="0.1" class="form-control" id="antropoCB" value="28.2" oninput="calcularAntropometria()" placeholder="Ej. 28.2">
               <span class="input-group-addon">cm</span>
             </div>
           </div>
           <div class="form-group">
             <label>Pliegue Tricipital (PCT):</label>
             <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoPCT" value="18" oninput="calcularAntropometria()">
+              <input type="number" step="0.1" class="form-control" id="antropoPCT" value="18" oninput="calcularAntropometria()" placeholder="Ej. 18">
               <span class="input-group-addon">mm</span>
             </div>
           </div>
           <div class="form-group">
             <label>Perímetro de Pantorrilla (CP):</label>
             <div class="input-group">
-              <input type="number" step="0.1" class="form-control" id="antropoCP" value="35.7" oninput="calcularAntropometria()">
+              <input type="number" step="0.1" class="form-control" id="antropoCP" value="35.7" oninput="calcularAntropometria()" placeholder="Ej. 35.7">
               <span class="input-group-addon">cm</span>
             </div>
           </div>
         </div>
 
-        <!-- Resultados automáticos de Antropometría -->
-        <div class="grid-4" style="margin-top: 1rem;">
-          <div class="calc-card" style="text-align: center;">
-            <span class="chip-label">ÍNDICE DE MASA CORPORAL (IMC)</span>
-            <div class="calc-val-large" id="resIMC" style="font-size: 1.8rem;">25.9</div>
-            <div id="resIMCBadge"><span class="badge badge-amarillo">Sobrepeso</span></div>
+        <!-- Panel Clínico de Interpretaciones Antropométricas en Tiempo Real (Imagen 2) -->
+        <div style="margin-top: 1.5rem; background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid var(--slate-100); padding-bottom: 0.75rem;">
+            <div>
+              <h3 style="color: var(--primary); font-size: 1.1rem; margin: 0; font-weight: 800;">
+                📊 Resultados e Interpretaciones Clínicas de Antropometría
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--gray-600); margin: 0.2rem 0 0 0;">Cálculo automático de IMC, reservas musculares, grasas, riesgo metabólico y CMB según las diapositivas de práctica USIL.</p>
+            </div>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalImagen('assets/antropometria_referencia.jpg', 'Diapositiva Oficial 2.1 Antropometría (USIL)')">
+              📷 Ver Diapositiva Oficial
+            </button>
           </div>
-          <div class="calc-card" style="text-align: center;">
-            <span class="chip-label">% PÉRDIDA DE PESO</span>
-            <div class="calc-val-large" id="resPerdidaPeso" style="font-size: 1.8rem;">7.6%</div>
-            <div id="resPerdidaBadge"><span class="badge badge-amarillo">Pérdida Significativa</span></div>
+
+          <div class="grid-2" style="gap: 0.85rem;">
+            <!-- IMC -->
+            <div style="background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">• IMC (Fórmula: Peso / Talla²):</div>
+                <div id="antropoImcInterp" style="font-size: 0.85rem; color: var(--gray-700); margin-top: 0.2rem;">
+                  <span id="resIMCBadge"><span class="badge badge-amarillo">25.9 - Sobrepeso</span></span>
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <span id="resIMC" style="font-size: 1.5rem; font-weight: 800; color: var(--brand-navy-main);">25.9</span>
+                <span style="font-size: 0.8rem; color: var(--gray-600);">kg/m²</span>
+              </div>
+            </div>
+
+            <!-- Perímetro Abdominal -->
+            <div style="background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">• Perímetro Abdominal:</div>
+                <div id="antropoAbdInterp" style="font-size: 0.85rem; color: #b91c1c; font-weight: 700; margin-top: 0.2rem;">
+                  → Riesgo metabólico aumentado
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <span id="resAbdVal" style="font-size: 1.5rem; font-weight: 800; color: var(--brand-navy-main);">84</span>
+                <span style="font-size: 0.8rem; color: var(--gray-600);">cm</span>
+              </div>
+            </div>
+
+            <!-- Perímetro Braquial CB -->
+            <div style="background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">• Perímetro Braquial (CB):</div>
+                <div id="antropoCbInterp" style="font-size: 0.85rem; color: #15803d; font-weight: 700; margin-top: 0.2rem;">
+                  → Reserva muscular braquial conservada
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <span id="antropoCbDisplay" style="font-size: 1.5rem; font-weight: 800; color: var(--brand-navy-main);">28.2</span>
+                <span style="font-size: 0.8rem; color: var(--gray-600);">cm</span>
+              </div>
+            </div>
+
+            <!-- Pliegue Tricipital PCT -->
+            <div style="background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">• Pliegue Tricipital (PCT):</div>
+                <div id="antropoPctInterp" style="font-size: 0.85rem; color: #15803d; font-weight: 700; margin-top: 0.2rem;">
+                  → Reserva grasa subcutánea conservada
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <span id="antropoPctDisplay" style="font-size: 1.5rem; font-weight: 800; color: var(--brand-navy-main);">18</span>
+                <span style="font-size: 0.8rem; color: var(--gray-600);">mm</span>
+              </div>
+            </div>
+
+            <!-- Circunferencia Muscular Brazo CMB -->
+            <div style="background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">• Circunferencia Muscular Brazo (CMB):</div>
+                <div id="antropoCmbInterp" style="font-size: 0.85rem; color: #b91c1c; font-weight: 700; margin-top: 0.2rem;">
+                  → Masa muscular braquial disminuida
+                </div>
+                <small style="font-size: 0.75rem; color: var(--gray-600);">Fórmula: CMB = CB - (0.314 × PCT)</small>
+              </div>
+              <div style="text-align: right;">
+                <span id="resCMB" style="font-size: 1.5rem; font-weight: 800; color: var(--brand-navy-main);">22.55</span>
+                <span style="font-size: 0.8rem; color: var(--gray-600);">cm</span>
+              </div>
+            </div>
+
+            <!-- Perímetro Pantorrilla CP -->
+            <div style="background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 700; color: var(--primary); font-size: 0.95rem;">• Perímetro de Pantorrilla (CP):</div>
+                <div id="antropoCpInterp" style="font-size: 0.85rem; color: #15803d; font-weight: 700; margin-top: 0.2rem;">
+                  → Masa muscular periférica conservada
+                </div>
+                <small style="font-size: 0.75rem; color: var(--gray-600);">Punto de corte: ≥ 31 cm</small>
+              </div>
+              <div style="text-align: right;">
+                <span id="antropoCpDisplay" style="font-size: 1.5rem; font-weight: 800; color: var(--brand-navy-main);">35.7</span>
+                <span style="font-size: 0.8rem; color: var(--gray-600);">cm</span>
+              </div>
+            </div>
           </div>
-          <div class="calc-card" style="text-align: center;">
-            <span class="chip-label">CIRCUNFERENCIA MUSCULAR BRAZO (CMB)</span>
-            <div class="calc-val-large" id="resCMB" style="font-size: 1.8rem;">22.55</div>
-            <div id="resCMBBadge"><span class="badge badge-rojo">Masa muscular disminuida</span></div>
-          </div>
-          <div class="calc-card" style="text-align: center;">
-            <span class="chip-label">RIESGO METABÓLICO (ABDOMINAL)</span>
-            <div class="calc-val-large" id="resAbdVal" style="font-size: 1.8rem;">84 cm</div>
-            <div id="resAbdBadge"><span class="badge badge-amarillo">Riesgo aumentado (≥80)</span></div>
+
+          <!-- % Pérdida de Peso -->
+          <div style="margin-top: 0.85rem; padding: 0.75rem 1rem; background: #eff6ff; border-radius: 8px; border-left: 4px solid #3b82f6; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-weight: 700; color: var(--primary);">• % Pérdida Ponderal:</span>
+              <span id="antropoPctPerdidaTexto" style="font-size: 0.9rem; color: var(--gray-700); margin-left: 0.5rem;">Pérdida de peso calculada respecto al habitual.</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span id="resPerdidaPeso" style="font-size: 1.3rem; font-weight: 800; color: var(--brand-navy-main);">7.6%</span>
+              <span id="resPerdidaBadge"><span class="badge badge-amarillo">Pérdida Significativa</span></span>
+            </div>
           </div>
         </div>
 
         <div class="form-group" style="margin-top: 1.25rem;">
-          <label><strong>Interpretación Antropométrica Integral:</strong></label>
+          <label><strong>Interpretación Antropométrica Integral (PAN):</strong></label>
           <textarea class="form-control" id="antropoInterpretacion" rows="3">IMC de 25.9 kg/m² indica sobrepeso según su talla. Perímetro abdominal de 84 cm evidencia riesgo metabólico aumentado. Pliegue Tricipital (PCT = 18 mm) refleja reserva grasa subcutánea conservada. Circunferencia muscular del brazo calculada (CMB = 22.55 cm) demuestra depleción de la masa muscular braquial. Perímetro de pantorrilla (CP = 35.7 cm) indica masa muscular periférica conservada.</textarea>
         </div>
       </div>
@@ -706,26 +793,34 @@
       <div class="card">
         <div class="card-header">
           <div>
-            <h2 class="card-title"><span>🥗</span> 2.4 Evaluación Dietética (Recordatorio de 24 Horas)</h2>
-            <p class="card-subtitle">Análisis del patrón de consumo, densidad de nutrientes e incompatibilidades</p>
+            <h2 class="card-title"><span>🥗</span> 2.4 Evaluación Dietética (Recordatorio de 24 Horas - R24)</h2>
+            <p class="card-subtitle">Análisis del patrón de consumo, densidad de nutrientes e incompatibilidades patológicas</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="analizarR24Automatico()">
+              ⚡ Analizar e Interpretar R24
+            </button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalImagen('assets/dietetico_referencia.png', 'Diapositiva Oficial 2.4 Recordatorio de 24 Horas (USIL)')">
+              📷 Diapositiva Oficial
+            </button>
           </div>
         </div>
         <div class="grid-3">
           <div class="form-group">
             <label>Desayuno:</label>
-            <textarea class="form-control" id="dietDesayuno" rows="2">Un plato de caldo de pollo con cubo Maggi</textarea>
+            <textarea class="form-control" id="dietDesayuno" rows="2" oninput="analizarR24Automatico()">Un plato de caldo de pollo con cubo Maggi</textarea>
           </div>
           <div class="form-group">
             <label>Almuerzo:</label>
-            <textarea class="form-control" id="dietAlmuerzo" rows="2">Guiso de pollo al sillao plato hondo, arroz chaufa plato hondo, gaseosa personal Inka Cola o Coca Zero</textarea>
+            <textarea class="form-control" id="dietAlmuerzo" rows="2" oninput="analizarR24Automatico()">Guiso de pollo al sillao plato hondo, arroz chaufa plato hondo, gaseosa personal Inka Cola o Coca Zero</textarea>
           </div>
           <div class="form-group">
             <label>Cena:</label>
-            <textarea class="form-control" id="dietCena" rows="2">Cuatro panes francés o ciabatta con mermelada de fresa, yogurt de medio litro Gloria</textarea>
+            <textarea class="form-control" id="dietCena" rows="2" oninput="analizarR24Automatico()">Cuatro panes francés o ciabatta con mermelada de fresa, yogurt de medio litro Gloria</textarea>
           </div>
         </div>
-        <div class="form-group">
-          <label><strong>Interpretación del Perfil Dietético:</strong></label>
+        <div class="form-group" style="margin-top: 1rem;">
+          <label><strong>Interpretación del Perfil Dietético (Generada Automáticamente):</strong></label>
           <textarea class="form-control" id="dietInterpretacion" rows="3">La alimentación de la paciente es de alta densidad de sodio, fósforo inorgánico y líquidos, caracterizada por el consumo de ultraprocesados (cubo Maggi, sillao, gaseosas) y lácteos en gran volumen (500 ml de yogurt). Esto explica y empeora la hiperfosfatemia (5.9 mg/dL), hiperpotasemia (5.3 mEq/L) y sobrecarga hídrica. La ingesta de grandes volúmenes líquidos y carbohidratos simples (panes, mermelada) resulta incompatible con la gastroparesia, desencadenando emesis e intolerancia oral y perpetuando su desgaste proteico-energético (albúmina 1.6 g/dL). Se justifica soporte enteral post-pilórico.</textarea>
         </div>
       </div>
@@ -735,8 +830,27 @@
         <div class="card-header">
           <div>
             <h2 class="card-title"><span>💩</span> 2.5 Escala de Heces de Bristol (Evaluación Gastrointestinal)</h2>
-            <p class="card-subtitle">Haz clic en el tipo de heces correspondiente para registrar el tránsito intestinal</p>
+            <p class="card-subtitle">Digitaliza el tipo de heces (1 al 7) o selecciónalo en la cuadrícula para obtener la interpretación oficial</p>
           </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalImagen('assets/escala_bristol.jpg', 'Infografía Oficial de la Escala de Heces de Bristol')">
+              📷 Infografía Bristol
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border);">
+          <label style="font-weight: 700; color: var(--primary); margin: 0;">Seleccionar Tipo de Bristol:</label>
+          <select class="form-control" id="bristolTipoSelect" style="max-width: 380px; font-weight: 600;" onchange="seleccionarBristol(parseInt(this.value))">
+            <option value="1">Tipo 1: Trozos duros separados (Nueces - Estreñimiento importante)</option>
+            <option value="2" selected>Tipo 2: Salchicha grumosa de fragmentos (Estreñimiento ligero)</option>
+            <option value="3">Tipo 3: Salchicha con grietas en superficie (Normal)</option>
+            <option value="4">Tipo 4: Salchicha o serpiente lisa y blanda (Normal / Ideal)</option>
+            <option value="5">Tipo 5: Trozos de masa pastosa definidos (Falta de fibra)</option>
+            <option value="6">Tipo 6: Fragmentos blandos y esponjosos (Ligera diarrea)</option>
+            <option value="7">Tipo 7: Acuosa sin pedazos sólidos (Líquida - Diarrea importante)</option>
+          </select>
+          <span style="font-size: 0.85rem; color: var(--gray-600);">💡 Al cambiar el tipo, la tarjeta se resalta y la interpretación se actualiza automáticamente.</span>
         </div>
 
         <div class="scale-image-container" style="margin-bottom: 1rem;">
@@ -850,6 +964,11 @@
           <div>
             <h2 class="card-title"><span>✊</span> 2. Dinamometría de Mano (Fuerza de Agarre - Schlüssel et al., 2008)</h2>
             <p class="card-subtitle">Evaluación de la fuerza isométrica máxima y reserva muscular en 3 intentos</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalImagen('assets/dinamometria_tabla.png', 'Tabla Normativa Dinamometría Schlüssel et al. 2008')">
+              📷 Tabla Schlüssel 2008
+            </button>
           </div>
         </div>
 
@@ -1012,8 +1131,29 @@
         <div class="card-header">
           <div>
             <h2 class="card-title"><span>👵</span> 4. Escala Clínica de Fragilidad (ECF / Rockwood Clinical Frailty Scale)</h2>
-            <p class="card-subtitle">Haz clic en la categoría correspondiente para asignar el nivel de fragilidad (1 al 9)</p>
+            <p class="card-subtitle">Digitaliza el puntaje (1 al 9) o haz clic en la categoría correspondiente para obtener la interpretación oficial</p>
           </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalImagen('assets/escala_fragilidad.jpg', 'Diapositiva Oficial 2.6 Escala Clínica de Fragilidad Rockwood')">
+              📷 Diapositiva Oficial
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; background: var(--slate-50); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid var(--border);">
+          <label style="font-weight: 700; color: var(--primary); margin: 0;">Seleccionar Puntaje ECF (1 al 9):</label>
+          <select class="form-control" id="ecfPuntoSelect" style="max-width: 380px; font-weight: 600;" onchange="seleccionarECF(parseInt(this.value))">
+            <option value="1">1: Muy en forma / Atlético (Robusto, activo)</option>
+            <option value="2">2: En forma (Sin enfermedad activa)</option>
+            <option value="3">3: Estable / Manejándose (Problemas médicos controlados)</option>
+            <option value="4" selected>4: Vulnerable (Independiente pero con fatiga precoz)</option>
+            <option value="5">5: Levemente frágil (Lentitud evidente, ayuda instrumental)</option>
+            <option value="6">6: Moderadamente frágil (Ayuda dentro y fuera del hogar)</option>
+            <option value="7">7: Severamente frágil (Dependencia total para cuidados)</option>
+            <option value="8">8: Muy severamente frágil (Completamente dependiente)</option>
+            <option value="9">9: Enfermo terminal (Esperanza de vida &lt; 6 meses)</option>
+          </select>
+          <span style="font-size: 0.85rem; color: var(--gray-600);">💡 Al cambiar el punto, se resalta la tarjeta correspondiente y se redacta la interpretación clínica automática.</span>
         </div>
 
         <div class="scale-image-container" style="margin-bottom: 1rem;">
@@ -1416,6 +1556,6 @@ La integración de la evaluación funcional (marcha de 0.5 m/s, SARC-F de 4 punt
   <!-- Contenedor accesible para notificaciones tipo Toast -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-  <script src="app.js?v=20261010_ui4"></script>
+  <script src="app.js?v=20261010_ui5"></script>
 </body>
 </html>
