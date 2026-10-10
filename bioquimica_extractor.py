@@ -243,10 +243,57 @@ PARAMETROS_BIOQUIMICOS = {
         "max": 2.2,
         "valor_normal_str": "1.7 - 2.2 mg/dL",
         "sinonimos": [r"magnesio(?:\s*s[eé]rico)?", r"mg(?:\+\+?|(?:\s*s[eé]rico))?"],
+        "diagnostico_elevado": "Hipermagnesemia",
+        "diagnostico_disminuido": "Hipomagnesemia",
         "interpretaciones": {
-            "disminuido": "Disminuido: hipomagnesemia secundaria a pérdidas dialíticas y baja ingesta por gastroparesia/ayuno; riesgo en síndrome de realimentación.",
+            "disminuido": "Disminuido: hipomagnesemia leve secundaria a pérdidas por el dializado y baja ingesta por la gastroparesia.",
             "normal": "Niveles séricos normales.",
             "elevado": "Elevado: hipermagnesemia en insuficiencia renal avanzada si hay suplementación no controlada."
+        }
+    },
+    "hematocrito": {
+        "nombre": "Hematocrito",
+        "unidad": "%",
+        "min": 36.0,
+        "max": 50.0,
+        "valor_normal_str": "36 - 50 %",
+        "sinonimos": [r"hematocrito", r"hto"],
+        "diagnostico_elevado": "Hemoconcentración",
+        "diagnostico_disminuido": "Hematocrito disminuido (Anemia)",
+        "interpretaciones": {
+            "disminuido": "Disminuido: correlaciona con anemia secundaria a nefropatía/pérdidas hemáticas o hemodilución.",
+            "normal": "Volumen globular concentrado dentro del rango normal.",
+            "elevado": "Elevado: sugiere hemoconcentración por deshidratación o poliglobulia."
+        }
+    },
+    "linfocitos": {
+        "nombre": "Linfocitos",
+        "unidad": "%",
+        "min": 20.0,
+        "max": 40.0,
+        "valor_normal_str": "20 - 40 %",
+        "sinonimos": [r"linfocitos?", r"linf"],
+        "diagnostico_elevado": "Linfocitosis",
+        "diagnostico_disminuido": "Linfopenia",
+        "interpretaciones": {
+            "disminuido": "Disminuido: linfopenia indicadora de depleción inmunológica asociada a malnutrición proteico-calórica.",
+            "normal": "Respuesta inmunitaria celular conservada dentro del rango de referencia.",
+            "elevado": "Elevado: respuesta leucocitaria reactiva a infección o estrés inmunológico."
+        }
+    },
+    "globulinas": {
+        "nombre": "Globulinas",
+        "unidad": "g/dL",
+        "min": 2.0,
+        "max": 3.5,
+        "valor_normal_str": "2.0 - 3.5 g/dL",
+        "sinonimos": [r"globulinas?", r"glob"],
+        "diagnostico_elevado": "Hipergammaglobulinemia",
+        "diagnostico_disminuido": "Hipogammaglobulinemia",
+        "interpretaciones": {
+            "disminuido": "Disminuido: síntesis hepática reducida o pérdidas proteicas gastrointestinales/urinarias.",
+            "normal": "Nivel proteico de globulinas dentro del rango normal.",
+            "elevado": "Elevado: elevación de proteínas de fase aguda por estado inflamatorio sistémico."
         }
     }
 }

@@ -1306,6 +1306,210 @@ textarea.form-control {
 }
 
 /* --------------------------------------------------------------------------
+   23.5. DIGITALIZADOR BIOQUÍMICO INTERACTIVO & TARJETA VALORACIÓN (IMÁGENES 4 Y 5)
+   -------------------------------------------------------------------------- */
+.bioq-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .bioq-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bioq-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--slate-50);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.bioq-toolbar-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.bioq-valoracion-card {
+  background: linear-gradient(145deg, #1865a8, #0e4c84);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 1.75rem 1.25rem;
+  box-shadow: 0 12px 28px -6px rgba(14, 76, 132, 0.42), 0 6px 12px -4px rgba(14, 76, 132, 0.25);
+  position: sticky;
+  top: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.bioq-valoracion-title {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 1.25rem 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bioq-valoracion-divider {
+  width: 60px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 auto 1.25rem auto;
+  border-radius: 2px;
+}
+
+.bioq-valoracion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  align-items: center;
+}
+
+.bioq-valoracion-item {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bioq-valoracion-empty {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+  padding: 1rem 0;
+}
+
+.bioq-input-nombre {
+  width: 100%;
+  font-weight: 700;
+  color: var(--brand-navy-main);
+  background-color: var(--white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+.bioq-input-res {
+  width: 85px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-align: right;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem;
+  color: var(--color-text-main);
+}
+
+.bioq-unit-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bioq-normal-text {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.bioq-textarea-interp {
+  width: 100%;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--color-text-main);
+  background-color: #f8fafc;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem;
+  resize: vertical;
+  min-height: 52px;
+}
+
+.bioq-textarea-interp:focus {
+  background-color: #ffffff;
+  border-color: var(--brand-navy-accent);
+}
+
+.bioq-ref-box {
+  margin-top: 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.bioq-ref-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--brand-navy-main);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.bioq-ref-thumbnails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.bioq-ref-thumb {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bioq-ref-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--brand-cyan-accent);
+}
+
+.bioq-ref-thumb img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+.bioq-ref-thumb-caption {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 0.25rem;
+  background: var(--slate-50);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
    24. FORMATO DE IMPRESIÓN OFICIAL USIL
    -------------------------------------------------------------------------- */
 @media print {

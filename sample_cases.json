@@ -97,15 +97,51 @@
       "magnesio": 1.5
     },
     "clinico": [
-      {"organo": "Cabello", "signo": "Cabello ligeramente opaco", "alteracion": "Sin signos clínicos severos de deficiencia nutricional"},
-      {"organo": "Piel", "signo": "Palidez cutáneo-mucosa moderada-severa, hiperpigmentación cetrina, acantosis nigricans", "alteracion": "Anemia crónica por ERC, uremia, resistencia insulínica asociada a DM2"},
-      {"organo": "Cara", "signo": "Facies pálida, cetrina y aspecto adelgazado", "alteracion": "Desgaste muscular y ERC avanzada"},
-      {"organo": "Uñas", "signo": "Uñas quebradizas con surcos transversales", "alteracion": "Déficit de micronutrientes (zinc, hierro), estado catabólico crónico"},
-      {"organo": "Ojos", "signo": "Ictericia escleral leve", "alteracion": "Alteración metabólica secundaria o compromiso hepatobiliar asociado"},
-      {"organo": "Labios", "signo": "Mucosas secas, estomatitis angular (queilosis)", "alteracion": "Deshidratación y déficit de complejo B (riboflavina, niacina) y hierro"},
-      {"organo": "Dientes y encías", "signo": "Mucosas orales secas, xerostomía", "alteracion": "Deshidratación severa y ayuno prolongado (NPO)"},
-      {"organo": "Lengua", "signo": "Mucosas secas, papilas aplanadas", "alteracion": "Deshidratación y deficiencia de micronutrientes"},
-      {"organo": "Esqueleto", "signo": "Signos sugerentes de alteración mineral ósea", "alteracion": "Osteodistrofia renal secundaria a hiperfosfatemia, hipocalcemia y ERC"}
+      {
+        "organo": "Cabello",
+        "signo": "Cabello ligeramente opaco",
+        "alteracion": "Sin signos clínicos severos de deficiencia nutricional"
+      },
+      {
+        "organo": "Piel",
+        "signo": "Palidez cutáneo-mucosa moderada-severa, hiperpigmentación cetrina, acantosis nigricans",
+        "alteracion": "Anemia crónica por ERC, uremia, resistencia insulínica asociada a DM2"
+      },
+      {
+        "organo": "Cara",
+        "signo": "Facies pálida, cetrina y aspecto adelgazado",
+        "alteracion": "Desgaste muscular y ERC avanzada"
+      },
+      {
+        "organo": "Uñas",
+        "signo": "Uñas quebradizas con surcos transversales",
+        "alteracion": "Déficit de micronutrientes (zinc, hierro), estado catabólico crónico"
+      },
+      {
+        "organo": "Ojos",
+        "signo": "Ictericia escleral leve",
+        "alteracion": "Alteración metabólica secundaria o compromiso hepatobiliar asociado"
+      },
+      {
+        "organo": "Labios",
+        "signo": "Mucosas secas, estomatitis angular (queilosis)",
+        "alteracion": "Deshidratación y déficit de complejo B (riboflavina, niacina) y hierro"
+      },
+      {
+        "organo": "Dientes y encías",
+        "signo": "Mucosas orales secas, xerostomía",
+        "alteracion": "Deshidratación severa y ayuno prolongado (NPO)"
+      },
+      {
+        "organo": "Lengua",
+        "signo": "Mucosas secas, papilas aplanadas",
+        "alteracion": "Deshidratación y deficiencia de micronutrientes"
+      },
+      {
+        "organo": "Esqueleto",
+        "signo": "Signos sugerentes de alteración mineral ósea",
+        "alteracion": "Osteodistrofia renal secundaria a hiperfosfatemia, hipocalcemia y ERC"
+      }
     ],
     "dietetico": {
       "desayuno": "Un plato de caldo de pollo con cubo Maggi",
@@ -187,9 +223,24 @@
       "kcal_por_kg": 30.0,
       "get_total": 1635.0,
       "distribucion_macro": {
-        "proteinas": {"g_kg": 1.2, "gramos": 65.4, "kcal": 261.6, "porcentaje": 16.0},
-        "carbohidratos": {"g_kg": 4.0, "gramos": 220.7, "kcal": 882.9, "porcentaje": 54.0},
-        "lipidos": {"g_kg": 1.0, "gramos": 54.5, "kcal": 490.5, "porcentaje": 30.0}
+        "proteinas": {
+          "g_kg": 1.2,
+          "gramos": 65.4,
+          "kcal": 261.6,
+          "porcentaje": 16.0
+        },
+        "carbohidratos": {
+          "g_kg": 4.0,
+          "gramos": 220.7,
+          "kcal": 882.9,
+          "porcentaje": 54.0
+        },
+        "lipidos": {
+          "g_kg": 1.0,
+          "gramos": 54.5,
+          "kcal": 490.5,
+          "porcentaje": 30.0
+        }
       },
       "porcentaje_inicio": 85,
       "get_inicio": 1390.0,
@@ -338,35 +389,61 @@
       "interpretacion": "IMC: 30.1 kg/m² (Obesidad grado I). Peso ideal calculado en 53.2 kg (usado para la prescripción calórica por exceso de adiposidad). Pliegue tricipital de 26 mm indicando preservación de grasa subcutánea, pero con depleción muscular subclínica."
     },
     "bioquimica": {
-      "trigliceridos": 418,
-      "colesterol": 100,
-      "hdl": 28,
-      "ldl": 210,
-      "glucosa": 269,
-      "hba1c": 9.3,
-      "albumina": 3.6,
-      "prealbumina": 18,
-      "hemoglobina": 12.5,
-      "bilirrubina_total": 0.8,
-      "bilirrubina_indirecta": 0.3,
-      "urea": 28,
-      "creatinina": 0.9,
-      "sodio": 138,
-      "calcio": 9.1,
-      "fosforo": 3.6,
-      "potasio": 4.1,
-      "magnesio": 1.9
+      "glucosa": 280,
+      "trigliceridos": 250,
+      "colesterol": 190,
+      "hemoglobina": 12.6,
+      "hematocrito": 34,
+      "linfocitos": 30,
+      "albumina": 4.3,
+      "globulinas": 0.7
     },
     "clinico": [
-      {"organo": "Cabello", "signo": "Normal", "alteracion": "Sin evidencia clínica de déficit nutricional asociado al cabello"},
-      {"organo": "Piel", "signo": "Normal", "alteracion": "Sin alteraciones nutricionales cutáneas evidentes; hidratación y reservas conservadas"},
-      {"organo": "Cara", "signo": "Facies de desnutrición / piel facial seca", "alteracion": "Disminución de reservas energéticas y posible deshidratación"},
-      {"organo": "Uñas", "signo": "Sin alteraciones", "alteracion": "Sin evidencia clínica de déficit nutricional asociado a uñas"},
-      {"organo": "Ojos", "signo": "Ictericia escleral leve", "alteracion": "Alteración hepatobiliar, elevación leve de bilirrubina o compromiso metabólico"},
-      {"organo": "Labios", "signo": "Secos", "alteracion": "Posible deshidratación o déficit temprano de vitaminas del complejo B"},
-      {"organo": "Dientes y encías", "signo": "Palidez gingival", "alteracion": "Posible anemia ferropénica subclínica o déficit de micronutrientes"},
-      {"organo": "Lengua", "signo": "Lengua blanquecina", "alteracion": "Alteración de higiene oral por NPO, candidiasis o déficit de complejo B"},
-      {"organo": "Esqueleto", "signo": "Sin alteraciones", "alteracion": "Sin evidencia clínica de alteración ósea actual"}
+      {
+        "organo": "Cabello",
+        "signo": "Normal",
+        "alteracion": "Sin evidencia clínica de déficit nutricional asociado al cabello"
+      },
+      {
+        "organo": "Piel",
+        "signo": "Normal",
+        "alteracion": "Sin alteraciones nutricionales cutáneas evidentes; hidratación y reservas conservadas"
+      },
+      {
+        "organo": "Cara",
+        "signo": "Facies de desnutrición / piel facial seca",
+        "alteracion": "Disminución de reservas energéticas y posible deshidratación"
+      },
+      {
+        "organo": "Uñas",
+        "signo": "Sin alteraciones",
+        "alteracion": "Sin evidencia clínica de déficit nutricional asociado a uñas"
+      },
+      {
+        "organo": "Ojos",
+        "signo": "Ictericia escleral leve",
+        "alteracion": "Alteración hepatobiliar, elevación leve de bilirrubina o compromiso metabólico"
+      },
+      {
+        "organo": "Labios",
+        "signo": "Secos",
+        "alteracion": "Posible deshidratación o déficit temprano de vitaminas del complejo B"
+      },
+      {
+        "organo": "Dientes y encías",
+        "signo": "Palidez gingival",
+        "alteracion": "Posible anemia ferropénica subclínica o déficit de micronutrientes"
+      },
+      {
+        "organo": "Lengua",
+        "signo": "Lengua blanquecina",
+        "alteracion": "Alteración de higiene oral por NPO, candidiasis o déficit de complejo B"
+      },
+      {
+        "organo": "Esqueleto",
+        "signo": "Sin alteraciones",
+        "alteracion": "Sin evidencia clínica de alteración ósea actual"
+      }
     ],
     "dietetico": {
       "desayuno": "NPO (Nada por vía oral)",
@@ -448,9 +525,24 @@
       "kcal_por_kg": 30.0,
       "get_total": 1596.0,
       "distribucion_macro": {
-        "proteinas": {"g_kg": 1.5, "gramos": 79.8, "kcal": 319.2, "porcentaje": 20.0},
-        "carbohidratos": {"g_kg": 3.75, "gramos": 199.5, "kcal": 798.0, "porcentaje": 50.0},
-        "lipidos": {"g_kg": 1.0, "gramos": 53.2, "kcal": 478.8, "porcentaje": 30.0}
+        "proteinas": {
+          "g_kg": 1.5,
+          "gramos": 79.8,
+          "kcal": 319.2,
+          "porcentaje": 20.0
+        },
+        "carbohidratos": {
+          "g_kg": 3.75,
+          "gramos": 199.5,
+          "kcal": 798.0,
+          "porcentaje": 50.0
+        },
+        "lipidos": {
+          "g_kg": 1.0,
+          "gramos": 53.2,
+          "kcal": 478.8,
+          "porcentaje": 30.0
+        }
       },
       "porcentaje_inicio": 50,
       "get_inicio": 798.0,

@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Cargar caso 1 por defecto al iniciar
   cargarCasoEjemplo("caso1");
   verificarConexionServidor();
-  inicializarDragAndDropPDF();
 });
 
 // Notificaciones tipo Toast accesibles (better-writing & better-ui)
@@ -456,12 +455,375 @@ async function analizarTextoBioquimica() {
   extraerBioquimicaCliente(texto);
 }
 
+// ============================================================================
+// BASE DE CONOCIMIENTO Y MOTOR BIOQUÍMICO INTERACTIVO (IMÁGENES 4 Y 5)
+// ============================================================================
+const CATALOGO_PARAMETROS_BIOQUIMICOS = {
+  glucosa: {
+    clave: "glucosa",
+    nombre: "Glucosa basal",
+    unidad: "mg/dL",
+    min: 70.0,
+    max: 100.0,
+    normal_str: "70 - 100 mg/dL",
+    diag_elevado: "Hiperglicemia",
+    diag_disminuido: "Hipoglicemia",
+    interp_elevado: "Elevada: Hiperglicemia secundaria a descompensación metabólica en DM2 o estrés hipercatabólico; requiere monitoreo estricto de glucometría.",
+    interp_normal: "Dentro de los límites basales normales (70 - 100 mg/dL).",
+    interp_disminuido: "Disminuido: hipoglucemia; riesgo neurológico agudo, requiere corrección rápida."
+  },
+  trigliceridos: {
+    clave: "trigliceridos",
+    nombre: "Triglicéridos",
+    unidad: "mg/dL",
+    min: null,
+    max: 150.0,
+    normal_str: "< 150 mg/dL",
+    diag_elevado: "Hipertrigliceridemia",
+    diag_disminuido: null,
+    interp_elevado: "Elevado: Hipertrigliceridemia, secundaria a alteración en el aclaramiento de lipoproteínas o resistencia insulínica; incrementa riesgo cardiovascular.",
+    interp_normal: "Dentro del rango normal deseable (< 150 mg/dL).",
+    interp_disminuido: "Disminuido: infrecuente, valorar desnutrición severa o malabsorción lipídica."
+  },
+  colesterol: {
+    clave: "colesterol",
+    nombre: "Colesterol Total",
+    unidad: "mg/dL",
+    min: null,
+    max: 200.0,
+    normal_str: "< 200 mg/dL",
+    diag_elevado: "Hipercolesterolemia",
+    diag_disminuido: "Hipocolesterolemia",
+    interp_elevado: "Elevado: Hipercolesterolemia; riesgo aterogénico y cardiovascular aumentado.",
+    interp_normal: "Normal: dentro del rango óptimo (< 200 mg/dL).",
+    interp_disminuido: "Disminuido: hipocolesterolemia por fallo hepático, hipercatabolismo o desnutrición severa."
+  },
+  hemoglobina: {
+    clave: "hemoglobina",
+    nombre: "Hemoglobina",
+    unidad: "g/dL",
+    min: 12.0,
+    max: 16.0,
+    normal_str: "12.0 - 16.0 g/dL",
+    diag_elevado: "Policitemia",
+    diag_disminuido: "Anemia",
+    interp_elevado: "Elevada: policitemia o deshidratación con hemoconcentración.",
+    interp_normal: "Normal: adecuada masa eritrocitaria y capacidad de transporte de O2.",
+    interp_disminuido: "Disminuida: anemia normocítica/microcítica secundaria a ERC por déficit de eritropoyetina o pérdidas; compromete oxigenación tisular."
+  },
+  hematocrito: {
+    clave: "hematocrito",
+    nombre: "Hematocrito",
+    unidad: "%",
+    min: 36.0,
+    max: 50.0,
+    normal_str: "36 - 50 %",
+    diag_elevado: "Hemoconcentración",
+    diag_disminuido: "Hematocrito disminuido (Anemia)",
+    interp_elevado: "Elevado: sugiere hemoconcentración por deshidratación o poliglobulia.",
+    interp_normal: "Normal: volumen globular concentrado adecuado.",
+    interp_disminuido: "Disminuido: correlaciona con anemia secundaria a nefropatía/pérdidas hemáticas o hemodilución por retención hídrica."
+  },
+  linfocitos: {
+    clave: "linfocitos",
+    nombre: "Linfocitos",
+    unidad: "%",
+    min: 20.0,
+    max: 40.0,
+    normal_str: "20 - 40 %",
+    diag_elevado: "Linfocitosis",
+    diag_disminuido: "Linfopenia",
+    interp_elevado: "Elevado: respuesta leucocitaria reactiva a infección o estrés inmunológico.",
+    interp_normal: "Normal: respuesta inmune celular conservada dentro del rango de referencia.",
+    interp_disminuido: "Disminuido: linfopenia indicadora de depleción inmunológica asociada a malnutrición proteico-calórica moderada a severa."
+  },
+  albumina: {
+    clave: "albumina",
+    nombre: "Albúmina",
+    unidad: "g/dL",
+    min: 3.5,
+    max: 5.0,
+    normal_str: "3.5 - 5.0 g/dL",
+    diag_elevado: "Deshidratación grave",
+    diag_disminuido: "Hipoalbuminemia",
+    interp_elevado: "Elevada: sugiere hemoconcentración o deshidratación severa.",
+    interp_normal: "Normal: estado proteico visceral conservado (3.5 - 5.0 g/dL).",
+    interp_disminuido: "Disminuida: hipoalbuminemia; marcador clave de Desgaste Proteico-Energético (DPE), inflamación sistémica y pérdidas dialíticas."
+  },
+  globulinas: {
+    clave: "globulinas",
+    nombre: "Globulinas",
+    unidad: "g/dL",
+    min: 2.0,
+    max: 3.5,
+    normal_str: "2.0 - 3.5 g/dL",
+    diag_elevado: "Hipergammaglobulinemia",
+    diag_disminuido: "Hipogammaglobulinemia",
+    interp_elevado: "Elevado: elevación de proteínas de fase aguda por estado inflamatorio sistémico.",
+    interp_normal: "Normal: fracción globulínica dentro del rango fisiológico.",
+    interp_disminuido: "Disminuido: síntesis hepática reducida o pérdidas proteicas gastrointestinales/renales."
+  },
+  sodio: {
+    clave: "sodio",
+    nombre: "Sodio",
+    unidad: "mEq/L",
+    min: 135.0,
+    max: 145.0,
+    normal_str: "135 - 145 mEq/L",
+    diag_elevado: "Hipernatremia",
+    diag_disminuido: "Hiponatremia dilucional",
+    interp_elevado: "Elevado: hipernatremia por déficit de agua libre o sobrecarga salina.",
+    interp_normal: "Normal: adecuado balance de osmolaridad plasmática.",
+    interp_disminuido: "Ligeramente disminuido: Hiponatremia dilucional por retención hídrica en contexto de sobrecarga de volumen o pérdidas digestivas."
+  },
+  calcio: {
+    clave: "calcio",
+    nombre: "Calcio",
+    unidad: "mg/dL",
+    min: 8.5,
+    max: 10.2,
+    normal_str: "8.5 - 10.2 mg/dL",
+    diag_elevado: "Hipercalcemia",
+    diag_disminuido: "Hipocalcemia secundaria",
+    interp_elevado: "Elevado: hipercalcemia; sospechar hiperparatiroidismo terciario o intoxicación por vitamina D.",
+    interp_normal: "Normal: calcio total dentro del rango fisiológico.",
+    interp_disminuido: "Disminuido: Hipocalcemia secundaria a déficit de vitamina D activa e hiperfosfatemia; evaluar junto a la albúmina (calcio corregido)."
+  },
+  fosforo: {
+    clave: "fosforo",
+    nombre: "Fósforo",
+    unidad: "mg/dL",
+    min: 2.5,
+    max: 4.5,
+    normal_str: "2.5 - 4.5 mg/dL",
+    diag_elevado: "Hiperfosfatemia",
+    diag_disminuido: "Hipofosfatemia",
+    interp_elevado: "Elevado: hiperfosfatemia por falla en la excreción renal; incrementa riesgo cardiovascular y óseo, requiere quelantes y restricción dietética estricta.",
+    interp_normal: "Normal: nivel dentro del rango objetivo.",
+    interp_disminuido: "Disminuido: hipofosfatemia; alerta crítica de Síndrome de Realimentación."
+  },
+  potasio: {
+    clave: "potasio",
+    nombre: "Potasio",
+    unidad: "mEq/L",
+    min: 3.5,
+    max: 5.0,
+    normal_str: "3.5 - 5.0 mEq/L",
+    diag_elevado: "Hiperpotasemia",
+    diag_disminuido: "Hipopotasemia",
+    interp_elevado: "Ligeramente elevado / Elevado: hiperpotasemia, que puede afectar el ritmo cardíaco, especialmente si progresa; requiere restricción y monitoreo.",
+    interp_normal: "Normal: rango de seguridad cardioprotectora.",
+    interp_disminuido: "Disminuido: hipopotasemia; riesgo por realimentación o diuréticos, puede causar arritmias y debilidad muscular."
+  },
+  magnesio: {
+    clave: "magnesio",
+    nombre: "Magnesio",
+    unidad: "mg/dL",
+    min: 1.7,
+    max: 2.2,
+    normal_str: "1.7 - 2.2 mg/dL",
+    diag_elevado: "Hipermagnesemia",
+    diag_disminuido: "Hipomagnesemia",
+    interp_elevado: "Elevado: hipermagnesemia en insuficiencia renal avanzada si hay suplementación no controlada.",
+    interp_normal: "Normal: niveles séricos normales.",
+    interp_disminuido: "Disminuido: hipomagnesemia leve secundaria a pérdidas por el dializado y baja ingesta por la gastroparesia."
+  },
+  creatinina: {
+    clave: "creatinina",
+    nombre: "Creatinina sérica",
+    unidad: "mg/dL",
+    min: 0.6,
+    max: 1.3,
+    normal_str: "0.6 - 1.3 mg/dL",
+    diag_elevado: "Disfunción Renal Crónica TFG Severa",
+    diag_disminuido: "Sarcopenia extrema",
+    interp_elevado: "Muy elevada: la tasa de filtración glomerular está severamente comprometida, confirmando la necesidad de hemodiálisis.",
+    interp_normal: "Función de filtración glomerular normal.",
+    interp_disminuido: "Disminuida: atrofia o masa muscular muy disminuida (sarcopenia marcada)."
+  },
+  urea: {
+    clave: "urea",
+    nombre: "Urea sérica",
+    unidad: "mg/dL",
+    min: 15.0,
+    max: 40.0,
+    normal_str: "15 - 40 mg/dL",
+    diag_elevado: "Azoemia / Retención Urémica",
+    diag_disminuido: "Baja ingesta proteica",
+    interp_elevado: "Muy elevada: retención severa de toxinas urémicas por falla renal terminal/hipercatabolismo; condiciona náuseas, vómitos, anorexia y disgeusia.",
+    interp_normal: "Dentro de límites normales.",
+    interp_disminuido: "Disminuida: sospechar dieta muy pobre en proteínas o hepatopatía severa."
+  },
+  prealbumina: {
+    clave: "prealbumina",
+    nombre: "Prealbúmina",
+    unidad: "mg/dL",
+    min: 15.0,
+    max: 36.0,
+    normal_str: "15 - 36 mg/dL",
+    diag_elevado: null,
+    diag_disminuido: "Hipoprealbuminemia",
+    interp_elevado: "Elevada: puede observarse en insuficiencia renal por menor degradación tubular.",
+    interp_normal: "Normal: adecuada síntesis hepática proteica y recambio a corto plazo.",
+    interp_disminuido: "Disminuida: marcador sensible de malnutrición proteica aguda e inflamación sistémica; confirma déficit agudo en reservas proteicas viscerales."
+  },
+  hdl: {
+    clave: "hdl",
+    nombre: "HDL",
+    unidad: "mg/dL",
+    min: 50.0,
+    max: null,
+    normal_str: "≥ 50 mg/dL",
+    diag_elevado: null,
+    diag_disminuido: "HDL Bajo (Dislipidemia)",
+    interp_elevado: "Elevado: nivel protector cardiovascular óptimo.",
+    interp_normal: "Normal: niveles protectores adecuados.",
+    interp_disminuido: "Disminuido: hipoalfalipoproteinemia, reflejo del perfil lipídico aterogénico clásico de la enfermedad renal terminal o síndrome metabólico."
+  },
+  ldl: {
+    clave: "ldl",
+    nombre: "LDL",
+    unidad: "mg/dL",
+    min: null,
+    max: 100.0,
+    normal_str: "< 100 mg/dL",
+    diag_elevado: "LDL Elevado (Aterogénico)",
+    diag_disminuido: null,
+    interp_elevado: "Elevado: hipercolesterolemia aterogénica, riesgo cardiovascular aumentado.",
+    interp_normal: "Dentro del objetivo terapéutico normal.",
+    interp_disminuido: "Disminuido: valores bajos sin repercusión patológica directa."
+  },
+  hba1c: {
+    clave: "hba1c",
+    nombre: "HbA1c",
+    unidad: "%",
+    min: null,
+    max: 5.7,
+    normal_str: "< 5.7 % (Meta DM2: < 7.0 %)",
+    diag_elevado: "Descontrol Glucémico Crónico",
+    diag_disminuido: null,
+    interp_elevado: "Elevada: refleja mal control glucémico crónico en los últimos 3 meses; considerar posible alteración por anemia en diálisis.",
+    interp_normal: "Normal: adecuado control metabólico a largo plazo.",
+    interp_disminuido: "Disminuida: recambio eritrocitario acelerado o anemia hemolítica."
+  }
+};
+
+function buscarParametroPorTexto(texto) {
+  if (!texto) return null;
+  const t = texto.toLowerCase().trim();
+  for (const [k, p] of Object.entries(CATALOGO_PARAMETROS_BIOQUIMICOS)) {
+    if (k === t || p.nombre.toLowerCase() === t) return p;
+    if (t.includes(k) || p.nombre.toLowerCase().includes(t)) return p;
+  }
+  if (t.includes("glu") || t.includes("glic")) return CATALOGO_PARAMETROS_BIOQUIMICOS.glucosa;
+  if (t.includes("trig") || t === "tg") return CATALOGO_PARAMETROS_BIOQUIMICOS.trigliceridos;
+  if (t.includes("colest")) return CATALOGO_PARAMETROS_BIOQUIMICOS.colesterol;
+  if (t.includes("hemo") || t === "hb") return CATALOGO_PARAMETROS_BIOQUIMICOS.hemoglobina;
+  if (t.includes("hto") || t.includes("hemat")) return CATALOGO_PARAMETROS_BIOQUIMICOS.hematocrito;
+  if (t.includes("linf")) return CATALOGO_PARAMETROS_BIOQUIMICOS.linfocitos;
+  if (t.includes("alb") && !t.includes("prealb")) return CATALOGO_PARAMETROS_BIOQUIMICOS.albumina;
+  if (t.includes("glob")) return CATALOGO_PARAMETROS_BIOQUIMICOS.globulinas;
+  if (t.includes("sodio") || t === "na") return CATALOGO_PARAMETROS_BIOQUIMICOS.sodio;
+  if (t.includes("calcio") || t === "ca") return CATALOGO_PARAMETROS_BIOQUIMICOS.calcio;
+  if (t.includes("fosf") || t === "p") return CATALOGO_PARAMETROS_BIOQUIMICOS.fosforo;
+  if (t.includes("potas") || t === "k") return CATALOGO_PARAMETROS_BIOQUIMICOS.potasio;
+  if (t.includes("magn") || t === "mg") return CATALOGO_PARAMETROS_BIOQUIMICOS.magnesio;
+  if (t.includes("creat")) return CATALOGO_PARAMETROS_BIOQUIMICOS.creatinina;
+  if (t.includes("urea")) return CATALOGO_PARAMETROS_BIOQUIMICOS.urea;
+  if (t.includes("prealb")) return CATALOGO_PARAMETROS_BIOQUIMICOS.prealbumina;
+  return null;
+}
+
+function clasificarAnalitoLocal(clave, valor, nombreCustom = "") {
+  const p = CATALOGO_PARAMETROS_BIOQUIMICOS[clave] || buscarParametroPorTexto(nombreCustom);
+  if (!p) {
+    return {
+      estado: "normal",
+      valor_normal: "--",
+      unidad: "",
+      diagnostico: null,
+      interpretacion: "Parámetro evaluado en la historia clínica."
+    };
+  }
+
+  const v = parseFloat(valor);
+  if (isNaN(v)) {
+    return {
+      estado: "normal",
+      valor_normal: p.normal_str,
+      unidad: p.unidad,
+      diagnostico: null,
+      interpretacion: "Ingresa el valor numérico obtenido para generar la interpretación clínica."
+    };
+  }
+
+  let estado = "normal";
+  let interp = p.interp_normal;
+  let diag = null;
+
+  if (p.max !== null && v > p.max) {
+    estado = (v >= p.max * 1.5) ? "muy_elevado" : "elevado";
+    interp = p.interp_elevado;
+    diag = p.diag_elevado;
+  } else if (p.min !== null && v < p.min) {
+    estado = (v <= p.min * 0.65) ? "muy_disminuido" : "disminuido";
+    interp = p.interp_disminuido;
+    diag = p.diag_disminuido;
+  }
+
+  return {
+    estado,
+    valor_normal: p.normal_str,
+    unidad: p.unidad,
+    diagnostico: diag,
+    interpretacion: interp
+  };
+}
+
+function actualizarValoracionBioquimicaGlobal() {
+  const listEl = document.getElementById("bioqValoracionList");
+  const emptyEl = document.getElementById("bioqValoracionEmpty");
+  if (!listEl) return;
+
+  const diagnosticos = [];
+
+  datosBioquimicosActuales.forEach(item => {
+    if (item.estado && item.estado !== "normal") {
+      let diag = item.diagnostico;
+      if (!diag) {
+        const info = clasificarAnalitoLocal(item.clave, item.resultado, item.nombre);
+        diag = info.diagnostico;
+      }
+      if (diag && !diagnosticos.includes(diag)) {
+        diagnosticos.push(diag);
+      }
+    }
+  });
+
+  listEl.innerHTML = "";
+  if (diagnosticos.length > 0) {
+    diagnosticos.forEach(d => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "bioq-valoracion-item";
+      itemDiv.textContent = d.endsWith(".") ? d : d + ".";
+      listEl.appendChild(itemDiv);
+    });
+    listEl.style.display = "flex";
+    if (emptyEl) emptyEl.style.display = "none";
+  } else {
+    listEl.style.display = "none";
+    if (emptyEl) emptyEl.style.display = "block";
+  }
+}
+
 function renderizarTablaBioquimica() {
   const tbody = document.getElementById("bioquimicaTableBody");
+  if (!tbody) return;
   tbody.innerHTML = "";
 
   datosBioquimicosActuales.forEach((item, index) => {
     const tr = document.createElement("tr");
+    tr.id = `bioqRow_${index}`;
 
     let badgeClass = "badge-normal";
     let badgeText = "Normal";
@@ -473,26 +835,197 @@ function renderizarTablaBioquimica() {
       badgeText = item.estado === "muy_disminuido" ? "Muy Disminuido" : "Disminuido";
     }
 
+    const valDisplay = (item.resultado !== undefined && item.resultado !== null) ? item.resultado : "";
+
     tr.innerHTML = `
-      <td><strong>${item.nombre}</strong></td>
       <td>
-        <input type="number" step="0.01" class="form-control" style="width: 100px; display: inline-block;" value="${item.resultado}" onchange="actualizarAnalitoManual(${index}, this.value)">
-        <span style="font-size: 0.8rem; color: var(--gray-600);">${item.unidad}</span>
+        <input list="catalogoAnalitosDatalist" class="bioq-input-nombre" value="${item.nombre || ''}" onchange="cambiarAnalitoNombre(${index}, this.value)" placeholder="Ej. Glucosa basal">
       </td>
-      <td style="color: var(--gray-600); font-size: 0.85rem;">${item.valor_normal}</td>
-      <td><span class="badge ${badgeClass}">${badgeText}</span></td>
       <td>
-        <textarea class="form-control" rows="2" style="font-size: 0.85rem;" oninput="actualizarInterpManual(${index}, this.value)">${item.interpretacion}</textarea>
+        <div style="display: flex; align-items: center; gap: 0.35rem;">
+          <input type="number" step="any" class="bioq-input-res" value="${valDisplay}" oninput="actualizarResultadoBioq(${index}, this.value)" placeholder="0.0">
+          <span class="bioq-unit-label">${item.unidad || ''}</span>
+        </div>
+      </td>
+      <td>
+        <span class="bioq-normal-text">${item.valor_normal || '--'}</span>
+      </td>
+      <td style="text-align: center;">
+        <span class="badge bioq-estado-badge ${badgeClass}">${badgeText}</span>
+      </td>
+      <td>
+        <textarea class="bioq-textarea-interp" rows="2" oninput="actualizarInterpManual(${index}, this.value)">${item.interpretacion || ''}</textarea>
+      </td>
+      <td style="text-align: center;">
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarFilaBioq(${index})" title="Eliminar este parámetro">🗑️</button>
       </td>
     `;
     tbody.appendChild(tr);
   });
+
+  actualizarValoracionBioquimicaGlobal();
+}
+
+function actualizarResultadoBioq(index, nuevoValor) {
+  if (!datosBioquimicosActuales[index]) return;
+  const item = datosBioquimicosActuales[index];
+  item.resultado = nuevoValor === "" ? "" : parseFloat(nuevoValor);
+  const evaluacion = clasificarAnalitoLocal(item.clave, item.resultado, item.nombre);
+  item.estado = evaluacion.estado;
+  item.diagnostico = evaluacion.diagnostico;
+  item.interpretacion = evaluacion.interpretacion;
+  item.valor_normal = evaluacion.valor_normal || item.valor_normal;
+
+  const row = document.getElementById(`bioqRow_${index}`);
+  if (row) {
+    const estadoBadge = row.querySelector(".bioq-estado-badge");
+    const interpTextarea = row.querySelector(".bioq-textarea-interp");
+    const normalCell = row.querySelector(".bioq-normal-text");
+    if (normalCell) normalCell.textContent = item.valor_normal;
+
+    if (estadoBadge) {
+      let bClass = "badge-normal";
+      let bText = "Normal";
+      if (item.estado === "elevado" || item.estado === "muy_elevado") {
+        bClass = "badge-elevado";
+        bText = item.estado === "muy_elevado" ? "Muy Elevado" : "Elevado";
+      } else if (item.estado === "disminuido" || item.estado === "muy_disminuido") {
+        bClass = "badge-disminuido";
+        bText = item.estado === "muy_disminuido" ? "Muy Disminuido" : "Disminuido";
+      }
+      estadoBadge.className = `badge bioq-estado-badge ${bClass}`;
+      estadoBadge.textContent = bText;
+    }
+
+    if (interpTextarea) {
+      interpTextarea.value = item.interpretacion;
+    }
+  }
+
+  actualizarValoracionBioquimicaGlobal();
+}
+
+function cambiarAnalitoNombre(index, nuevoNombre) {
+  if (!datosBioquimicosActuales[index]) return;
+  const p = buscarParametroPorTexto(nuevoNombre);
+  if (p) {
+    datosBioquimicosActuales[index].clave = p.clave;
+    datosBioquimicosActuales[index].nombre = p.nombre;
+    datosBioquimicosActuales[index].unidad = p.unidad;
+    datosBioquimicosActuales[index].valor_normal = p.normal_str;
+    const res = datosBioquimicosActuales[index].resultado;
+    const evaluacion = clasificarAnalitoLocal(p.clave, res, p.nombre);
+    datosBioquimicosActuales[index].estado = evaluacion.estado;
+    datosBioquimicosActuales[index].diagnostico = evaluacion.diagnostico;
+    datosBioquimicosActuales[index].interpretacion = evaluacion.interpretacion;
+  } else {
+    datosBioquimicosActuales[index].nombre = nuevoNombre;
+  }
+  renderizarTablaBioquimica();
+}
+
+function agregarFilaBioquimica(nombre = "Glucosa basal", valor = "") {
+  const p = buscarParametroPorTexto(nombre) || CATALOGO_PARAMETROS_BIOQUIMICOS.glucosa;
+  const evaluacion = clasificarAnalitoLocal(p.clave, valor !== "" ? parseFloat(valor) : NaN, p.nombre);
+  datosBioquimicosActuales.push({
+    clave: p.clave,
+    nombre: p.nombre,
+    resultado: valor !== "" ? parseFloat(valor) : "",
+    unidad: p.unidad,
+    valor_normal: p.normal_str,
+    estado: valor !== "" ? evaluacion.estado : "normal",
+    diagnostico: evaluacion.diagnostico,
+    interpretacion: evaluacion.interpretacion
+  });
+  renderizarTablaBioquimica();
+}
+
+function eliminarFilaBioq(index) {
+  if (datosBioquimicosActuales[index]) {
+    datosBioquimicosActuales.splice(index, 1);
+    renderizarTablaBioquimica();
+  }
+}
+
+function limpiarTablaBioquimica() {
+  datosBioquimicosActuales = [];
+  renderizarTablaBioquimica();
+  actualizarValoracionBioquimicaGlobal();
+  mostrarToast("Tabla de bioquímica vacía para digitalizar un nuevo paciente.", "toast-info");
+}
+
+function cargarBioquimicaCaso(casoId) {
+  if (casoId === "caso2") {
+    // Caso 2: Diabetes Mellitus 2 (exactamente como en la Imagen 4 de práctica)
+    datosBioquimicosActuales = [
+      { clave: "glucosa", nombre: "Glucosa basal", resultado: 280, unidad: "mg/dL" },
+      { clave: "trigliceridos", nombre: "Triglicéridos", resultado: 250, unidad: "mg/dL" },
+      { clave: "colesterol", nombre: "Colesterol Total", resultado: 190, unidad: "mg/dL" },
+      { clave: "hemoglobina", nombre: "Hemoglobina", resultado: 12.6, unidad: "g/dL" },
+      { clave: "hematocrito", nombre: "Hematocrito", resultado: 34, unidad: "%" },
+      { clave: "linfocitos", nombre: "Linfocitos", resultado: 30, unidad: "%" },
+      { clave: "albumina", nombre: "Albúmina", resultado: 4.3, unidad: "g/dL" },
+      { clave: "globulinas", nombre: "Globulinas", resultado: 0.7, unidad: "g/dL" }
+    ];
+  } else {
+    // Caso 1: Nefropatía ERC en Hemodiálisis (exactamente como en la Imagen 5 + reporte completo)
+    datosBioquimicosActuales = [
+      { clave: "sodio", nombre: "Sodio", resultado: 134, unidad: "mEq/L" },
+      { clave: "calcio", nombre: "Calcio", resultado: 7.0, unidad: "mg/dL" },
+      { clave: "fosforo", nombre: "Fósforo", resultado: 5.9, unidad: "mg/dL" },
+      { clave: "potasio", nombre: "Potasio", resultado: 5.3, unidad: "mEq/L" },
+      { clave: "magnesio", nombre: "Magnesio", resultado: 1.5, unidad: "mg/dL" },
+      { clave: "creatinina", nombre: "Creatinina sérica", resultado: 6.51, unidad: "mg/dL" },
+      { clave: "urea", nombre: "Urea sérica", resultado: 150, unidad: "mg/dL" },
+      { clave: "albumina", nombre: "Albúmina", resultado: 1.6, unidad: "g/dL" },
+      { clave: "prealbumina", nombre: "Prealbúmina", resultado: 11, unidad: "mg/dL" },
+      { clave: "trigliceridos", nombre: "Triglicéridos", resultado: 320, unidad: "mg/dL" },
+      { clave: "colesterol", nombre: "Colesterol Total", resultado: 500, unidad: "mg/dL" },
+      { clave: "hemoglobina", nombre: "Hemoglobina", resultado: 9.1, unidad: "g/dL" },
+      { clave: "glucosa", nombre: "Glucosa basal", resultado: 159, unidad: "mg/dL" }
+    ];
+  }
+
+  datosBioquimicosActuales.forEach(item => {
+    const evaluacion = clasificarAnalitoLocal(item.clave, item.resultado, item.nombre);
+    item.valor_normal = evaluacion.valor_normal;
+    item.estado = evaluacion.estado;
+    item.diagnostico = evaluacion.diagnostico;
+    item.interpretacion = evaluacion.interpretacion;
+    item.unidad = evaluacion.unidad || item.unidad;
+  });
+
+  renderizarTablaBioquimica();
+  mostrarToast(`Analítica del ${casoId === 'caso2' ? 'Caso 2 (DM2)' : 'Caso 1 (ERC)'} cargada con éxito.`, "toast-success");
+}
+
+function toggleDrawerTextoBioq() {
+  const drawer = document.getElementById("drawerTextoBioq");
+  if (drawer) {
+    drawer.style.display = (drawer.style.display === "none" || !drawer.style.display) ? "block" : "none";
+  }
+}
+
+function abrirModalImagen(src, titulo) {
+  const modal = document.getElementById("imageViewerModal");
+  const img = document.getElementById("imageViewerImg");
+  const t = document.getElementById("imageViewerTitle");
+  if (modal && img) {
+    img.src = src;
+    if (t && titulo) t.textContent = "📷 " + titulo;
+    modal.style.display = "flex";
+  }
+}
+
+function cerrarModalImagen(e) {
+  const modal = document.getElementById("imageViewerModal");
+  if (modal) {
+    modal.style.display = "none";
+  }
 }
 
 function actualizarAnalitoManual(index, nuevoValor) {
-  if (datosBioquimicosActuales[index]) {
-    datosBioquimicosActuales[index].resultado = parseFloat(nuevoValor);
-  }
+  actualizarResultadoBioq(index, nuevoValor);
 }
 
 function actualizarInterpManual(index, nuevoTexto) {
@@ -502,57 +1035,32 @@ function actualizarInterpManual(index, nuevoTexto) {
 }
 
 function extraerBioquimicaCliente(texto) {
-  // Regex básica local para cuando se corre sin backend
-  const analitosMock = [
-    { clave: "trigliceridos", nombre: "Triglicéridos", unidad: "mg/dL", normal: "< 150 mg/dL", max: 150, pat: /triglic[eé]ridos?[:=\s]+([0-9.,]+)/i },
-    { clave: "colesterol", nombre: "Colesterol Total", unidad: "mg/dL", normal: "< 200 mg/dL", max: 200, pat: /colesterol[:=\s]+([0-9.,]+)/i },
-    { clave: "hdl", nombre: "HDL", unidad: "mg/dL", normal: "≥ 50 mg/dL", min: 50, pat: /hdl[:=\s]+([0-9.,]+)/i },
-    { clave: "ldl", nombre: "LDL", unidad: "mg/dL", normal: "< 100 mg/dL", max: 100, pat: /ldl[:=\s]+([0-9.,]+)/i },
-    { clave: "glucosa", nombre: "Glucosa basal", unidad: "mg/dL", normal: "70 - 100 mg/dL", min: 70, max: 100, pat: /glucosa(?:\s*basal)?[:=\s]+([0-9.,]+)/i },
-    { clave: "hba1c", nombre: "HbA1c", unidad: "%", normal: "< 5.7 % (Meta: < 7.0%)", max: 5.7, pat: /hb1?c[:=\s]+([0-9.,]+)/i },
-    { clave: "albumina", nombre: "Albúmina", unidad: "g/dL", normal: "3.5 - 5.0 g/dL", min: 3.5, max: 5.0, pat: /alb[uú]mina[:=\s]+([0-9.,]+)/i },
-    { clave: "prealbumina", nombre: "Prealbúmina", unidad: "mg/dL", normal: "15 - 36 mg/dL", min: 15.0, pat: /prealb[uú]mina[:=\s]+([0-9.,]+)/i },
-    { clave: "hemoglobina", nombre: "Hemoglobina", unidad: "g/dL", normal: "12 - 16 g/dL", min: 12.0, pat: /hemoglobina[:=\s]+([0-9.,]+)/i },
-    { clave: "urea", nombre: "Urea sérica", unidad: "mg/dL", normal: "15 - 40 mg/dL", max: 40.0, pat: /urea[:=\s]+([0-9.,]+)/i },
-    { clave: "creatinina", nombre: "Creatinina sérica", unidad: "mg/dL", normal: "0.6 - 1.3 mg/dL", max: 1.3, pat: /creatinina[:=\s]+([0-9.,]+)/i },
-    { clave: "sodio", nombre: "Sodio", unidad: "mEq/L", normal: "135 - 145 mEq/L", min: 135.0, pat: /sodio[:=\s]+([0-9.,]+)/i },
-    { clave: "calcio", nombre: "Calcio", unidad: "mg/dL", normal: "8.5 - 10.2 mg/dL", min: 8.5, pat: /calcio[:=\s]+([0-9.,]+)/i },
-    { clave: "fosforo", nombre: "Fósforo", unidad: "mg/dL", normal: "2.5 - 4.5 mg/dL", max: 4.5, pat: /f[oó]sforo[:=\s]+([0-9.,]+)/i },
-    { clave: "potasio", nombre: "Potasio", unidad: "mEq/L", normal: "3.5 - 5.0 mEq/L", max: 5.0, pat: /potasio[:=\s]+([0-9.,]+)/i },
-    { clave: "magnesio", nombre: "Magnesio", unidad: "mg/dL", normal: "1.7 - 2.2 mg/dL", min: 1.7, pat: /magnesio[:=\s]+([0-9.,]+)/i }
-  ];
-
   const encontrados = [];
-  analitosMock.forEach(a => {
-    const m = texto.match(a.pat);
+  for (const [clave, p] of Object.entries(CATALOGO_PARAMETROS_BIOQUIMICOS)) {
+    const regex = new RegExp(`(?:${p.nombre}|${clave})[:=\\s]+([0-9.,]+)`, "i");
+    const m = texto.match(regex);
     if (m) {
       const val = parseFloat(m[1].replace(",", "."));
-      let estado = "normal";
-      let interp = "Dentro del rango de normalidad.";
-      if (a.max && val > a.max) {
-        estado = "elevado";
-        interp = `Elevado: valor superior al rango máximo normal (${a.normal}), requiere monitoreo en soporte nutricional.`;
-      } else if (a.min && val < a.min) {
-        estado = "disminuido";
-        interp = `Disminuido: valor inferior al rango de referencia (${a.normal}), indica déficit o pérdida orgánica.`;
-      }
+      const evaluacion = clasificarAnalitoLocal(clave, val, p.nombre);
       encontrados.push({
-        nombre: a.nombre,
+        clave: p.clave,
+        nombre: p.nombre,
         resultado: val,
-        unidad: a.unidad,
-        valor_normal: a.normal,
-        estado: estado,
-        interpretacion: interp
+        unidad: p.unidad,
+        valor_normal: evaluacion.valor_normal,
+        estado: evaluacion.estado,
+        diagnostico: evaluacion.diagnostico,
+        interpretacion: evaluacion.interpretacion
       });
     }
-  });
+  }
 
   if (encontrados.length > 0) {
     datosBioquimicosActuales = encontrados;
     renderizarTablaBioquimica();
-    alert(`Se extrajeron ${encontrados.length} analitos con el motor local.`);
+    mostrarToast(`Se extrajeron ${encontrados.length} analitos del texto.`, "toast-success");
   } else {
-    alert("No se detectaron analitos en el texto ingresado. Comprueba el formato de los datos.");
+    mostrarToast("No se detectaron analitos en el texto ingresado.", "toast-error");
   }
 }
 
@@ -991,13 +1499,7 @@ async function cargarCasoEjemplo(casoId) {
 }
 
 function poblarBioquimicaCaso(bioqDict, casoId) {
-  // Construir texto de laboratorio y analizar
-  let lineas = [];
-  for (const [k, v] of Object.entries(bioqDict)) {
-    lineas.push(`${k}: ${v}`);
-  }
-  document.getElementById("rawClinicalText").value = lineas.join("\n");
-  analizarTextoBioquimica();
+  cargarBioquimicaCaso(casoId);
 }
 
 function poblarClinicoTabla(clinicoArr) {

@@ -4,14 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proceso de Atención Nutricional (PAN) - Nutrición Clínica USIL</title>
-  <link rel="stylesheet" href="styles.css?v=20261010_ui3">
+  <link rel="stylesheet" href="styles.css?v=20261010_ui4">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
-  <script src="pdf.min.js"></script>
-  <script>
-    if (window.pdfjsLib) {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
-    }
-  </script>
   <script src="qrcode.min.js"></script>
 </head>
 <body>
@@ -138,33 +132,29 @@
           </div>
         </div>
 
-        <!-- Zona Interactiva de Carga de PDF -->
-        <div class="pdf-upload-card" id="pdfUploadZone" onclick="document.getElementById('pdfFileInput').click()">
-          <input type="file" id="pdfFileInput" accept=".pdf" style="display: none;" onchange="manejarSubidaPDF(event)">
-          <div class="pdf-upload-icon">📂</div>
-          <div class="pdf-upload-title">Subir Historia Clínica en PDF</div>
-          <p class="pdf-upload-desc">Arrastra tu archivo PDF aquí o haz clic para seleccionarlo. El sistema extraerá automáticamente filiación, antecedentes, diagnóstico, tratamiento y la tabla de 18 parámetros bioquímicos.</p>
-          <div class="pdf-upload-btn-group" onclick="event.stopPropagation()">
-            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('pdfFileInput').click()">
-              📄 Seleccionar Archivo PDF
-            </button>
-            <button type="button" class="btn btn-outline-primary btn-sm" onclick="cargarCasoEjemplo('caso1')">
-              ⚡ Cargar Caso 1 (María Infanta)
+        <!-- Barra de Casos Clínicos y Digitalización Directa -->
+        <div style="background: linear-gradient(135deg, rgba(26,54,93,0.06), rgba(43,108,176,0.08)); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+          <div>
+            <div style="font-weight: 700; color: var(--primary); font-size: 1.05rem; margin-bottom: 0.25rem;">🩺 Casos Clínicos Oficiales - Nutrición Clínica USIL</div>
+            <div style="font-size: 0.85rem; color: var(--gray-600);">Selecciona un caso de estudio para autocompletar la historia clínica o digitaliza manualmente los datos del paciente:</div>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="cargarCasoEjemplo('caso1')">
+              ⚡ Cargar Caso 1: Nefropatía ERC (María Infanta)
             </button>
             <button type="button" class="btn btn-outline-primary btn-sm" onclick="cargarCasoEjemplo('caso2')">
-              ⚡ Cargar Caso 2 (Alejandra Román)
+              ⚡ Cargar Caso 2: Diabetes Mellitus 2 (Alejandra Román)
             </button>
-          </div>
-          <div class="pdf-status-alert alert-box alert-info" id="pdfStatusAlert" style="display: none; margin-top: 1rem;">
-            <div id="pdfStatusIcon">⏳</div>
-            <div id="pdfStatusText">Procesando archivo PDF...</div>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="limpiarFormulario()">
+              🧹 Limpiar Formulario
+            </button>
           </div>
         </div>
 
         <div class="alert-box alert-info" style="margin-bottom: 1.25rem;">
           <div>💡</div>
           <div>
-            <strong>Flujo de Trabajo Clínico:</strong> Tras subir la Historia Clínica en PDF, los datos generales y analíticos se rellenarán automáticamente. Luego, ingresa en persona las <strong>mediciones antropométricas y funcionales</strong> (Pliegues, Dinamometría, Marcha, SARC-F, Bristol y Fragilidad) para obtener los cálculos, semáforos e interpretaciones finales.
+            <strong>Flujo de Evaluación Nutricional Clínica:</strong> Digitaliza directamente los antecedentes y datos de filiación del paciente, o selecciona un caso de estudio pre-cargado. A continuación, evalúa el tamizaje <strong>NRS-2002</strong>, ingresa las <strong>mediciones antropométricas</strong> y <strong>bioquímicas</strong>, y realiza la valoración <strong>funcional</strong> para obtener el diagnóstico PES, requerimiento energético e intervención nutricional completa.
           </div>
         </div>
 
@@ -333,7 +323,7 @@
 
         <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">Screening Inicial (Preguntas de Filtro)</h3>
         <div class="scale-image-container" style="margin-bottom: 1rem;">
-          <img src="assets/nrs_inicial.jpg" alt="Screening Inicial NRS-2002" style="max-height: 200px;">
+          <img src="assets/nrs_inicial.png" alt="Screening Inicial NRS-2002" style="max-height: 240px; border-radius: 8px;">
           <div class="scale-image-caption">Tabla oficial de Screening Inicial (Criterios de filtro)</div>
         </div>
         <div class="table-responsive" style="margin-bottom: 1.5rem;">
@@ -392,7 +382,7 @@
 
         <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">Screening Final Cuantitativo</h3>
         <div class="scale-image-container" style="margin-bottom: 1rem;">
-          <img src="assets/nrs_final.png" alt="Screening Final NRS-2002" style="max-height: 280px;">
+          <img src="assets/nrs_final.jpg" alt="Screening Final NRS-2002" style="max-height: 320px; border-radius: 8px;">
           <div class="scale-image-caption">Tabla oficial de Cuantificación: Estado Nutricional vs Severidad de Enfermedad</div>
         </div>
         <div class="grid-2">
@@ -550,47 +540,135 @@
       <div class="card">
         <div class="card-header">
           <div>
-            <h2 class="card-title"><span>🧪</span> 2.2 Evaluación Bioquímica con Analizador Inteligente</h2>
-            <p class="card-subtitle">Detección de analitos elevados/disminuidos y generación de interpretaciones fisiopatológicas</p>
+            <h2 class="card-title"><span>🧪</span> 2.2 Valoración Bioquímica e Interpretación Clínica (PAN)</h2>
+            <p class="card-subtitle">Digitalización de parámetros de laboratorio con cálculo automático de valores normales, estado semafórico e interpretación fisiopatológica en tiempo real.</p>
           </div>
-          <div>
-            <button class="btn btn-primary btn-sm" onclick="analizarTextoBioquimica()">
-              ⚡ Extraer y Analizar con Python
+        </div>
+
+        <!-- Barra de Herramientas de Digitalización Bioquímica -->
+        <div class="bioq-toolbar">
+          <div class="bioq-toolbar-group">
+            <button type="button" class="btn btn-primary btn-sm" onclick="cargarBioquimicaCaso('caso1')">
+              ⚡ Cargar Caso 1 (ERC Hemodiálisis)
+            </button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="cargarBioquimicaCaso('caso2')">
+              ⚡ Cargar Caso 2 (Diabetes Mellitus 2)
+            </button>
+            <button type="button" class="btn btn-success btn-sm" onclick="agregarFilaBioquimica()">
+              ➕ Agregar Analito
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="limpiarTablaBioquimica()">
+              🧹 Limpiar Tabla
+            </button>
+          </div>
+          <div class="bioq-toolbar-group">
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="toggleDrawerTextoBioq()">
+              📝 Pegar Texto de Reporte
             </button>
           </div>
         </div>
 
-        <!-- Área para subir o pegar historia clínica -->
-        <div class="calc-card" style="margin-bottom: 1.5rem;">
+        <!-- Drawer Colapsable para Pegar Texto de Historia Clínica -->
+        <div id="drawerTextoBioq" class="calc-card" style="display: none; margin-bottom: 1.25rem;">
           <label style="font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-            <span>📄</span> Pegar Historia Clínica o Reporte de Laboratorio aquí:
+            <span>📄</span> Pegar Reporte o Analítica Textual:
           </label>
-          <textarea class="form-control" id="rawClinicalText" rows="4" placeholder="Pega aquí el texto de la historia clínica o analítica (ej. Triglicéridos: 320 mg/dl, Colesterol 500, Albúmina 1.6, Glucosa 159, Creatinina 6.51, Urea 150, Potasio 5.3...). El sistema detectará automáticamente cada analito, evaluará si está elevado y escribirá la interpretación clínica."></textarea>
+          <textarea class="form-control" id="rawClinicalText" rows="3" placeholder="Pega aquí el texto de laboratorio (ej. Glucosa 280, Triglicéridos 250, Sodio 134, Calcio 7, Fósforo 5.9, Potasio 5.3...)."></textarea>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
-            <span style="font-size: 0.8rem; color: var(--gray-600);">💡 Puedes pegar fragmentos de texto desordenados; el detector clínico identificará los analitos.</span>
-            <button class="btn btn-secondary btn-sm" onclick="cargarEjemploTextoBioq()">
-              📋 Cargar Texto de Caso 1
+            <span style="font-size: 0.8rem; color: var(--gray-600);">💡 El analizador detectará automáticamente los analitos y los insertará en la tabla interactiva inferior.</span>
+            <button type="button" class="btn btn-primary btn-sm" onclick="analizarTextoBioquimica()">
+              ⚡ Extraer y Actualizar Tabla
             </button>
           </div>
         </div>
 
-        <!-- Tabla Bioquímica Dinámica -->
-        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">Tabla de Parámetros Bioquímicos e Interpretación</h3>
-        <div class="table-responsive">
-          <table class="clinical-table" id="tablaBioquimica">
-            <thead>
-              <tr>
-                <th>Datos Bioquímicos</th>
-                <th style="width: 140px;">Resultados</th>
-                <th style="width: 160px;">Valores Normales</th>
-                <th style="width: 110px;">Estado</th>
-                <th>Interpretación Fisiopatológica y Nutricional</th>
-              </tr>
-            </thead>
-            <tbody id="bioquimicaTableBody">
-              <!-- Se puebla dinámicamente -->
-            </tbody>
-          </table>
+        <!-- Layout Principal: Tabla Interactiva a la izquierda y Tarjeta Valoración a la derecha -->
+        <div class="bioq-layout">
+          <!-- Columna Izquierda: Tabla Dinámica de Digitalización -->
+          <div>
+            <div class="table-responsive">
+              <table class="clinical-table" id="tablaBioquimica">
+                <thead>
+                  <tr>
+                    <th style="min-width: 170px;">Datos Bioquímicos</th>
+                    <th style="min-width: 140px;">Resultados</th>
+                    <th style="min-width: 140px;">Valores Normales</th>
+                    <th style="min-width: 95px; text-align: center;">Estado</th>
+                    <th style="min-width: 260px;">Interpretación Fisiopatológica y Nutricional</th>
+                    <th style="width: 50px; text-align: center;">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="bioquimicaTableBody">
+                  <!-- Se puebla interactivamente por JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Datalist para autocompletado de analitos -->
+            <datalist id="catalogoAnalitosDatalist">
+              <option value="Glucosa basal">
+              <option value="Triglicéridos">
+              <option value="Colesterol Total">
+              <option value="Hemoglobina">
+              <option value="Hematocrito">
+              <option value="Linfocitos">
+              <option value="Albúmina">
+              <option value="Globulinas">
+              <option value="Sodio">
+              <option value="Calcio">
+              <option value="Fósforo">
+              <option value="Potasio">
+              <option value="Magnesio">
+              <option value="Urea sérica">
+              <option value="Creatinina sérica">
+              <option value="Prealbúmina">
+              <option value="HDL">
+              <option value="LDL">
+              <option value="HbA1c">
+              <option value="Bilirrubinas Totales">
+            </datalist>
+
+            <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.8rem; color: var(--gray-600);">💡 Puedes digitalizar directamente el valor o seleccionar cualquier parámetro del catálogo. El sistema recalcula la normalidad y la interpretación al instante.</span>
+              <button type="button" class="btn btn-outline-primary btn-sm" onclick="agregarFilaBioquimica()">
+                ➕ Agregar Fila
+              </button>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Tarjeta Azul de Valoración (Imagen 4) y Referencias Oficiales -->
+          <div>
+            <!-- Tarjeta Oficial de Valoración Global -->
+            <div class="bioq-valoracion-card">
+              <h3 class="bioq-valoracion-title">Valoración</h3>
+              <div class="bioq-valoracion-divider"></div>
+              <div id="bioqValoracionList" class="bioq-valoracion-list">
+                <!-- Se puebla dinámicamente con los diagnósticos de analitos alterados -->
+                <div class="bioq-valoracion-item">Hiperglicemia.</div>
+                <div class="bioq-valoracion-item">Hipertrigliceridemia.</div>
+              </div>
+              <div id="bioqValoracionEmpty" class="bioq-valoracion-empty" style="display: none;">
+                Parámetros evaluados dentro de rangos fisiológicos normales.
+              </div>
+            </div>
+
+            <!-- Diapositivas de Referencia Oficial de las Prácticas -->
+            <div class="bioq-ref-box">
+              <div class="bioq-ref-title">
+                <span>📷</span> Diapositivas de Práctica Oficial
+              </div>
+              <div class="bioq-ref-thumbnails">
+                <div class="bioq-ref-thumb" onclick="abrirModalImagen('assets/bioquimica_referencia_dm.jpg', 'Caso DM2: Valoración Bioquímica Oficial')">
+                  <img src="assets/bioquimica_referencia_dm.jpg" alt="Diapositiva Bioquímica DM2">
+                  <div class="bioq-ref-thumb-caption">Práctica DM2 (Img 4)</div>
+                </div>
+                <div class="bioq-ref-thumb" onclick="abrirModalImagen('assets/bioquimica_referencia_erc.png', 'Caso ERC: Parámetros e Interpretación Oficial')">
+                  <img src="assets/bioquimica_referencia_erc.png" alt="Diapositiva Bioquímica ERC">
+                  <div class="bioq-ref-thumb-caption">Práctica ERC (Img 5)</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1322,9 +1400,22 @@ La integración de la evaluación funcional (marcha de 0.5 m/s, SARC-F de 4 punt
     </div>
   </div>
 
+  <!-- Modal para Visualización de Imágenes de Referencia Clínica -->
+  <div class="modal-overlay" id="imageViewerModal" onclick="cerrarModalImagen(event)" style="display: none;">
+    <div class="modal-dialog" style="max-width: 850px; text-align: center;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="imageViewerTitle" style="font-size: 1.1rem; color: var(--primary);">📷 Diapositiva Clínica Oficial</h3>
+        <button class="modal-close-btn" onclick="cerrarModalImagen()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 1rem;">
+        <img id="imageViewerImg" src="" alt="Diapositiva Clínica" style="max-width: 100%; max-height: 80vh; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      </div>
+    </div>
+  </div>
+
   <!-- Contenedor accesible para notificaciones tipo Toast -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-  <script src="app.js?v=20261010_ui3"></script>
+  <script src="app.js?v=20261010_ui4"></script>
 </body>
 </html>
