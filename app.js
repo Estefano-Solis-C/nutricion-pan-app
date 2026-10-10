@@ -40,14 +40,45 @@ document.addEventListener("DOMContentLoaded", () => {
   inicializarDragAndDropPDF();
 });
 
-// Navegación por pestañas
+// Notificaciones tipo Toast accesibles (better-writing & better-ui)
+function mostrarToast(mensaje, tipo = "toast-info", duracion = 3500) {
+  const container = document.getElementById("toastContainer");
+  if (!container) return;
+  
+  const toast = document.createElement("div");
+  toast.className = `toast ${tipo}`;
+  
+  let icono = "ℹ️";
+  if (tipo === "toast-success") icono = "✅";
+  else if (tipo === "toast-error") icono = "⚠️";
+  
+  toast.innerHTML = `<span style="font-size: 1.1rem;">${icono}</span><span>${mensaje}</span>`;
+  container.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(8px)";
+    toast.style.transition = "opacity 180ms ease, transform 180ms ease";
+    setTimeout(() => toast.remove(), 200);
+  }, duracion);
+}
+
+// Navegación por pestañas con soporte ARIA (better-accessibility)
 function mostrarPestana(tabId, btn) {
-  document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
-  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".tab-pane").forEach(p => {
+    p.classList.remove("active");
+  });
+  document.querySelectorAll(".tab-btn").forEach(b => {
+    b.classList.remove("active");
+    b.setAttribute("aria-selected", "false");
+  });
   
   const pane = document.getElementById(tabId);
   if (pane) pane.classList.add("active");
-  if (btn) btn.classList.add("active");
+  if (btn) {
+    btn.classList.add("active");
+    btn.setAttribute("aria-selected", "true");
+  }
   
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1286,11 +1317,118 @@ function copiarUrlMovil() {
   if (!input) return;
   input.select();
   navigator.clipboard.writeText(input.value).then(() => {
-    alert("¡Enlace copiado al portapapeles! Ábrelo en el navegador de tu celular.");
+    mostrarToast("¡Enlace copiado al portapapeles! Ábrelo en el navegador de tu celular.", "toast-success");
   }).catch(() => {
     document.execCommand("copy");
-    alert("¡Enlace copiado!");
+    mostrarToast("¡Enlace copiado!", "toast-info");
   });
+}
+
+// ============================================================================
+// COMPILACIÓN Y GUARDADO DE CASOS EN LA NUBE (TiDB Cloud Serverless)
+// ============================================================================
+
+function compilarCasoActual() {
+  const nombre = document.getElementById("filiacionNombre")?.value || "Paciente sin nombre";
+  const edad = parseInt(document.getElementById("filiacionEdad")?.value) || 0;
+  const sexo = document.getElementById("filiacionSexo")?.value || "femenino";
+
+  return {
+    id: casoActivoId || `caso_${Date.now()}`,
+    filiacion: {
+      nombre,
+      edad,
+      sexo,
+      estado_civil: document.getElementById("filiacionEstadoCivil")?.value || "",
+      religion: document.getElementById("filiacionReligion")?.value || "",
+      lugar_nacimiento: document.getElementById("filiacionNacimiento")?.value || "",
+      lugar_procedencia: document.getElementById("filiacionProcedencia")?.value || "",
+      ocupacion: document.getElementById("filiacionOcupacion")?.value || ""
+    },
+    enfermedad_ingreso: {
+      temperatura: document.getElementById("ingresoTemp")?.value || "",
+      fc: document.getElementById("ingresoFC")?.value || "",
+      fr: document.getElementById("ingresoFR")?.value || "",
+      pa: document.getElementById("ingresoPA")?.value || "",
+      tiempo_enfermedad: document.getElementById("ingresoTiempo")?.value || "",
+      forma_inicio: document.getElementById("ingresoForma")?.value || "",
+      curso: document.getElementById("ingresoCurso")?.value || "",
+      relato: document.getElementById("ingresoRelato")?.value || ""
+    },
+    funciones_biologicas: {
+      apetito: document.getElementById("bioApetito")?.value || "",
+      sed: document.getElementById("bioSed")?.value || "",
+      orina: document.getElementById("bioOrina")?.value || "",
+      deposiciones: document.getElementById("bioDeposiciones")?.value || "",
+      animo: document.getElementById("bioAnimo")?.value || ""
+    },
+    antecedentes: {
+      patologicos: document.getElementById("antPatologicos")?.value || "",
+      familiares: document.getElementById("antFamiliares")?.value || ""
+    },
+    diagnostico_medico: document.getElementById("diagMedico")?.value || "",
+    tratamiento_farmacologico: document.getElementById("tratamientoFarmacos")?.value || "",
+    antropometria: {
+      peso_actual: parseFloat(document.getElementById("antropoPesoActual")?.value) || 0,
+      talla: parseFloat(document.getElementById("antropoTalla")?.value) || 0,
+      circunferencia_brazo: parseFloat(document.getElementById("antropoCB")?.value) || 0,
+      pliegue_tricipital: parseFloat(document.getElementById("antropoPCT")?.value) || 0,
+      perimetro_pantorrilla: parseFloat(document.getElementById("antropoCP")?.value) || 0,
+      perimetro_abdominal: parseFloat(document.getElementById("antropoCAbd")?.value) || 0
+    },
+    bioquimica: datosBioquimicosActuales || [],
+    funcional: {
+      dinamometria_max: parseFloat(document.getElementById("dinamoMax")?.textContent) || 0,
+      marcha_vel: parseFloat(document.getElementById("marchaVelocidadDisplay")?.textContent) || 0,
+      sarc_f: parseInt(document.getElementById("sarcTotalDisplay")?.textContent) || 0,
+      ecf: selectedECF || 4
+    },
+    intervencion: {
+      get_kcal: parseFloat(document.getElementById("intervGET")?.textContent) || 0,
+      formula: document.getElementById("intervFormulaSelect")?.value || "Vital 1.5",
+      prescripcion: document.getElementById("intervPrescripcionText")?.value || ""
+    },
+    monitoreo: {
+      corto: document.getElementById("monitCorto")?.value || "",
+      mediano: document.getElementById("monitMediano")?.value || "",
+      largo: document.getElementById("monitLargo")?.value || ""
+    },
+    conclusiones: document.getElementById("informeConclusiones")?.value || ""
+  };
+}
+
+async function guardarCasoActivoEnNube() {
+  const btn = document.getElementById("btnSaveCaseCloud");
+  const originalHtml = btn ? btn.innerHTML : "";
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `⏳ Guardando...`;
+  }
+
+  try {
+    const caso = compilarCasoActual();
+    const resp = await fetch("/api/save-case", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(caso)
+    });
+
+    if (resp.ok) {
+      const res = await resp.json();
+      const destino = res.storage === "tidb_cloud" ? "TiDB Cloud Serverless" : "almacenamiento local";
+      mostrarToast(`Caso clínico de '${caso.filiacion.nombre}' guardado en ${destino}.`, "toast-success", 4000);
+    } else {
+      mostrarToast("No se pudo guardar el caso en la nube. Verifica tu conexión.", "toast-error");
+    }
+  } catch (e) {
+    console.error("Error al guardar en TiDB:", e);
+    mostrarToast("Error de conexión al sincronizar con TiDB Cloud.", "toast-error");
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }
+  }
 }
 
 

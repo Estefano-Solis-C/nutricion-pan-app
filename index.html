@@ -35,14 +35,17 @@
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn btn-primary btn-sm" onclick="abrirModalMovil()" style="background: #0284c7; border-color: #0284c7;">
+        <button class="btn btn-primary btn-sm" onclick="guardarCasoActivoEnNube()" id="btnSaveCaseCloud" aria-label="Guardar caso en la nube TiDB">
+          💾 Guardar en TiDB Cloud
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="abrirModalMovil()" aria-label="Abrir en celular o tablet">
           📱 Abrir en Celular / Red
         </button>
         <button class="btn btn-secondary btn-sm" onclick="cargarCasoEjemplo('caso1')">
-          📥 Caso 1: María Infanta (ERC/SNY)
+          📥 Caso 1: María Infanta (ERC)
         </button>
         <button class="btn btn-secondary btn-sm" onclick="cargarCasoEjemplo('caso2')">
-          📥 Caso 2: Alejandra Román (DM2/SNG)
+          📥 Caso 2: Alejandra Román (DM2)
         </button>
         <button class="btn btn-outline-white btn-sm" onclick="limpiarFormulario()">
           🧹 Nuevo Caso
@@ -86,35 +89,35 @@
     </section>
 
     <!-- Navegación por Pestañas del Proceso -->
-    <nav class="tabs-nav no-print" id="mainTabsNav">
-      <button class="tab-btn active" onclick="mostrarPestana('tab-filiacion', this)">
+    <nav class="tabs-nav no-print" id="mainTabsNav" role="tablist" aria-label="Etapas del Proceso de Atención Nutricional">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-filiacion" onclick="mostrarPestana('tab-filiacion', this)">
         <span>📋</span> Historia Clínica
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-nrs', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-nrs" onclick="mostrarPestana('tab-nrs', this)">
         <span>🔍</span> 1. NRS-2002
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-antropo', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-antropo" onclick="mostrarPestana('tab-antropo', this)">
         <span>📏</span> 2.1 Antropometría
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-bioquimica', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-bioquimica" onclick="mostrarPestana('tab-bioquimica', this)">
         <span>🧪</span> 2.2 Bioquímica
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-clinico-diet', this)">
-        <span>🥗</span> 2.3-2.5 Clínico & Bristol
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-clinico-diet" onclick="mostrarPestana('tab-clinico-diet', this)">
+        <span>🥗</span> 2.3–2.5 Clínico & Bristol
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-funcional', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-funcional" onclick="mostrarPestana('tab-funcional', this)">
         <span>⚡</span> 2.6 Funcional (Marcha/SARC)
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-diagnostico', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-diagnostico" onclick="mostrarPestana('tab-diagnostico', this)">
         <span>🩺</span> 3. Diagnóstico (PES)
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-intervencion', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-intervencion" onclick="mostrarPestana('tab-intervencion', this)">
         <span>🥣</span> 4. Intervención
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-monitoreo', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-monitoreo" onclick="mostrarPestana('tab-monitoreo', this)">
         <span>📊</span> 5. Monitoreo
       </button>
-      <button class="tab-btn" onclick="mostrarPestana('tab-informe', this)">
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-informe" onclick="mostrarPestana('tab-informe', this)">
         <span>📑</span> 6. Informe Final
       </button>
     </nav>
@@ -1289,10 +1292,10 @@ La integración de la evaluación funcional (marcha de 0.5 m/s, SARC-F de 4 punt
 
   <!-- Modal para Abrir en Celular / Red Local con Código QR -->
   <div class="modal-overlay" id="mobileModal" onclick="cerrarModalMovil(event)">
-    <div class="modal-dialog" onclick="event.stopPropagation()">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalMobileTitle" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h3>📱 Abrir en otro dispositivo (Celular / Tablet)</h3>
-        <button class="modal-close-btn" onclick="cerrarModalMovil()">&times;</button>
+        <h3 id="modalMobileTitle">📱 Abrir en otro dispositivo (Celular / Tablet)</h3>
+        <button class="modal-close-btn" onclick="cerrarModalMovil()" aria-label="Cerrar ventana modal">&times;</button>
       </div>
       <div class="modal-body">
         <p style="font-size: 0.95rem; color: #475569; margin-bottom: 0.75rem;">
@@ -1302,18 +1305,21 @@ La integración de la evaluación funcional (marcha de 0.5 m/s, SARC-F de 4 punt
           <!-- Se genera dinámicamente con qrcode.min.js -->
         </div>
         <div class="url-copy-container">
-          <input type="text" class="url-copy-input" id="mobileUrlInput" readonly value="http://192.168.18.186:8080">
-          <button class="btn btn-secondary btn-sm" onclick="copiarUrlMovil()">📋 Copiar</button>
+          <input type="text" class="url-copy-input" id="mobileUrlInput" readonly value="http://192.168.18.186:8080" aria-label="Dirección web de la aplicación">
+          <button class="btn btn-primary btn-sm" onclick="copiarUrlMovil()" aria-label="Copiar dirección web al portapapeles">📋 Copiar enlace</button>
         </div>
         <div class="alert-box alert-info" style="text-align: left; margin-top: 1rem; font-size: 0.85rem;">
           <div>📶</div>
           <div>
-            <strong>Instrucciones Wi-Fi:</strong> Tu celular o tablet debe estar conectado a la misma red Wi-Fi que esta computadora (o compartir zona Wi-Fi). Abre el navegador del móvil e ingresa la dirección mostrada arriba.
+            <strong>Acceso Móvil:</strong> Escanea el código QR con cualquier dispositivo conectado a Internet o a la misma red para continuar la atención del paciente en tiempo real.
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Contenedor accesible para notificaciones tipo Toast -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
