@@ -928,6 +928,11 @@
             <h2 class="card-title"><span>🚶‍♀️</span> 1. Prueba de Velocidad de la Marcha (6 Metros)</h2>
             <p class="card-subtitle">Ingresa únicamente los segundos cronometrados en la prueba presencial</p>
           </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalImagen('assets/marcha_referencia.png', 'Diapositiva Oficial: Velocidad de la Marcha (USIL)')">
+              📷 Diapositiva Oficial
+            </button>
+          </div>
         </div>
 
         <div class="grid-3">
@@ -946,15 +951,18 @@
             </div>
           </div>
           <div class="calc-card" style="text-align: center;">
-            <span class="chip-label">VELOCIDAD CALCULADA</span>
-            <div class="calc-val-large" id="marchaVelocidadDisplay">0.50 <span style="font-size: 1rem;">m/s</span></div>
-            <div id="marchaBadgeDisplay"><span class="badge badge-rojo">Marcha Lenta (&lt; 0.8 m/s)</span></div>
+            <span class="chip-label">CÁLCULO MATEMÁTICO (d / t)</span>
+            <div id="marchaFormulaDisplay" style="font-weight: 800; color: var(--primary); font-size: 1.15rem; margin-top: 0.25rem;">
+              Velocidad = 6 / 12 = 0.5 m/s
+            </div>
+            <div class="calc-val-large" id="marchaVelocidadDisplay" style="font-size: 1.4rem; margin-top: 0.2rem;">0.50 <span style="font-size: 0.9rem;">m/s</span></div>
+            <div id="marchaBadgeDisplay" style="margin-top: 0.25rem;"><span class="badge badge-rojo">Marcha Lenta (&lt; 0.8 m/s)</span></div>
           </div>
         </div>
 
         <div class="form-group" style="margin-top: 1rem;">
           <label><strong>Interpretación Clínica de la Marcha:</strong></label>
-          <textarea class="form-control" id="marchaInterpretacion" rows="2">La paciente presentó una velocidad de marcha de 0.5 m/s, calculada a partir de una distancia de 6 metros recorrida en 12 segundos. Al encontrarse por debajo de los parámetros de normalidad (habitualmente &lt; 0.8 m/s), se clasifica como marcha lenta, evidenciando un bajo rendimiento físico y un compromiso severo de la capacidad funcional.</textarea>
+          <textarea class="form-control" id="marchaInterpretacion" rows="2">La paciente presentó una velocidad de marcha de 0.5 m/s, calculada a partir de una distancia de 6 metros recorrida en 12 segundos. Al encontrarse por debajo de los parámetros de normalidad (habitualmente &lt; 0.8 m/s), se clasifica como marcha lenta, evidenciando un bajo rendimiento físico y un compromiso de la capacidad funcional.</textarea>
         </div>
       </div>
 
@@ -1556,6 +1564,6 @@ La integración de la evaluación funcional (marcha de 0.5 m/s, SARC-F de 4 punt
   <!-- Contenedor accesible para notificaciones tipo Toast -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-  <script src="app.js?v=20261010_ui5"></script>
+  <script src="app.js?v=20261010_ui6"></script>
 </body>
 </html>

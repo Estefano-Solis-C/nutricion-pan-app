@@ -137,31 +137,45 @@ function actualizarBanner() {
 // EVALUACIÓN FUNCIONAL
 // ============================================================================
 
-// 1. Velocidad de la marcha
+// 1. Velocidad de la marcha (Prueba de 6 Metros - USIL)
 function calcularMarcha() {
-  const dist = parseFloat(document.getElementById("marchaDistancia").value) || 6.0;
-  const tiempo = parseFloat(document.getElementById("marchaTiempo").value);
+  const dist = parseFloat(document.getElementById("marchaDistancia")?.value) || 6.0;
+  const tiempo = parseFloat(document.getElementById("marchaTiempo")?.value);
   
+  const dispFormula = document.getElementById("marchaFormulaDisplay");
   const dispVel = document.getElementById("marchaVelocidadDisplay");
   const dispBadge = document.getElementById("marchaBadgeDisplay");
   const dispInterp = document.getElementById("marchaInterpretacion");
   
   if (!tiempo || tiempo <= 0) {
-    dispVel.innerHTML = `-- <span style="font-size: 1rem;">m/s</span>`;
-    dispBadge.innerHTML = `<span class="badge badge-amarillo">Ingrese segundos</span>`;
+    if (dispFormula) dispFormula.textContent = `Velocidad = ${dist} / t = -- m/s`;
+    if (dispVel) dispVel.innerHTML = `-- <span style="font-size: 1rem;">m/s</span>`;
+    if (dispBadge) dispBadge.innerHTML = `<span class="badge badge-amarillo">Ingrese segundos</span>`;
     return;
   }
   
   const vel = dist / tiempo;
-  dispVel.innerHTML = `${vel.toFixed(2)} <span style="font-size: 1rem;">m/s</span>`;
+  // Redondeo a 1 decimal para la fórmula oficial (ej. 6 / 12 = 0.5 m/s)
+  const velFormateada = (Math.round(vel * 10) / 10).toFixed(1);
   
-  let esLenta = vel < 0.8;
+  if (dispFormula) {
+    dispFormula.textContent = `Velocidad = ${dist} / ${tiempo} = ${velFormateada} m/s`;
+  }
+  if (dispVel) {
+    dispVel.innerHTML = `${vel.toFixed(2)} <span style="font-size: 1rem;">m/s</span>`;
+  }
+  
+  const esLenta = vel < 0.8;
   if (esLenta) {
-    dispBadge.innerHTML = `<span class="badge badge-rojo">Marcha Lenta (&lt; 0.8 m/s)</span>`;
-    dispInterp.value = `La paciente presentó una velocidad de marcha de ${vel.toFixed(2)} m/s, calculada a partir de una distancia de ${dist} metros recorrida en ${tiempo} segundos. Al encontrarse por debajo de los parámetros de normalidad (habitualmente < 0.8 m/s), se clasifica como marcha lenta, evidenciando un bajo rendimiento físico y un compromiso severo de la capacidad funcional.`;
+    if (dispBadge) dispBadge.innerHTML = `<span class="badge badge-rojo">Marcha Lenta (&lt; 0.8 m/s)</span>`;
+    if (dispInterp) {
+      dispInterp.value = `La paciente presentó una velocidad de marcha de ${velFormateada} m/s, calculada a partir de una distancia de ${dist} metros recorrida en ${tiempo} segundos. Al encontrarse por debajo de los parámetros de normalidad (habitualmente < 0.8 m/s), se clasifica como marcha lenta, evidenciando un bajo rendimiento físico y un compromiso de la capacidad funcional.`;
+    }
   } else {
-    dispBadge.innerHTML = `<span class="badge badge-verde">Marcha Normal / Conservada (≥ 0.8 m/s)</span>`;
-    dispInterp.value = `La paciente presentó una velocidad de marcha de ${vel.toFixed(2)} m/s (${dist} metros en ${tiempo} segundos), situándose dentro de los límites de normalidad (≥ 0.8 m/s), reflejando una capacidad funcional de desplazamiento adecuada.`;
+    if (dispBadge) dispBadge.innerHTML = `<span class="badge badge-verde">Marcha Normal / Conservada (≥ 0.8 m/s)</span>`;
+    if (dispInterp) {
+      dispInterp.value = `La paciente presentó una velocidad de marcha de ${velFormateada} m/s, calculada a partir de una distancia de ${dist} metros recorrida en ${tiempo} segundos. Al situarse dentro o por encima de los parámetros de normalidad (habitualmente ≥ 0.8 m/s), se clasifica como marcha conservada / normal, reflejando un rendimiento físico adecuado y capacidad funcional de desplazamiento preservada.`;
+    }
   }
 }
 
