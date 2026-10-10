@@ -1,0 +1,540 @@
+{
+  "caso1": {
+    "id": "caso1",
+    "titulo": "Caso Clínico 1: Paciente con ERC Estadio 5 en HD y Gastroparesia (María Infanta)",
+    "institucion": "Universidad San Ignacio De Loyola - Nutrición Clínica",
+    "bloque": "FC-PRENUT08A01TPRL2",
+    "docente": "ESPINOZA LAZARO, JHONNY ALFREDO",
+    "filiacion": {
+      "nombre": "María Infanta",
+      "edad": 45,
+      "sexo": "femenino",
+      "estado_civil": "Casada",
+      "religion": "Cristiana",
+      "lugar_nacimiento": "Ayacucho",
+      "lugar_procedencia": "Villa María del Triunfo",
+      "ocupacion": "Empleada del hogar"
+    },
+    "enfermedad_ingreso": {
+      "temperatura": "37.5",
+      "fc": "91",
+      "fr": "22",
+      "pa": "140/90",
+      "tiempo_enfermedad": "6 meses",
+      "forma_inicio": "Progresivo",
+      "curso": "Crónico",
+      "relato": "Paciente mujer de 45 años con antecedente de Diabetes Mellitus tipo 2 (hace 5 años) e Hipertensión Arterial (hace 3 años), con diagnóstico de Enfermedad Renal Crónica Estadio 5 en tratamiento con Hemodiálisis. Ingresa por cuadro clínico caracterizado por pérdida de peso involuntaria, astenia, náuseas recurrentes y vómitos postprandiales. Se identificó gastroparesia diabética e intolerancia oral y a la sonda nasogástrica (SNG), por lo que se procedió a la colocación de una Sonda Nasoyeyunal (SNY) para inicio de soporte nutricional enteral post-pilórico e inicie evaluación por Nutrición."
+    },
+    "funciones_biologicas": {
+      "apetito": "Disminuido",
+      "sed": "Aumentado",
+      "orina": 50,
+      "deposiciones": "1 vez cada 2 días",
+      "sudoracion": "Sin alteración",
+      "sueno": "Sin alteración",
+      "peso": 57.3,
+      "talla": 145.3,
+      "animo": "Depresiva"
+    },
+    "antecedentes": {
+      "personales_generales": "Vive con su familia con todos los servicios básicos. No fuma ni consume alcohol. Niega viajes el último año.",
+      "fisiologicos": "Nacida de parto eutócico no institucional. Inmunizaciones completas.",
+      "patologicos": "Diabetes Mellitus tipo 2 (hace 5 años). Hipertensión Arterial (hace 3 años). Gastroparesia Diabética. ERC Estadio 5 en HD.",
+      "familiares": "Padre con diabetes mellitus. Madre con hipertensión arterial."
+    },
+    "examen_fisico": {
+      "apreciacion_general": "Paciente regular/mal estado general, pálida, adelgazada, conectada a Sonda Nasoyeyunal (SNY) en fosa nasal.",
+      "piel_anexos": "Palidez cutáneo-mucosa moderada-severa, hiperpigmentación cetrina (urémica), acantosis nigricans en pliegues posteriores del cuello. Uñas quebradizas con surcos transversales.",
+      "cavidad_oral": "Mucosas secas, estomatitis en comisuras labiales.",
+      "torax_abdomen": "Ruidos hidroaéreos disminuidos. Sin signos de irritación peritoneal."
+    },
+    "diagnostico_medico": "Enfermedad Renal Crónica Estadio 5 Terminal en Hemodiálisis (3 veces/semana). Gastroparesia Diabética. Diabetes Mellitus Tipo 2 / Hipertensión Arterial.",
+    "tratamiento_farmacologico": "• Omeprazol: 40 mg IV c/24h.\n• Metoclopramida: 10 mg IV 15 min antes de infusión enteral (procinético).\n• Carbonato de Calcio: 500 mg V.O. con las comidas (quelante de fósforo).\n• Losartán: 50 mg V.O. c/12h.\n• Insulina NPH / Escala móvil: Según monitoreo glucométrico.",
+    "nrs_2002": {
+      "imc_menor_20_5": false,
+      "perdida_peso_3m": true,
+      "disminucion_ingesta_semana": true,
+      "paciente_grave": true,
+      "estado_nutricional_pts": 3,
+      "severidad_enfermedad_pts": 1,
+      "edad_mayor_70": false,
+      "puntaje_total": 4,
+      "interpretacion": "Se obtuvo una puntuación total de 4/7 puntos, por lo que la paciente presenta riesgo de malnutrición según la escala NRS-2002. Del puntaje obtenido, 3 puntos corresponden al deterioro del estado nutricional (disminución severa de ingesta por gastroparesia y NPO) y 1 punto a la severidad de la enfermedad (DM2 y ERC descompensadas). Al ser ≥3, es necesaria la intervención y soporte nutricional oportuno."
+    },
+    "antropometria": {
+      "peso_habitual": 62.0,
+      "peso_actual": 57.3,
+      "peso_seco": 54.5,
+      "peso_ideal": 53.0,
+      "talla": 145.3,
+      "imc": 25.9,
+      "imc_clasificacion": "Sobrepeso",
+      "perimetro_abdominal": 84.0,
+      "cb": 28.2,
+      "pct": 18.0,
+      "cmb": 22.55,
+      "cp": 35.7,
+      "interpretacion": "IMC 25.9 (Sobrepeso según talla). Perímetro abdominal 84 cm (riesgo metabólico aumentado). Pliegue Tricipital (PCT 18mm, reserva grasa subcutánea conservada). Circunferencia muscular de brazo (CMB 22.55 cm, masa muscular braquial disminuida). Perímetro de pantorrilla (CP 35.7 cm, reserva muscular periférica conservada)."
+    },
+    "bioquimica": {
+      "trigliceridos": 320,
+      "colesterol": 500,
+      "hdl": 22,
+      "ldl": 250,
+      "glucosa": 159,
+      "hba1c": 7.5,
+      "albumina": 1.6,
+      "prealbumina": 11,
+      "hemoglobina": 9.1,
+      "bilirrubina_total": 1.2,
+      "bilirrubina_indirecta": 0.1,
+      "urea": 150,
+      "creatinina": 6.51,
+      "sodio": 134,
+      "calcio": 7.0,
+      "fosforo": 5.9,
+      "potasio": 5.3,
+      "magnesio": 1.5
+    },
+    "clinico": [
+      {"organo": "Cabello", "signo": "Cabello ligeramente opaco", "alteracion": "Sin signos clínicos severos de deficiencia nutricional"},
+      {"organo": "Piel", "signo": "Palidez cutáneo-mucosa moderada-severa, hiperpigmentación cetrina, acantosis nigricans", "alteracion": "Anemia crónica por ERC, uremia, resistencia insulínica asociada a DM2"},
+      {"organo": "Cara", "signo": "Facies pálida, cetrina y aspecto adelgazado", "alteracion": "Desgaste muscular y ERC avanzada"},
+      {"organo": "Uñas", "signo": "Uñas quebradizas con surcos transversales", "alteracion": "Déficit de micronutrientes (zinc, hierro), estado catabólico crónico"},
+      {"organo": "Ojos", "signo": "Ictericia escleral leve", "alteracion": "Alteración metabólica secundaria o compromiso hepatobiliar asociado"},
+      {"organo": "Labios", "signo": "Mucosas secas, estomatitis angular (queilosis)", "alteracion": "Deshidratación y déficit de complejo B (riboflavina, niacina) y hierro"},
+      {"organo": "Dientes y encías", "signo": "Mucosas orales secas, xerostomía", "alteracion": "Deshidratación severa y ayuno prolongado (NPO)"},
+      {"organo": "Lengua", "signo": "Mucosas secas, papilas aplanadas", "alteracion": "Deshidratación y deficiencia de micronutrientes"},
+      {"organo": "Esqueleto", "signo": "Signos sugerentes de alteración mineral ósea", "alteracion": "Osteodistrofia renal secundaria a hiperfosfatemia, hipocalcemia y ERC"}
+    ],
+    "dietetico": {
+      "desayuno": "Un plato de caldo de pollo con cubo Maggi",
+      "almuerzo": "Guiso de pollo al sillao plato hondo, arroz chaufa plato hondo, gaseosa personal Inka Cola o Coca Zero",
+      "cena": "Cuatro panes francés o ciabatta con mermelada de fresa, yogurt de medio litro Gloria",
+      "interpretacion": "Alimentación de alta densidad de sodio, fósforo inorgánico y líquidos, caracterizada por ultraprocesados y lácteos en gran volumen. Esto explica y empeora la hiperfosfatemia (5.9 mg/dL), hiperpotasemia (5.3 mEq/L) y sobrecarga hídrica. Incompatible con la gastroparesia, desencadenando emesis e intolerancia oral y perpetuando el desgaste proteico-energético (albúmina 1.6 g/dL). Justifica transición a Nutrición Enteral por Sonda Nasoyeyunal (SNY)."
+    },
+    "ecologica_bristol": {
+      "tipo": 2,
+      "nombre": "Tipo 2: Salchicha grumosa compuesta de fragmentos",
+      "interpretacion": "Heces tipo 2 según Escala de Bristol, compatibles con estreñimiento y tránsito intestinal lento, relacionado con su estado de NPO y nula ingesta previa de agua y fibra."
+    },
+    "funcional": {
+      "dinamometria": {
+        "brazo": "izquierdo",
+        "intento1": 19.8,
+        "intento2": 20.6,
+        "intento3": 20.7,
+        "maximo": 20.7,
+        "percentil": "P10 - P30",
+        "semaforo": "amarillo",
+        "clasificacion": "Fuerza baja / Alerta (Riesgo moderado)",
+        "interpretacion": "Valor máximo de 20.7 kgf en brazo izquierdo se sitúa entre P10 y P30 para su edad (45 años) y sexo femenino (Schlüssel et al., 2008). Evidencia cuadro de fuerza baja / alerta asociado a riesgo moderado y reserva funcional comprometida."
+      },
+      "marcha": {
+        "distancia": 6.0,
+        "tiempo": 12.0,
+        "velocidad": 0.5,
+        "clasificacion": "Marcha lenta (< 0.8 m/s)",
+        "interpretacion": "Velocidad de marcha de 0.5 m/s (6 metros en 12 segundos). Se encuentra por debajo del punto de normalidad (< 0.8 m/s), clasificándose como marcha lenta y evidenciando bajo rendimiento físico y compromiso funcional."
+      },
+      "sarc_f": {
+        "fuerza": 1,
+        "caminar": 1,
+        "levantarse": 1,
+        "escaleras": 1,
+        "caidas": 0,
+        "puntaje_total": 4,
+        "corte": "≥ 4 puntos: Riesgo de Sarcopenia",
+        "interpretacion": "Obtuvo 4 puntos en el cuestionario SARC-F, alcanzando el punto de corte establecido (≥ 4), lo que indica riesgo de presentar sarcopenia, asociado a dificultades en fuerza muscular y movilidad diaria."
+      },
+      "ecf": {
+        "nivel": 4,
+        "nombre": "Categoría 4: Vulnerable",
+        "interpretacion": "Puntuación de 4 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Vulnerable. Mantiene cierta independencia pero la fatiga temprana es manifestación del Desgaste Proteico-Energético (DPE) y catabolismo severo."
+      }
+    },
+    "diagnosticos_pes": [
+      {
+        "id": "PES-1",
+        "dominio": "Clínico - Función Gastrointestinal",
+        "codigo": "NC-1.4",
+        "diagnostico": "Función gastrointestinal alterada (NC-1.4) relacionada con gastroparesia diabética y Enfermedad Renal Crónica Estadio 5, evidenciada por náuseas recurrentes, vómitos postprandiales, intolerancia a la vía oral y necesidad de soporte enteral post-pilórico por Sonda Nasoyeyunal (SNY)."
+      },
+      {
+        "id": "PES-2",
+        "dominio": "Ingesta - Ingesta Oral Insuficiente",
+        "codigo": "NI-2.1",
+        "diagnostico": "Ingesta oral Inadecuada / Nula (NI-2.1) relacionada con el régimen de NPO por intolerancia digestiva alta y vaciamiento gástrico enlentecido, evidenciada por imposibilidad de cubrir sus requerimientos calórico-proteicos por vía oral."
+      },
+      {
+        "id": "PES-3",
+        "dominio": "Clínico - Bioquímica y DPE",
+        "codigo": "NC-2.2",
+        "diagnostico": "Valores de laboratorio alterados relacionados con la nutrición (NC-2.2) relacionados con hipercatabolismo, pérdidas en el dializado e incapacidad de ingesta oral, evidenciados por hipoalbuminemia severa (1.6 g/dL), prealbúmina disminuida (11 mg/dL), hiperfosfatemia (5.9 mg/dL) e hiperpotasemia (5.3 mEq/L)."
+      },
+      {
+        "id": "PES-4",
+        "dominio": "Ingesta - Desnutrición Proteico-Energética",
+        "codigo": "NI-5.3",
+        "diagnostico": "Ingestión energético-proteica insuficiente (NI-5.3) relacionada con capacidad disminuida para consumir energía y proteínas por gastroparesia diabética e intolerancia gastrointestinal, evidenciada por pérdida de peso involuntaria, inapetencia y emesis postprandial."
+      }
+    ],
+    "intervencion": {
+      "via": "Sonda Nasoyeyunal (SNY post-pilórica)",
+      "justificacion": "Superar el retardo en el vaciamiento gástrico secundario a la gastroparesia diabética, evitando náuseas, vómitos y broncoaspiración.",
+      "metodo_calculo": "Regla del pulgar de Vidal sobre peso seco (54.5 kg)",
+      "peso_calculo": 54.5,
+      "kcal_por_kg": 30.0,
+      "get_total": 1635.0,
+      "distribucion_macro": {
+        "proteinas": {"g_kg": 1.2, "gramos": 65.4, "kcal": 261.6, "porcentaje": 16.0},
+        "carbohidratos": {"g_kg": 4.0, "gramos": 220.7, "kcal": 882.9, "porcentaje": 54.0},
+        "lipidos": {"g_kg": 1.0, "gramos": 54.5, "kcal": 490.5, "porcentaje": 30.0}
+      },
+      "porcentaje_inicio": 85,
+      "get_inicio": 1390.0,
+      "macro_inicio": {
+        "proteinas_g": 56.0,
+        "carbohidratos_g": 188.0,
+        "lipidos_g": 46.0
+      },
+      "requerimiento_hidrico": {
+        "metodo": "Diuresis residual (50 ml) + Pérdidas insensibles (600 ml)",
+        "total_ml": 650.0
+      },
+      "formula_seleccionada": {
+        "nombre": "Vital® 1,5 kcal Líquido",
+        "tipo": "Fórmula oligomérica, hipercalórica y especializada, con proteínas hidrolizadas",
+        "por_100ml": {
+          "energia_kcal": 150.0,
+          "proteinas_g": 6.75,
+          "carbohidratos_g": 18.4,
+          "lipidos_g": 5.5,
+          "agua_ml": 77.6,
+          "potasio_mg": 200.0,
+          "fosforo_mg": 100.0,
+          "sodio_mg": 169.0
+        }
+      },
+      "nutriente_limitante": {
+        "nombre": "Lípidos",
+        "calculo": "(46 g x 100) / 5.5 = 836.4 ml ≈ 835 ml",
+        "volumen_formula_ml": 835.0
+      },
+      "aporte_formula": {
+        "energia_kcal": 1253.0,
+        "proteinas_g": 56.0,
+        "carbohidratos_g": 154.0,
+        "lipidos_g": 46.0,
+        "agua_ml": 650.0
+      },
+      "modulos": [
+        {
+          "tipo": "Carbohidratos",
+          "producto": "Maltodextrina",
+          "cantidad_g": 35.0,
+          "energia_adicional_kcal": 140.0,
+          "cho_adicional_g": 35.0,
+          "agua_dilucion_ml": 0.0
+        }
+      ],
+      "agua_libre_ml": 0.0,
+      "adecuacion_final": {
+        "energia_pct": 100,
+        "proteinas_pct": 100,
+        "carbohidratos_pct": 101,
+        "lipidos_pct": 100,
+        "agua_pct": 100
+      },
+      "prescripcion_formal": "NET por SNY: 835 mL/día de Vital® 1,5 kcal/mL, fórmula oligomérica hipercalórica especializada a base de suero de leche hidrolizado, administrada mediante bomba de infusión continua durante 20 horas al día (42 mL/h), más 35 g de módulo de maltodextrina. Monitorizar tolerancia GI, glucemia y balance hídrico en ERC estadio 5 en hemodiálisis."
+    },
+    "monitoreo": {
+      "corto_plazo": "Primeras 24 a 72 horas: Evaluación prioritaria de tolerancia gastrointestinal (ausencia de náuseas, vómitos o distensión) ante infusión enteral post-pilórica. Balance hídrico estricto de 24h junto a control de peso seco pre y post-hemodiálisis (restricción hídrica a 600-650 ml/día). Control seríado de potasio sérico (meta < 5.0 mEq/L), sodio, fósforo y magnesio para prevenir arritmias y descartar síndrome de realimentación. Verificación de permeabilidad y posición de SNY.",
+      "mediano_plazo": "1 a 4 semanas: Medición semanal de prealbúmina sérica (meta > 15-20 mg/dL) y mensual de albúmina. Progresión progresiva hacia el 100% del requerimiento objetivo (1635 kcal/día y 65.4 g proteína). Monitoreo de dinamometría de agarre para frenar desgaste muscular. Registro de heces según escala de Bristol.",
+      "largo_plazo": "Mayor a 1 mes: Reversión del Desgaste Proteico-Energético (DPE) con normalización de albúmina (> 3.8 g/dL). Control riguroso de metabolismo óseo-mineral (fósforo, calcio corregido, PTH). Reevaluación de capacidad funcional en ECF (migrar de categoría 4-Vulnerable a 3-Estable). Respuesta al tratamiento de anemia (hemoglobina meta 10-11.5 g/dL)."
+    },
+    "conclusiones": [
+      "Eficiencia del Soporte Nutricional Enteral Post-Pilórico: La vía SNY continua sortea el retardo del vaciamiento gástrico por la gastroparesia, cubriendo requerimientos sin emesis ni riesgo de aspiración.",
+      "Manejo Específico del DPE en Hemodiálisis: Dieta hiperproteica (1.2 g/kg/día) para contrarrestar pérdidas dialíticas y reponer masa magra y proteínas viscerales.",
+      "Restricción Hídrica y Control Electrolítico: Control estricto del volumen total (650 mL/día) por oligoanuria (50 mL diuresis) y control de potasio (< 3000 mg) y fósforo (800 mg) para prevenir edema pulmonar y descompensación cardiometabólica.",
+      "Prevención del Deterioro Funcional: El monitoreo continuo de marcha (0.5 m/s) y dinamometría permitirá revertir la vulnerabilidad funcional."
+    ]
+  },
+  "caso2": {
+    "id": "caso2",
+    "titulo": "Caso Clínico 2: Paciente con DM2 Descompensada, Disfagia Severa y Obesidad (Alejandra Román)",
+    "institucion": "Universidad San Ignacio De Loyola - Nutrición Clínica",
+    "bloque": "FC-PRENUT08A01TPRL2",
+    "docente": "ESPINOZA LAZARO, JHONNY ALFREDO",
+    "filiacion": {
+      "nombre": "Alejandra Román",
+      "edad": 40,
+      "sexo": "femenino",
+      "estado_civil": "Casada",
+      "religion": "Evangélica",
+      "lugar_nacimiento": "Huancavelica",
+      "lugar_procedencia": "Ate Vitarte",
+      "ocupacion": "Ama de casa"
+    },
+    "enfermedad_ingreso": {
+      "temperatura": "36.5",
+      "fc": "90",
+      "fr": "23",
+      "pa": "120/80",
+      "tiempo_enfermedad": "2 meses",
+      "forma_inicio": "Progresivo",
+      "curso": "Agudo",
+      "relato": "Paciente con antecedente de DM2 que ingresa por cuadro de insuficiencia respiratoria severa. Durante su estancia presenta falla en la deglución (disfagia severa) confirmada por evaluación especializada, lo que impide de forma absoluta la alimentación por vía oral debido al alto riesgo de aspiración. Se procedió a la colocación de Sonda Nasogástrica (SNG) para inicio de soporte nutricional artificial."
+    },
+    "funciones_biologicas": {
+      "apetito": "No evaluable por vía oral (disfagia). Presenta sensación de hambre referida.",
+      "sed": "Manejada mediante hidratación parenteral y aportes por sonda.",
+      "orina": 2000,
+      "deposiciones": "1 vez al día",
+      "sudoracion": "Sin alteración",
+      "sueno": "Sin alteración",
+      "peso": 72.9,
+      "talla": 155.5,
+      "animo": "Ansiosa"
+    },
+    "antecedentes": {
+      "personales_generales": "Vive con su familia con todos los servicios básicos. No fuma. Consume alcohol fines de semana. Niega viajes.",
+      "fisiologicos": "Nacida de parto distócico por macrosomía. Inmunizaciones completas.",
+      "patologicos": "Obesidad grado I, Diabetes mellitus tipo 2 descompensada.",
+      "familiares": "Madre con diabetes mellitus."
+    },
+    "examen_fisico": {
+      "apreciacion_general": "Paciente en cama conectada a soporte por SNG, alerta pero ansiosa por imposibilidad deglutoria.",
+      "piel_anexos": "Hidratación conservada, sin alteraciones cutáneas evidentes.",
+      "cavidad_oral": "Facies seca, lengua blanquecina, sin reflejo deglutorio seguro.",
+      "torax_abdomen": "Tórax con murmullo vesicular rudo, abdomen blando no doloroso."
+    },
+    "diagnostico_medico": "Diabetes mellitus tipo 2 descompensada. Insuficiencia respiratoria severa en resolución. Disfagia orofaríngea severa.",
+    "tratamiento_farmacologico": "• Insulina según escala móvil.\n• Terapia respiratoria.\n• Ranitidina / Protector gástrico.",
+    "nrs_2002": {
+      "imc_menor_20_5": false,
+      "perdida_peso_3m": false,
+      "disminucion_ingesta_semana": true,
+      "paciente_grave": true,
+      "estado_nutricional_pts": 3,
+      "severidad_enfermedad_pts": 1,
+      "edad_mayor_70": false,
+      "puntaje_total": 4,
+      "interpretacion": "La paciente presenta riesgo de malnutrición según la NRS-2002, con un puntaje total de 4 puntos. Obtiene 3 puntos por el estado nutricional (disminución severa de requerimientos cubiertos la semana previa) y 1 punto por la severidad de la enfermedad (diabetes con complicaciones). Requiere soporte nutricional enteral."
+    },
+    "antropometria": {
+      "peso_habitual": 80.0,
+      "peso_actual": 72.9,
+      "peso_seco": 72.9,
+      "peso_ideal": 53.2,
+      "talla": 155.5,
+      "imc": 30.1,
+      "imc_clasificacion": "Obesidad grado I",
+      "perimetro_abdominal": 92.0,
+      "cb": 29.5,
+      "pct": 26.0,
+      "cmb": 21.33,
+      "cp": 32.0,
+      "interpretacion": "IMC: 30.1 kg/m² (Obesidad grado I). Peso ideal calculado en 53.2 kg (usado para la prescripción calórica por exceso de adiposidad). Pliegue tricipital de 26 mm indicando preservación de grasa subcutánea, pero con depleción muscular subclínica."
+    },
+    "bioquimica": {
+      "trigliceridos": 418,
+      "colesterol": 100,
+      "hdl": 28,
+      "ldl": 210,
+      "glucosa": 269,
+      "hba1c": 9.3,
+      "albumina": 3.6,
+      "prealbumina": 18,
+      "hemoglobina": 12.5,
+      "bilirrubina_total": 0.8,
+      "bilirrubina_indirecta": 0.3,
+      "urea": 28,
+      "creatinina": 0.9,
+      "sodio": 138,
+      "calcio": 9.1,
+      "fosforo": 3.6,
+      "potasio": 4.1,
+      "magnesio": 1.9
+    },
+    "clinico": [
+      {"organo": "Cabello", "signo": "Normal", "alteracion": "Sin evidencia clínica de déficit nutricional asociado al cabello"},
+      {"organo": "Piel", "signo": "Normal", "alteracion": "Sin alteraciones nutricionales cutáneas evidentes; hidratación y reservas conservadas"},
+      {"organo": "Cara", "signo": "Facies de desnutrición / piel facial seca", "alteracion": "Disminución de reservas energéticas y posible deshidratación"},
+      {"organo": "Uñas", "signo": "Sin alteraciones", "alteracion": "Sin evidencia clínica de déficit nutricional asociado a uñas"},
+      {"organo": "Ojos", "signo": "Ictericia escleral leve", "alteracion": "Alteración hepatobiliar, elevación leve de bilirrubina o compromiso metabólico"},
+      {"organo": "Labios", "signo": "Secos", "alteracion": "Posible deshidratación o déficit temprano de vitaminas del complejo B"},
+      {"organo": "Dientes y encías", "signo": "Palidez gingival", "alteracion": "Posible anemia ferropénica subclínica o déficit de micronutrientes"},
+      {"organo": "Lengua", "signo": "Lengua blanquecina", "alteracion": "Alteración de higiene oral por NPO, candidiasis o déficit de complejo B"},
+      {"organo": "Esqueleto", "signo": "Sin alteraciones", "alteracion": "Sin evidencia clínica de alteración ósea actual"}
+    ],
+    "dietetico": {
+      "desayuno": "NPO (Nada por vía oral)",
+      "almuerzo": "NPO (Nada por vía oral)",
+      "cena": "NPO (Nada por vía oral)",
+      "interpretacion": "Actualmente la paciente se encuentra en régimen de NPO esperando abordaje nutricional debido a disfagia severa e intolerancia oral absoluta. Requiere soporte nutricional enteral total para cubrir requerimientos basales y evitar síndrome de realimentación."
+    },
+    "ecologica_bristol": {
+      "tipo": 1,
+      "nombre": "Tipo 1: Trozos duros separados, como nueces",
+      "interpretacion": "Heces tipo 1 según la Escala de Bristol, características de estreñimiento severo y tránsito intestinal enlentecido por nula ingesta hídrica y de fibra en días previos."
+    },
+    "funcional": {
+      "dinamometria": {
+        "brazo": "izquierdo",
+        "intento1": 1.8,
+        "intento2": 1.8,
+        "intento3": 1.7,
+        "maximo": 1.8,
+        "percentil": "< P10",
+        "semaforo": "rojo",
+        "clasificacion": "Dinapenia / Depleción severa (Riesgo Crítico)",
+        "interpretacion": "Fuerza máxima de agarre de 1.8 kgf en brazo izquierdo, situada muy por debajo del percentil 10 (< P10 = 18.4 kgf para 40 años mujeres según Schlüssel et al., 2008). Evidencia dinapenia crítica y criterio mayor para sarcopenia o fragilidad clínica."
+      },
+      "marcha": {
+        "distancia": 6.0,
+        "tiempo": 30.0,
+        "velocidad": 0.2,
+        "clasificacion": "Marcha lenta (< 0.6 m/s en frágil)",
+        "interpretacion": "Velocidad de marcha de 0.2 m/s (6 metros en 30 segundos). Al estar muy por debajo de 0.6 m/s, se clasifica como marcha extremadamente lenta, evidenciando un rendimiento físico severamente disminuido."
+      },
+      "sarc_f": {
+        "fuerza": 2,
+        "caminar": 1,
+        "levantarse": 1,
+        "escaleras": 1,
+        "caidas": 1,
+        "puntaje_total": 6,
+        "corte": "≥ 4 puntos: Riesgo de Sarcopenia",
+        "interpretacion": "Puntuación de 6 puntos en el cuestionario SARC-F (marcadamente superior al corte de 4 puntos). Indica un riesgo elevado de sarcopenia con afectación de la funcionalidad en actividades de la vida diaria."
+      },
+      "ecf": {
+        "nivel": 5,
+        "nombre": "Categoría 5: Levemente frágil",
+        "interpretacion": "Puntuación de 5 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Levemente frágil, con lentitud evidente y necesidad de asistencia para actividades cotidianas complejas."
+      }
+    },
+    "diagnosticos_pes": [
+      {
+        "id": "PES-1",
+        "dominio": "Clínico - Función Deglutoria",
+        "codigo": "NC-1.1",
+        "diagnostico": "Dificultad para deglutir (NC-1.1) relacionada con alteración de la función deglutoria (disfagia orofaríngea severa) confirmada por evaluación fonoaudiológica, evidenciada por imposibilidad absoluta de alimentación por vía oral y colocación de sonda nasogástrica (SNG)."
+      },
+      {
+        "id": "PES-2",
+        "dominio": "Ingesta - Ingesta Oral Inadecuada",
+        "codigo": "NI-2.1",
+        "diagnostico": "Ingesta oral inadecuada / nula (NI-2.1) relacionada con régimen NPO obligado por disfagia e insuficiencia respiratoria, evidenciada por ayuno prolongado e imposibilidad de satisfacer demandas calóricas."
+      },
+      {
+        "id": "PES-3",
+        "dominio": "Clínico - Desbalance Metabólico",
+        "codigo": "NC-2.2",
+        "diagnostico": "Valores de laboratorio alterados relacionados con la nutrición (NC-2.2) relacionados con resistencia insulínica severa y descompensación glucémica, evidenciados por glucosa sérica de 269 mg/dL, HbA1c de 9.3%, triglicéridos de 418 mg/dL y LDL de 210 mg/dL."
+      },
+      {
+        "id": "PES-4",
+        "dominio": "Clínico - Composición Corporal",
+        "codigo": "NC-3.3",
+        "diagnostico": "Obesidad sarcopénica (NC-3.3) relacionada con sobreingesta previa combinada con sedentarismo crónico y catabolismo agudo, evidenciada por IMC de 30.1 kg/m² asociado a dinapenia severa (fuerza de agarre 1.8 kgf), marcha lenta (0.2 m/s) y SARC-F de 6 puntos."
+      }
+    ],
+    "intervencion": {
+      "via": "Sonda Nasogástrica (SNG)",
+      "justificacion": "Soporte enteral total continuo por falla deglutoria absoluta y alto riesgo de broncoaspiración.",
+      "metodo_calculo": "Regla del pulgar de Vidal sobre peso ideal (53.2 kg) debido a obesidad",
+      "peso_calculo": 53.2,
+      "kcal_por_kg": 30.0,
+      "get_total": 1596.0,
+      "distribucion_macro": {
+        "proteinas": {"g_kg": 1.5, "gramos": 79.8, "kcal": 319.2, "porcentaje": 20.0},
+        "carbohidratos": {"g_kg": 3.75, "gramos": 199.5, "kcal": 798.0, "porcentaje": 50.0},
+        "lipidos": {"g_kg": 1.0, "gramos": 53.2, "kcal": 478.8, "porcentaje": 30.0}
+      },
+      "porcentaje_inicio": 50,
+      "get_inicio": 798.0,
+      "macro_inicio": {
+        "proteinas_g": 39.9,
+        "carbohidratos_g": 99.75,
+        "lipidos_g": 26.6
+      },
+      "requerimiento_hidrico": {
+        "metodo": "30 ml/kg/día sobre peso actual (72.9 kg)",
+        "total_ml": 2187.0
+      },
+      "formula_seleccionada": {
+        "nombre": "Glucerna® 1.0 kcal/ml",
+        "tipo": "Fórmula enteral normocalórica y normoproteica especializada para diabetes e hiperglucemia",
+        "por_100ml": {
+          "energia_kcal": 100.0,
+          "proteinas_g": 4.05,
+          "carbohidratos_g": 9.2,
+          "lipidos_g": 5.13,
+          "fibra_g": 0.9,
+          "agua_ml": 84.37
+        }
+      },
+      "nutriente_limitante": {
+        "nombre": "Lípidos",
+        "calculo": "(26.6 g x 100) / 5.13 = 518.5 ml ≈ 518 ml",
+        "volumen_formula_ml": 518.0
+      },
+      "aporte_formula": {
+        "energia_kcal": 518.0,
+        "proteinas_g": 21.0,
+        "carbohidratos_g": 47.7,
+        "lipidos_g": 26.6,
+        "fibra_g": 4.7,
+        "agua_ml": 437.0
+      },
+      "modulos": [
+        {
+          "tipo": "Proteico",
+          "producto": "ProSource TF",
+          "cantidad_g": 45.0,
+          "energia_adicional_kcal": 90.0,
+          "proteina_adicional_g": 22.5,
+          "agua_dilucion_ml": 0.0
+        },
+        {
+          "tipo": "Fibra",
+          "producto": "InstaFibra",
+          "cantidad_g": 8.3,
+          "energia_adicional_kcal": 7.8,
+          "fibra_adicional_g": 7.8,
+          "agua_dilucion_ml": 25.0
+        },
+        {
+          "tipo": "Carbohidratos",
+          "producto": "Palatinose (Bajo IG)",
+          "cantidad_g": 44.0,
+          "energia_adicional_kcal": 176.0,
+          "cho_adicional_g": 44.0,
+          "agua_dilucion_ml": 132.0
+        }
+      ],
+      "agua_libre_ml": 1543.0,
+      "adecuacion_final": {
+        "energia_pct": 99,
+        "proteinas_pct": 109,
+        "carbohidratos_pct": 100,
+        "lipidos_pct": 100,
+        "fibra_pct": 100,
+        "agua_pct": 100
+      },
+      "prescripcion_formal": "NET por SNG con 518 mL/día de Glucerna 1.0 kcal/mL mediante bomba continua a 21.6 mL/h durante 24 horas + 1.5 porciones (45 mL) de ProSource TF + 8.3 g InstaFibra + 44 g Palatinose + 1543 mL de agua libre adicional fraccionada para completar balance hídrico de 2187 mL/día."
+    },
+    "monitoreo": {
+      "corto_plazo": "Primeras 48 a 72 horas: Vigilancia de tolerancia digestiva (residuo gástrico, ausencia de broncoaspiración). Vigilancia metabólica estricta de electrolitos de realimentación (fósforo, potasio, magnesio) tras periodo de ayuno. Control seriado de glucemia capilar cada 4 a 6 horas para guiar terapia insulínica (glucemia de ingreso 269 mg/dL).",
+      "mediano_plazo": "1 a 4 semanas: Seguimiento del perfil lipídico ante hipertrigliceridemia severa (418 mg/dL) y función hepática por ictericia escleral. Progresión gradual desde el 50% inicial hacia el 100% del requerimiento calculado (1596 kcal/día y 79.8 g proteína). Control semanal de deposiciones (resolución de heces Bristol tipo 1).",
+      "largo_plazo": "Mayor a 1 mes: Evaluación de la reversión de dinapenia severa (fuerza de agarre 1.8 kg) y marcha lenta con apoyo de terapia física. Reevaluación fonoaudiológica para determinar tránsito seguro hacia la vía oral. Seguimiento de hemoglobina glucosilada HbA1c (meta < 7%)."
+    },
+    "conclusiones": [
+      "Riesgo Crítico y Obesidad Sarcopénica: A pesar del IMC de 30.1 kg/m², la paciente presenta compromiso funcional extremo (fuerza 1.8 kgf y marcha 0.2 m/s), requiriendo un abordaje que preserve masa muscular magra.",
+      "Soporte Enteral Progresivo al 50%: Inicio conservador a 798 kcal/día para prevenir descompensación glucémica y síndrome de realimentación en el marco de insuficiencia respiratoria aguda.",
+      "Uso de Fórmula Especializada y Módulos: Glucerna 1.0 complementada con ProSource TF, Palatinose de bajo índice glucémico e InstaFibra para normalizar motilidad intestinal (Bristol 1 a 4).",
+      "Abordaje Multidisciplinario y Monitoreo Funcional: Articular el monitoreo metabólico con rehabilitación física y deglutoria para lograr destete paulatino de la sonda nasogástrica."
+    ]
+  }
+}

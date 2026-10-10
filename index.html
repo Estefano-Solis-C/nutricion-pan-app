@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proceso de Atención Nutricional (PAN) - Nutrición Clínica USIL</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
+  <script src="pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
+    }
+  </script>
+  <script src="qrcode.min.js"></script>
+</head>
+<body>
+
+  <!-- Encabezado de Impresión Formal -->
+  <div class="print-only-header">
+    <h2 style="color: #003865; margin-bottom: 2px;">UNIVERSIDAD SAN IGNACIO DE LOYOLA</h2>
+    <h3 style="color: #475569; margin-bottom: 5px;">CARRERA DE NUTRICIÓN Y DIETÉTICA - NUTRICIÓN CLÍNICA</h3>
+    <h4 style="color: #0284c7; margin-bottom: 15px;">INFORME DEL PROCESO DE ATENCIÓN NUTRICIONAL (PAN)</h4>
+    <p style="font-size: 11pt; color: #333;"><strong>Docente:</strong> ESPINOZA LAZARO, JHONNY ALFREDO &nbsp;|&nbsp; <strong>Bloque:</strong> FC-PRENUT08A01TPRL2</p>
+  </div>
+
+  <!-- Barra Superior de Navegación y Acciones -->
+  <header class="app-header no-print">
+    <div class="header-container">
+      <div class="header-brand">
+        <div class="brand-badge">USIL</div>
+        <div class="brand-text">
+          <h1>Proceso de Atención Nutricional (PAN)</h1>
+          <p>Nutrición Clínica Especializada • Formato Académico Hospitalario</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary btn-sm" onclick="abrirModalMovil()" style="background: #0284c7; border-color: #0284c7;">
+          📱 Abrir en Celular / Red
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="cargarCasoEjemplo('caso1')">
+          📥 Caso 1: María Infanta (ERC/SNY)
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="cargarCasoEjemplo('caso2')">
+          📥 Caso 2: Alejandra Román (DM2/SNG)
+        </button>
+        <button class="btn btn-outline-white btn-sm" onclick="limpiarFormulario()">
+          🧹 Nuevo Caso
+        </button>
+        <button class="btn btn-success btn-sm" onclick="window.print()">
+          🖨️ Imprimir / Guardar PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-layout">
+
+    <!-- Resumen Rápido del Paciente -->
+    <section class="patient-quick-banner" id="patientSummaryBanner">
+      <div class="patient-chips">
+        <div class="chip-item">
+          <span class="chip-label">Paciente</span>
+          <span class="chip-val" id="bannerNombre">María Infanta</span>
+        </div>
+        <div class="chip-item">
+          <span class="chip-label">Edad / Sexo</span>
+          <span class="chip-val" id="bannerEdadSexo">45 años • Femenino</span>
+        </div>
+        <div class="chip-item">
+          <span class="chip-label">Peso / Talla</span>
+          <span class="chip-val" id="bannerPesoTalla">57.3 kg • 145.3 cm</span>
+        </div>
+        <div class="chip-item">
+          <span class="chip-label">IMC</span>
+          <span class="chip-val" id="bannerIMC">25.9 kg/m² (Sobrepeso)</span>
+        </div>
+        <div class="chip-item">
+          <span class="chip-label">Vía Nutricional</span>
+          <span class="chip-val" id="bannerVia">Sonda Nasoyeyunal (SNY)</span>
+        </div>
+      </div>
+      <div>
+        <span class="badge badge-normal" id="serverStatusBadge">🟢 Motor Clínico Activo</span>
+      </div>
+    </section>
+
+    <!-- Navegación por Pestañas del Proceso -->
+    <nav class="tabs-nav no-print" id="mainTabsNav">
+      <button class="tab-btn active" onclick="mostrarPestana('tab-filiacion', this)">
+        <span>📋</span> Historia Clínica
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-nrs', this)">
+        <span>🔍</span> 1. NRS-2002
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-antropo', this)">
+        <span>📏</span> 2.1 Antropometría
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-bioquimica', this)">
+        <span>🧪</span> 2.2 Bioquímica
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-clinico-diet', this)">
+        <span>🥗</span> 2.3-2.5 Clínico & Bristol
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-funcional', this)">
+        <span>⚡</span> 2.6 Funcional (Marcha/SARC)
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-diagnostico', this)">
+        <span>🩺</span> 3. Diagnóstico (PES)
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-intervencion', this)">
+        <span>🥣</span> 4. Intervención
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-monitoreo', this)">
+        <span>📊</span> 5. Monitoreo
+      </button>
+      <button class="tab-btn" onclick="mostrarPestana('tab-informe', this)">
+        <span>📑</span> 6. Informe Final
+      </button>
+    </nav>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: FILIACIÓN E HISTORIA CLÍNICA -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane active" id="tab-filiacion">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>📋</span> Historia Clínica - Filiación y Antecedentes</h2>
+            <p class="card-subtitle">Datos de identificación, anamnesis, funciones biológicas y tratamiento farmacológico</p>
+          </div>
+        </div>
+
+        <!-- Zona Interactiva de Carga de PDF -->
+        <div class="pdf-upload-card" id="pdfUploadZone" onclick="document.getElementById('pdfFileInput').click()">
+          <input type="file" id="pdfFileInput" accept=".pdf" style="display: none;" onchange="manejarSubidaPDF(event)">
+          <div class="pdf-upload-icon">📂</div>
+          <div class="pdf-upload-title">Subir Historia Clínica en PDF</div>
+          <p class="pdf-upload-desc">Arrastra tu archivo PDF aquí o haz clic para seleccionarlo. El sistema extraerá automáticamente filiación, antecedentes, diagnóstico, tratamiento y la tabla de 18 parámetros bioquímicos.</p>
+          <div class="pdf-upload-btn-group" onclick="event.stopPropagation()">
+            <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('pdfFileInput').click()">
+              📄 Seleccionar Archivo PDF
+            </button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="cargarCasoEjemplo('caso1')">
+              ⚡ Cargar Caso 1 (María Infanta)
+            </button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="cargarCasoEjemplo('caso2')">
+              ⚡ Cargar Caso 2 (Alejandra Román)
+            </button>
+          </div>
+          <div class="pdf-status-alert alert-box alert-info" id="pdfStatusAlert" style="display: none; margin-top: 1rem;">
+            <div id="pdfStatusIcon">⏳</div>
+            <div id="pdfStatusText">Procesando archivo PDF...</div>
+          </div>
+        </div>
+
+        <div class="alert-box alert-info" style="margin-bottom: 1.25rem;">
+          <div>💡</div>
+          <div>
+            <strong>Flujo de Trabajo Clínico:</strong> Tras subir la Historia Clínica en PDF, los datos generales y analíticos se rellenarán automáticamente. Luego, ingresa en persona las <strong>mediciones antropométricas y funcionales</strong> (Pliegues, Dinamometría, Marcha, SARC-F, Bristol y Fragilidad) para obtener los cálculos, semáforos e interpretaciones finales.
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">1. Datos de Filiación</h3>
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Nombre del Paciente:</label>
+            <input type="text" class="form-control" id="filiacionNombre" value="María Infanta" oninput="actualizarBanner()">
+          </div>
+          <div class="form-group">
+            <label>Edad:</label>
+            <div class="input-group">
+              <input type="number" class="form-control" id="filiacionEdad" value="45" min="1" max="120" oninput="actualizarBanner(); recalcularFuncional();">
+              <span class="input-group-addon">años</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Sexo:</label>
+            <select class="form-control" id="filiacionSexo" onchange="actualizarBanner(); recalcularFuncional();">
+              <option value="femenino" selected>Femenino</option>
+              <option value="masculino">Masculino</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Estado Civil:</label>
+            <input type="text" class="form-control" id="filiacionEstadoCivil" value="Casada">
+          </div>
+          <div class="form-group">
+            <label>Religión:</label>
+            <input type="text" class="form-control" id="filiacionReligion" value="Cristiana">
+          </div>
+          <div class="form-group">
+            <label>Lugar de Nacimiento:</label>
+            <input type="text" class="form-control" id="filiacionNacimiento" value="Ayacucho">
+          </div>
+          <div class="form-group">
+            <label>Lugar de Procedencia:</label>
+            <input type="text" class="form-control" id="filiacionProcedencia" value="Villa María del Triunfo">
+          </div>
+          <div class="form-group">
+            <label>Ocupación Actual:</label>
+            <input type="text" class="form-control" id="filiacionOcupacion" value="Empleada del hogar">
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin: 1.25rem 0 0.75rem;">2. Enfermedad de Ingreso y Signos Vitales</h3>
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Temperatura (T°):</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="ingresoTemp" value="37.5">
+              <span class="input-group-addon">°C</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Frecuencia Cardíaca (FC):</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="ingresoFC" value="91">
+              <span class="input-group-addon">lpm</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Frecuencia Respiratoria (FR):</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="ingresoFR" value="22">
+              <span class="input-group-addon">rpm</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Presión Arterial (PA):</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="ingresoPA" value="140/90">
+              <span class="input-group-addon">mmHg</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Tiempo de Enfermedad:</label>
+            <input type="text" class="form-control" id="ingresoTiempo" value="6 meses">
+          </div>
+          <div class="form-group">
+            <label>Forma de Inicio:</label>
+            <input type="text" class="form-control" id="ingresoForma" value="Progresivo">
+          </div>
+          <div class="form-group">
+            <label>Curso:</label>
+            <input type="text" class="form-control" id="ingresoCurso" value="Crónico">
+          </div>
+          <div class="form-group">
+            <label>Estado de Ánimo:</label>
+            <input type="text" class="form-control" id="bioAnimo" value="Depresiva">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Relato Cronológico de Ingreso:</label>
+          <textarea class="form-control" id="ingresoRelato" rows="3">Paciente mujer de 45 años con antecedente de Diabetes Mellitus tipo 2 (hace 5 años) e Hipertensión Arterial (hace 3 años), con diagnóstico de Enfermedad Renal Crónica Estadio 5 en tratamiento con Hemodiálisis. Ingresa por cuadro clínico caracterizado por pérdida de peso involuntaria, astenia, náuseas recurrentes y vómitos postprandiales. Se identificó gastroparesia diabética e intolerancia oral y a la sonda nasogástrica (SNG), por lo que se procedió a la colocación de una Sonda Nasoyeyunal (SNY) para inicio de soporte nutricional enteral post-pilórico e inicie evaluación por Nutrición.</textarea>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin: 1.25rem 0 0.75rem;">3. Funciones Biológicas</h3>
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Apetito:</label>
+            <input type="text" class="form-control" id="bioApetito" value="Disminuido">
+          </div>
+          <div class="form-group">
+            <label>Sed:</label>
+            <input type="text" class="form-control" id="bioSed" value="Aumentado">
+          </div>
+          <div class="form-group">
+            <label>Orina (Diuresis):</label>
+            <div class="input-group">
+              <input type="number" class="form-control" id="bioOrina" value="50" oninput="actualizarAguaRequerimiento()">
+              <span class="input-group-addon">ml/día</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Deposiciones:</label>
+            <input type="text" class="form-control" id="bioDeposiciones" value="1 vez cada 2 días">
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin: 1.25rem 0 0.75rem;">4. Antecedentes y Tratamiento Farmacológico</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Antecedentes Patológicos y Quirúrgicos:</label>
+            <textarea class="form-control" id="antPatologicos" rows="2">Diabetes Mellitus tipo 2 (hace 5 años). Hipertensión Arterial (hace 3 años). Gastroparesia Diabética. ERC Estadio 5 en Hemodiálisis.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Antecedentes Familiares:</label>
+            <textarea class="form-control" id="antFamiliares" rows="2">Padre con diabetes mellitus. Madre con hipertensión arterial.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Diagnóstico Médico de Ingreso:</label>
+            <textarea class="form-control" id="diagMedico" rows="3">Enfermedad Renal Crónica Estadio 5 Terminal en Hemodiálisis (3 veces/semana). Gastroparesia Diabética. Diabetes Mellitus Tipo 2 / Hipertensión Arterial.</textarea>
+          </div>
+          <div class="form-group">
+            <label>Tratamiento Farmacológico Actual:</label>
+            <textarea class="form-control" id="tratamientoFarmacos" rows="3">• Omeprazol: 40 mg IV c/24h.
+• Metoclopramida: 10 mg IV 15 min antes de infusión enteral (procinético).
+• Carbonato de Calcio: 500 mg V.O. con las comidas (quelante de fósforo).
+• Losartán: 50 mg V.O. c/12h.
+• Insulina NPH / Escala móvil: Según monitoreo glucométrico.</textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: EVALUACIÓN GLOBAL SUBJETIVA (NRS-2002) -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-nrs">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>🔍</span> 1. Evaluación Global Subjetiva: Tamizaje de Riesgo Nutricional NRS-2002</h2>
+            <p class="card-subtitle">Herramienta estándar para identificar presencia de riesgo de malnutrición hospitalaria</p>
+          </div>
+        </div>
+
+        <div class="alert-box alert-info">
+          <div>ℹ️</div>
+          <div>
+            <strong>Protocolo NRS-2002:</strong> Si la respuesta es afirmativa en alguno de los 4 apartados del screening inicial, se realiza el screening final cuantificando el deterioro nutricional y la severidad de la enfermedad (+1 punto si edad ≥ 70 años). Un puntaje ≥ 3 indica riesgo de malnutrición y necesidad de soporte nutricional.
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">Screening Inicial (Preguntas de Filtro)</h3>
+        <div class="scale-image-container" style="margin-bottom: 1rem;">
+          <img src="assets/nrs_inicial.jpg" alt="Screening Inicial NRS-2002" style="max-height: 200px;">
+          <div class="scale-image-caption">Tabla oficial de Screening Inicial (Criterios de filtro)</div>
+        </div>
+        <div class="table-responsive" style="margin-bottom: 1.5rem;">
+          <table class="clinical-table">
+            <thead>
+              <tr>
+                <th style="width: 60px;">#</th>
+                <th>Criterio de Screening Inicial</th>
+                <th style="width: 100px; text-align: center;">Respuesta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>¿IMC &lt; 20.5 kg/m²?</td>
+                <td style="text-align: center;">
+                  <select class="form-control" id="nrsInit1" onchange="evaluarNRS()">
+                    <option value="no" selected>No</option>
+                    <option value="si">Sí</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>¿El paciente ha perdido peso en los últimos 3 meses?</td>
+                <td style="text-align: center;">
+                  <select class="form-control" id="nrsInit2" onchange="evaluarNRS()">
+                    <option value="si" selected>Sí</option>
+                    <option value="no">No</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>¿El paciente ha disminuido su ingesta en la última semana?</td>
+                <td style="text-align: center;">
+                  <select class="form-control" id="nrsInit3" onchange="evaluarNRS()">
+                    <option value="si" selected>Sí</option>
+                    <option value="no">No</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>¿Está el paciente gravemente enfermo? (ej. UCI, patología severa, diálisis)</td>
+                <td style="text-align: center;">
+                  <select class="form-control" id="nrsInit4" onchange="evaluarNRS()">
+                    <option value="si" selected>Sí</option>
+                    <option value="no">No</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">Screening Final Cuantitativo</h3>
+        <div class="scale-image-container" style="margin-bottom: 1rem;">
+          <img src="assets/nrs_final.png" alt="Screening Final NRS-2002" style="max-height: 280px;">
+          <div class="scale-image-caption">Tabla oficial de Cuantificación: Estado Nutricional vs Severidad de Enfermedad</div>
+        </div>
+        <div class="grid-2">
+          <div class="calc-card">
+            <div class="form-group">
+              <label><strong>Estado Nutricional:</strong></label>
+              <select class="form-control" id="nrsEstadoNutricional" onchange="evaluarNRS()">
+                <option value="0">0: Normal (Estado nutricional conservado)</option>
+                <option value="1">1: Leve (Pérdida peso &gt;5% en 3 meses o ingesta 50-75% en última semana)</option>
+                <option value="2">2: Moderado (Pérdida peso &gt;5% en 2 meses o IMC 18.5-20.5 + estado general deter. o ingesta 25-60%)</option>
+                <option value="3" selected>3: Grave (Pérdida peso &gt;5% en 1 mes / &gt;15% en 3 meses o IMC &lt;18.5 + ingesta 0-25%)</option>
+              </select>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--gray-600);">Puntaje seleccionado: <span id="nrsPtsNutricionalBadge" class="badge badge-rojo">3 puntos</span></p>
+          </div>
+
+          <div class="calc-card">
+            <div class="form-group">
+              <label><strong>Severidad de la Enfermedad (Incremento de requerimientos):</strong></label>
+              <select class="form-control" id="nrsSeveridad" onchange="evaluarNRS()">
+                <option value="0">0: Ausente (Requerimientos nutricionales normales)</option>
+                <option value="1" selected>1: Leve (Fractura cadera, cirrosis, EPOC, hemodiálisis, diabetes, oncológicos)</option>
+                <option value="2">2: Moderada (Cirugía mayor abdominal, ACV, neumonía severa, tumores hematológicos)</option>
+                <option value="3">3: Grave (Traumatismo craneoencefálico, trasplante medular, UCI APACHE&gt;10)</option>
+              </select>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--gray-600);">Puntaje seleccionado: <span id="nrsPtsSeveridadBadge" class="badge badge-amarillo">1 punto</span></p>
+          </div>
+        </div>
+
+        <div class="calc-result-display" style="margin-top: 1.5rem;">
+          <div class="calc-label">PUNTUACIÓN TOTAL NRS-2002</div>
+          <div class="calc-val-large" id="nrsTotalPts">4 / 7</div>
+          <div class="calc-diag" id="nrsDiagnosticoBadge">
+            <span class="badge badge-rojo" style="font-size: 1rem; padding: 0.4rem 1rem;">⚠️ PACIENTE EN RIESGO DE MALNUTRICIÓN (≥ 3 puntos)</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1.25rem;">
+          <label><strong>Interpretación Clínica del Tamizaje NRS-2002:</strong></label>
+          <textarea class="form-control" id="nrsInterpretacion" rows="3">Se obtuvo una puntuación total de 4/7 puntos, por lo que la paciente presenta riesgo de malnutrición según la escala NRS-2002. Del puntaje obtenido, 3 puntos corresponden al deterioro del estado nutricional, relacionado con la disminución significativa de la ingesta alimentaria debido a la gastroparesia, náuseas/vómitos y régimen de NPO. Asimismo, 1 punto corresponde a la severidad de la enfermedad, asociada a la diabetes mellitus tipo 2 y ERC descompensadas. Al presentar una puntuación ≥3, se considera necesaria la intervención y soporte nutricional oportuno.</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: ANTROPOMETRÍA & EXAMEN CLÍNICO -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-antropo">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>📏</span> 2.1 Evaluación Antropométrica</h2>
+            <p class="card-subtitle">Indicadores de composición corporal, reservas grasas y reservas musculares</p>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Peso Habitual:</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoPesoHabitual" value="62" oninput="calcularAntropometria()">
+              <span class="input-group-addon">kg</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Peso Actual:</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoPesoActual" value="57.3" oninput="calcularAntropometria(); actualizarBanner();">
+              <span class="input-group-addon">kg</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Peso Seco (post-diálisis) o Peso Ideal:</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoPesoSeco" value="54.5" oninput="calcularAntropometria(); recalcularIntervencion();">
+              <span class="input-group-addon">kg</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Talla / Estatura:</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoTalla" value="145.3" oninput="calcularAntropometria(); actualizarBanner();">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-top: 0.5rem;">
+          <div class="form-group">
+            <label>Perímetro Abdominal:</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoAbd" value="84" oninput="calcularAntropometria()">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Perímetro Braquial (CB):</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoCB" value="28.2" oninput="calcularAntropometria()">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Pliegue Tricipital (PCT):</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoPCT" value="18" oninput="calcularAntropometria()">
+              <span class="input-group-addon">mm</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Perímetro de Pantorrilla (CP):</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="antropoCP" value="35.7" oninput="calcularAntropometria()">
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resultados automáticos de Antropometría -->
+        <div class="grid-4" style="margin-top: 1rem;">
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">ÍNDICE DE MASA CORPORAL (IMC)</span>
+            <div class="calc-val-large" id="resIMC" style="font-size: 1.8rem;">25.9</div>
+            <div id="resIMCBadge"><span class="badge badge-amarillo">Sobrepeso</span></div>
+          </div>
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">% PÉRDIDA DE PESO</span>
+            <div class="calc-val-large" id="resPerdidaPeso" style="font-size: 1.8rem;">7.6%</div>
+            <div id="resPerdidaBadge"><span class="badge badge-amarillo">Pérdida Significativa</span></div>
+          </div>
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">CIRCUNFERENCIA MUSCULAR BRAZO (CMB)</span>
+            <div class="calc-val-large" id="resCMB" style="font-size: 1.8rem;">22.55</div>
+            <div id="resCMBBadge"><span class="badge badge-rojo">Masa muscular disminuida</span></div>
+          </div>
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">RIESGO METABÓLICO (ABDOMINAL)</span>
+            <div class="calc-val-large" id="resAbdVal" style="font-size: 1.8rem;">84 cm</div>
+            <div id="resAbdBadge"><span class="badge badge-amarillo">Riesgo aumentado (≥80)</span></div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1.25rem;">
+          <label><strong>Interpretación Antropométrica Integral:</strong></label>
+          <textarea class="form-control" id="antropoInterpretacion" rows="3">IMC de 25.9 kg/m² indica sobrepeso según su talla. Perímetro abdominal de 84 cm evidencia riesgo metabólico aumentado. Pliegue Tricipital (PCT = 18 mm) refleja reserva grasa subcutánea conservada. Circunferencia muscular del brazo calculada (CMB = 22.55 cm) demuestra depleción de la masa muscular braquial. Perímetro de pantorrilla (CP = 35.7 cm) indica masa muscular periférica conservada.</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: BIOQUÍMICA INTELIGENTE -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-bioquimica">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>🧪</span> 2.2 Evaluación Bioquímica con Analizador Inteligente</h2>
+            <p class="card-subtitle">Detección de analitos elevados/disminuidos y generación de interpretaciones fisiopatológicas</p>
+          </div>
+          <div>
+            <button class="btn btn-primary btn-sm" onclick="analizarTextoBioquimica()">
+              ⚡ Extraer y Analizar con Python
+            </button>
+          </div>
+        </div>
+
+        <!-- Área para subir o pegar historia clínica -->
+        <div class="calc-card" style="margin-bottom: 1.5rem;">
+          <label style="font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
+            <span>📄</span> Pegar Historia Clínica o Reporte de Laboratorio aquí:
+          </label>
+          <textarea class="form-control" id="rawClinicalText" rows="4" placeholder="Pega aquí el texto de la historia clínica o analítica (ej. Triglicéridos: 320 mg/dl, Colesterol 500, Albúmina 1.6, Glucosa 159, Creatinina 6.51, Urea 150, Potasio 5.3...). El sistema detectará automáticamente cada analito, evaluará si está elevado y escribirá la interpretación clínica."></textarea>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+            <span style="font-size: 0.8rem; color: var(--gray-600);">💡 Puedes pegar fragmentos de texto desordenados; el detector clínico identificará los analitos.</span>
+            <button class="btn btn-secondary btn-sm" onclick="cargarEjemploTextoBioq()">
+              📋 Cargar Texto de Caso 1
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabla Bioquímica Dinámica -->
+        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">Tabla de Parámetros Bioquímicos e Interpretación</h3>
+        <div class="table-responsive">
+          <table class="clinical-table" id="tablaBioquimica">
+            <thead>
+              <tr>
+                <th>Datos Bioquímicos</th>
+                <th style="width: 140px;">Resultados</th>
+                <th style="width: 160px;">Valores Normales</th>
+                <th style="width: 110px;">Estado</th>
+                <th>Interpretación Fisiopatológica y Nutricional</th>
+              </tr>
+            </thead>
+            <tbody id="bioquimicaTableBody">
+              <!-- Se puebla dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: CLÍNICO, DIETÉTICO & BRISTOL -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-clinico-diet">
+      <!-- 2.3 Examen Físico Clínico -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>🩺</span> 2.3 Examen Clínico Nutricional por Órganos</h2>
+            <p class="card-subtitle">Signos clínicos orientados a deficiencias de micro y macronutrientes</p>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="clinical-table" id="tablaClinico">
+            <thead>
+              <tr>
+                <th style="width: 140px;">Órgano / Sistema</th>
+                <th>Signo Clínico Observado</th>
+                <th>Probable Alteración Nutricional</th>
+              </tr>
+            </thead>
+            <tbody id="clinicoTableBody">
+              <!-- Se puebla dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2.4 Dietético -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>🥗</span> 2.4 Evaluación Dietética (Recordatorio de 24 Horas)</h2>
+            <p class="card-subtitle">Análisis del patrón de consumo, densidad de nutrientes e incompatibilidades</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Desayuno:</label>
+            <textarea class="form-control" id="dietDesayuno" rows="2">Un plato de caldo de pollo con cubo Maggi</textarea>
+          </div>
+          <div class="form-group">
+            <label>Almuerzo:</label>
+            <textarea class="form-control" id="dietAlmuerzo" rows="2">Guiso de pollo al sillao plato hondo, arroz chaufa plato hondo, gaseosa personal Inka Cola o Coca Zero</textarea>
+          </div>
+          <div class="form-group">
+            <label>Cena:</label>
+            <textarea class="form-control" id="dietCena" rows="2">Cuatro panes francés o ciabatta con mermelada de fresa, yogurt de medio litro Gloria</textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label><strong>Interpretación del Perfil Dietético:</strong></label>
+          <textarea class="form-control" id="dietInterpretacion" rows="3">La alimentación de la paciente es de alta densidad de sodio, fósforo inorgánico y líquidos, caracterizada por el consumo de ultraprocesados (cubo Maggi, sillao, gaseosas) y lácteos en gran volumen (500 ml de yogurt). Esto explica y empeora la hiperfosfatemia (5.9 mg/dL), hiperpotasemia (5.3 mEq/L) y sobrecarga hídrica. La ingesta de grandes volúmenes líquidos y carbohidratos simples (panes, mermelada) resulta incompatible con la gastroparesia, desencadenando emesis e intolerancia oral y perpetuando su desgaste proteico-energético (albúmina 1.6 g/dL). Se justifica soporte enteral post-pilórico.</textarea>
+        </div>
+      </div>
+
+      <!-- 2.5 Escala Ecológica de Bristol -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>💩</span> 2.5 Escala de Heces de Bristol (Evaluación Gastrointestinal)</h2>
+            <p class="card-subtitle">Haz clic en el tipo de heces correspondiente para registrar el tránsito intestinal</p>
+          </div>
+        </div>
+
+        <div class="scale-image-container" style="margin-bottom: 1rem;">
+          <img src="assets/escala_bristol.jpg" alt="Escala de Heces de Bristol" style="max-height: 380px;">
+          <div class="scale-image-caption">Infografía médica oficial de la Escala de Heces de Bristol (Tipos 1 al 7)</div>
+        </div>
+
+        <div class="bristol-grid" id="bristolSelectorGrid">
+          <div class="bristol-card" onclick="seleccionarBristol(1)">
+            <div class="bristol-icon bristol-type-1">T1</div>
+            <div class="bristol-desc">
+              <h4>Tipo 1: Trozos duros separados</h4>
+              <p>Similares a nueces, difíciles de evacuar. Estreñimiento importante.</p>
+            </div>
+          </div>
+          <div class="bristol-card selected" onclick="seleccionarBristol(2)">
+            <div class="bristol-icon bristol-type-2">T2</div>
+            <div class="bristol-desc">
+              <h4>Tipo 2: Salchicha grumosa</h4>
+              <p>Compuesta de fragmentos compactos. Estreñimiento leve/tránsito lento.</p>
+            </div>
+          </div>
+          <div class="bristol-card" onclick="seleccionarBristol(3)">
+            <div class="bristol-icon bristol-type-3">T3</div>
+            <div class="bristol-desc">
+              <h4>Tipo 3: En forma de salchicha</h4>
+              <p>Con grietas en la superficie. Tránsito intestinal normal.</p>
+            </div>
+          </div>
+          <div class="bristol-card" onclick="seleccionarBristol(4)">
+            <div class="bristol-icon bristol-type-4">T4</div>
+            <div class="bristol-desc">
+              <h4>Tipo 4: Lisa y blanda</h4>
+              <p>Como una serpiente o salchicha lisa. Tránsito intestinal ideal.</p>
+            </div>
+          </div>
+          <div class="bristol-card" onclick="seleccionarBristol(5)">
+            <div class="bristol-icon bristol-type-5">T5</div>
+            <div class="bristol-desc">
+              <h4>Tipo 5: Trozos pastosos</h4>
+              <p>Bordes definidos, evacuados fácilmente. Falta de fibra dietética.</p>
+            </div>
+          </div>
+          <div class="bristol-card" onclick="seleccionarBristol(6)">
+            <div class="bristol-icon bristol-type-6">T6</div>
+            <div class="bristol-desc">
+              <h4>Tipo 6: Fragmentos blandos y esponjosos</h4>
+              <p>Bordes irregulares, consistencia pastosa. Diarrea leve.</p>
+            </div>
+          </div>
+          <div class="bristol-card" onclick="seleccionarBristol(7)">
+            <div class="bristol-icon bristol-type-7">T7</div>
+            <div class="bristol-desc">
+              <h4>Tipo 7: Acuosa sin pedazos sólidos</h4>
+              <p>Totalmente líquida. Diarrea importante.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label><strong>Interpretación Clínica de la Escala de Bristol:</strong></label>
+          <textarea class="form-control" id="bristolInterpretacion" rows="2">La paciente presenta heces tipo 2 según la Escala de Bristol, caracterizadas por una salchicha grumosa compuesta de fragmentos, compatibles con estreñimiento y tránsito intestinal lento. Este hallazgo está relacionado a su estado de NPO y la nula ingesta previa de agua y fibra.</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: EVALUACIÓN FUNCIONAL (MARCHA, DINAMOMETRÍA, SARC-F, ECF) -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-funcional">
+      <!-- 1. Velocidad de la Marcha -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>🚶‍♀️</span> 1. Prueba de Velocidad de la Marcha (6 Metros)</h2>
+            <p class="card-subtitle">Ingresa únicamente los segundos cronometrados en la prueba presencial</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Distancia Estandarizada (d):</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="marchaDistancia" value="6.0" readonly>
+              <span class="input-group-addon">metros</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--secondary); font-weight: 700;">⏱️ Tiempo Cronometrado (t):</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="marchaTiempo" value="12.0" oninput="calcularMarcha()" placeholder="Ej. 12">
+              <span class="input-group-addon">segundos</span>
+            </div>
+          </div>
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">VELOCIDAD CALCULADA</span>
+            <div class="calc-val-large" id="marchaVelocidadDisplay">0.50 <span style="font-size: 1rem;">m/s</span></div>
+            <div id="marchaBadgeDisplay"><span class="badge badge-rojo">Marcha Lenta (&lt; 0.8 m/s)</span></div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label><strong>Interpretación Clínica de la Marcha:</strong></label>
+          <textarea class="form-control" id="marchaInterpretacion" rows="2">La paciente presentó una velocidad de marcha de 0.5 m/s, calculada a partir de una distancia de 6 metros recorrida en 12 segundos. Al encontrarse por debajo de los parámetros de normalidad (habitualmente &lt; 0.8 m/s), se clasifica como marcha lenta, evidenciando un bajo rendimiento físico y un compromiso severo de la capacidad funcional.</textarea>
+        </div>
+      </div>
+
+      <!-- 2. Dinamometría de Mano -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>✊</span> 2. Dinamometría de Mano (Fuerza de Agarre - Schlüssel et al., 2008)</h2>
+            <p class="card-subtitle">Evaluación de la fuerza isométrica máxima y reserva muscular en 3 intentos</p>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="form-group">
+            <label>Brazo Evaluado:</label>
+            <select class="form-control" id="dinamoBrazo" onchange="calcularDinamometria()">
+              <option value="izquierdo" selected>Brazo Izquierdo</option>
+              <option value="derecho">Brazo Derecho</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Intento 1 (kgf):</label>
+            <input type="number" step="0.1" class="form-control" id="dinamoIntento1" value="19.8" oninput="calcularDinamometria()">
+          </div>
+          <div class="form-group">
+            <label>Intento 2 (kgf):</label>
+            <input type="number" step="0.1" class="form-control" id="dinamoIntento2" value="20.6" oninput="calcularDinamometria()">
+          </div>
+          <div class="form-group">
+            <label>Intento 3 (kgf):</label>
+            <input type="number" step="0.1" class="form-control" id="dinamoIntento3" value="20.7" oninput="calcularDinamometria()">
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 0.5rem;">
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">VALOR MÁXIMO REGISTRADO</span>
+            <div class="calc-val-large" id="dinamoMaximoDisplay">20.7 <span style="font-size: 1rem;">kgf</span></div>
+          </div>
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">PERCENTIL NORMATIVO</span>
+            <div class="calc-val-large" id="dinamoPercentilDisplay" style="font-size: 1.8rem;">P10 - P30</div>
+            <p style="font-size: 0.8rem; color: var(--gray-600);">Según edad y sexo</p>
+          </div>
+          <div class="calc-card" style="text-align: center;">
+            <span class="chip-label">CLASIFICACIÓN SEMÁFORO</span>
+            <div style="margin-top: 0.5rem;" id="dinamoSemaforoDisplay">
+              <span class="badge badge-amarillo" style="font-size: 0.95rem; padding: 0.5rem 0.8rem;">Fuerza Baja / Alerta (Riesgo Moderado)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Infografía: Guía Semáforo y Tabla Normativa Schlüssel -->
+        <div class="reference-box">
+          <div class="reference-title">
+            <span>📊</span> Guía Semáforo y Tabla de Valores Normativos (Schlüssel et al., 2008)
+          </div>
+          <div class="scale-image-container" style="margin-bottom: 1rem;">
+            <img src="assets/dinamometria_tabla.png" alt="Tabla Normativa Dinamometría Schlüssel 2008" style="max-height: 220px;">
+            <div class="scale-image-caption">1. Tabla de valores normativos (Schlüssel et al., 2008) - Mujeres y Varones en kgf</div>
+          </div>
+          <div class="scale-image-container" style="margin-bottom: 1rem;">
+            <img src="assets/dinamometria_semaforo.png" alt="Guía Semáforo Dinamometría" style="max-height: 260px;">
+            <div class="scale-image-caption">2. Guía Semáforo de interpretación clínica (Dinapenia, Alerta, Normal, Elevada)</div>
+          </div>
+          <div class="semaforo-grid">
+            <div class="semaforo-card semaforo-rojo">
+              <strong>&lt; Percentil 10 (&lt; P10)</strong><br>
+              <small>Dinapenia / Depleción Severa • Riesgo Crítico. Criterio mayor para sarcopenia y fragilidad.</small>
+            </div>
+            <div class="semaforo-card semaforo-amarillo">
+              <strong>Percentil 10 a 30 (P10 - P30)</strong><br>
+              <small>Fuerza Baja / Alerta • Riesgo Moderado. Desgaste muscular subclínico. Intervención hiperproteica.</small>
+            </div>
+            <div class="semaforo-card semaforo-verde">
+              <strong>Percentil 30 a 70 (P30 - P70)</strong><br>
+              <small>Fuerza Normal / Promedio • Estatus Óptimo. Capacidad funcional preservada para grupo etario.</small>
+            </div>
+            <div class="semaforo-card semaforo-azul">
+              <strong>&gt; Percentil 70 (&gt; P70)</strong><br>
+              <small>Fuerza Elevada • Excelente Reserva. Reserva nutricional y funcional alta frente a estrés catabólico.</small>
+            </div>
+          </div>
+
+          <div style="margin-top: 1rem; font-size: 0.82rem; color: var(--gray-600);">
+            <strong>Referencia bibliográfica:</strong> Schlüssel MM, dos Anjos LA, de Vasconcelos MT, Kac G. Reference values of handgrip dynamometry of healthy adults. <em>Clin Nutr.</em> 2008; 27(4): 601-607.
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label><strong>Interpretación Clínica de Dinamometría:</strong></label>
+          <textarea class="form-control" id="dinamoInterpretacion" rows="3">Dada la evaluación funcional realizada en tres intentos en el brazo izquierdo (19.8 kg, 20.6 kg y un valor máximo de 20.7 kg obtenido en el tercer intento), se selecciona este último por ser el registro máximo de la prueba. Este valor se sitúa entre el percentil 10 y el percentil 30 (P10 - P30) para su edad y sexo (Schlüssel et al., 2008), con lo cual se evidencia un cuadro de fuerza baja / alerta asociado a un riesgo moderado. Indica necesidad de intervención nutricional hiperproteica y ejercicios de fuerza.</textarea>
+        </div>
+      </div>
+
+      <!-- 3. Cuestionario SARC-F -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>📋</span> 3. Cuestionario SARC-F (Tamizaje Rápido de Sarcopenia)</h2>
+            <p class="card-subtitle">Versión validada en español. Puntuación de corte ≥ 4 puntos define riesgo de sarcopenia</p>
+          </div>
+        </div>
+
+        <div class="scale-image-container" style="margin-bottom: 1rem;">
+          <img src="assets/sarc_f.jpg" alt="Cuestionario SARC-F" style="max-height: 350px;">
+          <div class="scale-image-caption">Formato clínico oficial del cuestionario SARC-F</div>
+        </div>
+
+        <div id="sarcFContainer">
+          <div class="sarc-row">
+            <div class="sarc-q">1. Fuerza: ¿Cuánta dificultad tiene para levantar y llevar 4.5 kg?</div>
+            <div class="sarc-opts">
+              <label class="sarc-radio-label"><input type="radio" name="sarc1" value="0" onchange="calcularSarcF()"> Ninguna (0)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc1" value="1" checked onchange="calcularSarcF()"> Alguna (1)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc1" value="2" onchange="calcularSarcF()"> Mucha / Incapaz (2)</label>
+            </div>
+          </div>
+          <div class="sarc-row">
+            <div class="sarc-q">2. Asistencia para caminar: ¿Cuánta dificultad tiene para cruzar caminando una habitación?</div>
+            <div class="sarc-opts">
+              <label class="sarc-radio-label"><input type="radio" name="sarc2" value="0" onchange="calcularSarcF()"> Ninguna (0)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc2" value="1" checked onchange="calcularSarcF()"> Alguna (1)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc2" value="2" onchange="calcularSarcF()"> Mucha / Ayuda (2)</label>
+            </div>
+          </div>
+          <div class="sarc-row">
+            <div class="sarc-q">3. Levantarse de una silla/cama: ¿Cuánta dificultad tiene para levantarse?</div>
+            <div class="sarc-opts">
+              <label class="sarc-radio-label"><input type="radio" name="sarc3" value="0" onchange="calcularSarcF()"> Ninguna (0)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc3" value="1" checked onchange="calcularSarcF()"> Alguna (1)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc3" value="2" onchange="calcularSarcF()"> Mucha / Sin ayuda (2)</label>
+            </div>
+          </div>
+          <div class="sarc-row">
+            <div class="sarc-q">4. Subir escaleras: ¿Cuánta dificultad tiene para subir 10 escalones?</div>
+            <div class="sarc-opts">
+              <label class="sarc-radio-label"><input type="radio" name="sarc4" value="0" onchange="calcularSarcF()"> Ninguna (0)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc4" value="1" checked onchange="calcularSarcF()"> Alguna (1)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc4" value="2" onchange="calcularSarcF()"> Mucha / Incapaz (2)</label>
+            </div>
+          </div>
+          <div class="sarc-row">
+            <div class="sarc-q">5. Caídas: ¿Cuántas veces se ha caído en el último año?</div>
+            <div class="sarc-opts">
+              <label class="sarc-radio-label"><input type="radio" name="sarc5" value="0" checked onchange="calcularSarcF()"> Ninguna (0)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc5" value="1" onchange="calcularSarcF()"> 1 a 3 caídas (1)</label>
+              <label class="sarc-radio-label"><input type="radio" name="sarc5" value="2" onchange="calcularSarcF()"> 4 o más caídas (2)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-result-display" style="margin-top: 1.25rem;">
+          <div class="calc-label">PUNTUACIÓN TOTAL SARC-F</div>
+          <div class="calc-val-large" id="sarcFTotalDisplay">4 <span style="font-size: 1rem;">/ 10 pts</span></div>
+          <div class="calc-diag" id="sarcFBadgeDisplay">
+            <span class="badge badge-rojo" style="font-size: 0.95rem; padding: 0.4rem 0.9rem;">⚠️ RIESGO DE SARCOPENIA (≥ 4 puntos)</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label><strong>Interpretación Clínica SARC-F:</strong></label>
+          <textarea class="form-control" id="sarcFInterpretacion" rows="2">La paciente obtuvo un puntaje de 4 puntos en el cuestionario SARC-F, alcanzando el punto de corte establecido (≥ 4). Este resultado indica riesgo de presentar sarcopenia, asociado a posibles dificultades en actividades cotidianas que requieren fuerza muscular, movilidad y adecuada capacidad funcional.</textarea>
+        </div>
+      </div>
+
+      <!-- 4. Escala Clínica de Fragilidad (ECF) -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>👵</span> 4. Escala Clínica de Fragilidad (ECF / Rockwood Clinical Frailty Scale)</h2>
+            <p class="card-subtitle">Haz clic en la categoría correspondiente para asignar el nivel de fragilidad (1 al 9)</p>
+          </div>
+        </div>
+
+        <div class="scale-image-container" style="margin-bottom: 1rem;">
+          <img src="assets/escala_fragilidad.jpg" alt="Escala Clínica de Fragilidad" style="max-height: 400px;">
+          <div class="scale-image-caption">Escala Clínica de Fragilidad oficial de Rockwood (Categorías 1 al 9 ilustradas)</div>
+        </div>
+
+        <div class="ecf-grid" id="ecfSelectorGrid">
+          <div class="ecf-card" onclick="seleccionarECF(1)">
+            <div class="ecf-num">1</div>
+            <h4 class="ecf-title">Muy en forma / Atlético</h4>
+            <p class="ecf-desc">Robusto, activo, motivado. Realiza ejercicio con frecuencia.</p>
+          </div>
+          <div class="ecf-card" onclick="seleccionarECF(2)">
+            <div class="ecf-num">2</div>
+            <h4 class="ecf-title">En forma</h4>
+            <p class="ecf-desc">Sin enfermedad activa, pero menos en forma que nivel 1. Camina a menudo.</p>
+          </div>
+          <div class="ecf-card" onclick="seleccionarECF(3)">
+            <div class="ecf-num">3</div>
+            <h4 class="ecf-title">Estable / Manejándose</h4>
+            <p class="ecf-desc">Problemas médicos bien controlados, sin práctica frecuente de ejercicio.</p>
+          </div>
+          <div class="ecf-card selected" onclick="seleccionarECF(4)">
+            <div class="ecf-num">4</div>
+            <h4 class="ecf-title">Vulnerable</h4>
+            <p class="ecf-desc">Independiente, pero con quejas de cansancio precoz o lentitud en actividades.</p>
+          </div>
+          <div class="ecf-card" onclick="seleccionarECF(5)">
+            <div class="ecf-num">5</div>
+            <h4 class="ecf-title">Levemente frágil</h4>
+            <p class="ecf-desc">Lentitud evidente; necesita ayuda en actividades instrumentales (compras, finanzas).</p>
+          </div>
+          <div class="ecf-card" onclick="seleccionarECF(6)">
+            <div class="ecf-num">6</div>
+            <h4 class="ecf-title">Moderadamente frágil</h4>
+            <p class="ecf-desc">Necesita ayuda dentro y fuera del hogar para vestirse, asearse o cocinar.</p>
+          </div>
+          <div class="ecf-card" onclick="seleccionarECF(7)">
+            <div class="ecf-num">7</div>
+            <h4 class="ecf-title">Severamente frágil</h4>
+            <p class="ecf-desc">Dependencia total para cuidados personales. Estable clínicamente.</p>
+          </div>
+          <div class="ecf-card" onclick="seleccionarECF(8)">
+            <div class="ecf-num">8</div>
+            <h4 class="ecf-title">Muy severamente frágil</h4>
+            <p class="ecf-desc">Completamente dependiente, cerca del final de la vida tras enfermedad menor.</p>
+          </div>
+          <div class="ecf-card" onclick="seleccionarECF(9)">
+            <div class="ecf-num">9</div>
+            <h4 class="ecf-title">Enfermo terminal</h4>
+            <p class="ecf-desc">Esperanza de vida menor a 6 meses sin ser necesariamente frágil previamente.</p>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label><strong>Interpretación Clínica de la Fragilidad (ECF):</strong></label>
+          <textarea class="form-control" id="ecfInterpretacion" rows="3">La paciente presenta una puntuación de 4 puntos en la Escala Clínica de Fragilidad (ECF), clasificándola como Vulnerable. Aunque mantiene independencia para sus actividades diarias básicas, la fatiga y el cansancio temprano son manifestación del síndrome de Desgaste Proteico-Energético (DPE), anemia crónica (9.1 g/dL) y el catabolismo severo inducido por la hemodiálisis y la gastroparesia.</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 7: DIAGNÓSTICO NUTRICIONAL (PES) -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-diagnostico">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>🩺</span> 3. Diagnóstico Nutricional en Formato PES</h2>
+            <p class="card-subtitle">Problema (P) relacionado con Etiología (E) evidenciado por Signos y Síntomas (S)</p>
+          </div>
+          <div>
+            <button class="btn btn-secondary btn-sm" onclick="agregarPES()">
+              ➕ Añadir Diagnóstico PES
+            </button>
+          </div>
+        </div>
+
+        <div id="pesListContainer">
+          <!-- Se puebla dinámicamente -->
+        </div>
+
+        <div class="alert-box alert-info" style="margin-top: 1.5rem;">
+          <div>💡</div>
+          <div>
+            <strong>Catálogo Rápido de Códigos Clínicos Habituales (IDNT/NCP):</strong>
+            <ul style="margin-left: 1.25rem; margin-top: 0.35rem;">
+              <li><strong>NC-1.4:</strong> Función gastrointestinal alterada (gastroparesia, vómitos, intolerancia oral)</li>
+              <li><strong>NC-1.1:</strong> Dificultad para deglutir (disfagia severa)</li>
+              <li><strong>NI-2.1:</strong> Ingesta oral inadecuada / Nula (régimen de NPO)</li>
+              <li><strong>NC-2.2:</strong> Valores de laboratorio alterados relacionados con nutrición (uremia, hipoalbuminemia, hiperfosfatemia)</li>
+              <li><strong>NI-5.3:</strong> Ingestión energético-proteica insuficiente (desgaste proteico-energético DPE)</li>
+              <li><strong>NC-3.3:</strong> Sobrepeso / Obesidad con sarcopenia (obesidad sarcopénica)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 8: INTERVENCIÓN NUTRICIONAL & SOPORTE ENTERAL -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-intervencion">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>🥣</span> 4. Intervención Nutricional: Soporte Enteral Especializado</h2>
+            <p class="card-subtitle">Cálculo de requerimiento energético, macronutrientes, nutriente limitante y módulos</p>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">1. Vía de Soporte y Estimación Energética (Regla del Pulgar de Vidal)</h3>
+        <div class="grid-3">
+          <div class="form-group">
+            <label>Vía de Soporte Nutricional:</label>
+            <input type="text" class="form-control" id="intervVia" value="Sonda Nasoyeyunal (SNY post-pilórica)" oninput="actualizarBanner()">
+          </div>
+          <div class="form-group">
+            <label>Peso de Referencia para Cálculo:</label>
+            <div class="input-group">
+              <input type="number" step="0.1" class="form-control" id="intervPesoCalculo" value="54.5" oninput="recalcularIntervencion()">
+              <span class="input-group-addon">kg (seco/ideal)</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Kcal por kg de peso (Regla del pulgar):</label>
+            <div class="input-group">
+              <input type="number" step="1" class="form-control" id="intervKcalKg" value="30" oninput="recalcularIntervencion()">
+              <span class="input-group-addon">kcal/kg</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-card" style="margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <span class="chip-label">GASTO ENERGÉTICO TOTAL (100% GET)</span>
+              <div class="calc-val-large" id="intervGetTotalDisplay">1,635 <span style="font-size: 1rem;">kcal/día</span></div>
+            </div>
+            <div style="width: 250px;">
+              <label><strong>Porcentaje de Inicio (% Adaptación):</strong></label>
+              <select class="form-control" id="intervPctInicio" onchange="recalcularIntervencion()">
+                <option value="50">50% (Inicio conservador - DM2/Disfagia)</option>
+                <option value="70">70% (Inicio progresivo)</option>
+                <option value="85" selected>85% (Inicio NET - ERC en hemodiálisis)</option>
+                <option value="100">100% (Requerimiento pleno)</option>
+              </select>
+            </div>
+            <div>
+              <span class="chip-label">ENERGÍA DE INICIO PRESCRITA</span>
+              <div class="calc-val-large" id="intervGetInicioDisplay" style="color: var(--secondary);">1,390 <span style="font-size: 1rem;">kcal/día</span></div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1rem; color: var(--primary); margin: 1.25rem 0 0.75rem;">2. Distribución de Macronutrientes y Requerimiento Hídrico</h3>
+        <div class="grid-3">
+          <div class="calc-card">
+            <span class="chip-label">PROTEÍNAS</span>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+              <input type="number" step="0.1" class="form-control" id="macroProtGKg" value="1.2" oninput="recalcularIntervencion()" style="width: 80px;">
+              <span style="font-size: 0.85rem; line-height: 2;">g/kg/día</span>
+            </div>
+            <div style="margin-top: 0.5rem; font-weight: 700;">
+              Total 100%: <span id="macroProtGramosDisplay">65.4 g</span> (<span id="macroProtKcalDisplay">261.6 kcal</span> / <span id="macroProtPctDisplay">16%</span> VCT)<br>
+              Inicio NET: <span id="macroProtInicioDisplay" style="color: var(--secondary);">56 g</span>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <span class="chip-label">CARBOHIDRATOS (CHO)</span>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+              <input type="number" step="0.1" class="form-control" id="macroChoGKg" value="4.0" oninput="recalcularIntervencion()" style="width: 80px;">
+              <span style="font-size: 0.85rem; line-height: 2;">g/kg/día</span>
+            </div>
+            <div style="margin-top: 0.5rem; font-weight: 700;">
+              Total 100%: <span id="macroChoGramosDisplay">220.7 g</span> (<span id="macroChoKcalDisplay">882.9 kcal</span> / <span id="macroChoPctDisplay">54%</span> VCT)<br>
+              Inicio NET: <span id="macroChoInicioDisplay" style="color: var(--secondary);">188 g</span>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <span class="chip-label">LÍPIDOS</span>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+              <input type="number" step="0.1" class="form-control" id="macroLipGKg" value="1.0" oninput="recalcularIntervencion()" style="width: 80px;">
+              <span style="font-size: 0.85rem; line-height: 2;">g/kg/día</span>
+            </div>
+            <div style="margin-top: 0.5rem; font-weight: 700;">
+              Total 100%: <span id="macroLipGramosDisplay">54.5 g</span> (<span id="macroLipKcalDisplay">490.5 kcal</span> / <span id="macroLipPctDisplay">30%</span> VCT)<br>
+              Inicio NET: <span id="macroLipInicioDisplay" style="color: var(--secondary);">46 g</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 1rem;">
+          <div class="form-group">
+            <label>Cálculo del Requerimiento Hídrico:</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="intervAguaMetodo" value="Diuresis (50 ml) + Pérdidas Insensibles (600 ml) = 650 ml/día" oninput="recalcularIntervencion()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Volumen Hídrico Total Objetivo:</label>
+            <div class="input-group">
+              <input type="number" class="form-control" id="intervAguaTotal" value="650" oninput="recalcularIntervencion()">
+              <span class="input-group-addon">ml/día</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Selección de Fórmula y Nutriente Limitante -->
+        <h3 style="font-size: 1rem; color: var(--primary); margin: 1.5rem 0 0.75rem;">3. Fórmula Enteral y Nutriente Limitante</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Fórmula Enteral Seleccionada:</label>
+            <select class="form-control" id="intervFormulaSelect" onchange="cambiarFormulaEnteral()">
+              <option value="vital" selected>Vital® 1,5 kcal Líquido (Oligomérica, 150 kcal, 6.75g Prot, 5.5g Lip, 18.4g CHO por 100ml)</option>
+              <option value="glucerna">Glucerna® 1.0 kcal/ml (Normocalórica DM, 100 kcal, 4.05g Prot, 5.13g Lip, 9.2g CHO por 100ml)</option>
+              <option value="personalizada">Fórmula Personalizada</option>
+            </select>
+            <div style="text-align: center; margin-top: 0.75rem;">
+              <img id="formulaImgDisplay" src="assets/vital_1_5.png" alt="Envase de Fórmula Enteral" style="max-height: 180px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+              <p style="font-size: 0.8rem; color: var(--gray-600); margin-top: 0.35rem;" id="formulaImgCaption">Vital® 1,5 kcal Líquido (Abbott Nutrition)</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nutriente Limitante Seleccionado para Definir el Volumen:</label>
+            <select class="form-control" id="intervNutrienteLimitante" onchange="recalcularIntervencion()">
+              <option value="lipidos" selected>Lípidos (Recomendado para evitar sobrecarga grasa)</option>
+              <option value="proteina">Proteínas</option>
+              <option value="carbohidratos">Carbohidratos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-card" style="margin-bottom: 1.25rem;">
+          <div class="grid-3" style="text-align: center;">
+            <div>
+              <span class="chip-label">CÁLCULO DEL NUTRIENTE LIMITANTE</span>
+              <div id="intervCalcLimitanteFormula" style="font-weight: 700; margin-top: 0.35rem;">(46 g × 100) / 5.5 = 836.4 ml</div>
+            </div>
+            <div>
+              <span class="chip-label">VOLUMEN DE FÓRMULA CALCULADO</span>
+              <div class="calc-val-large" id="intervVolumenFormulaDisplay">835 <span style="font-size: 1rem;">ml/día</span></div>
+            </div>
+            <div>
+              <span class="chip-label">RITMO DE INFUSIÓN (BOMBA CONTINUA)</span>
+              <div class="calc-val-large" id="intervRitmoInfusionDisplay" style="color: var(--secondary);">42 <span style="font-size: 1rem;">ml/h (20h)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Déficit y Módulos Nutricionales -->
+        <h3 style="font-size: 1rem; color: var(--primary); margin: 1.5rem 0 0.75rem;">4. Aporte de la Fórmula vs Requerimiento (Déficit y Módulos)</h3>
+        <div class="table-responsive">
+          <table class="clinical-table">
+            <thead>
+              <tr>
+                <th>Nutriente</th>
+                <th>Requerimiento (Inicio)</th>
+                <th>Aporte Fórmula (<span id="tablaVolumenFml">835 ml</span>)</th>
+                <th>Falta / Déficit</th>
+                <th>Módulo Nutricional Agregado</th>
+                <th>Aporte Final</th>
+                <th>% Adecuación</th>
+              </tr>
+            </thead>
+            <tbody id="intervAdecuacionTableBody">
+              <!-- Se puebla dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-group" style="margin-top: 1.5rem;">
+          <label><strong>Prescripción Nutricional Formal y Forma de Infusión:</strong></label>
+          <textarea class="form-control" id="intervPrescripcion" rows="3">NET por SNY: 835 mL/día de Vital® 1,5 kcal/mL, fórmula enteral oligomérica, hipercalórica y especializada a base de proteínas hidrolizadas de suero de leche, administrada mediante bomba de infusión continua durante 20 horas al día (42 mL/h), más 35 g de módulo de carbohidratos (maltodextrina). Monitorizar la tolerancia gastrointestinal, la glucemia y el balance hídrico, considerando la enfermedad renal crónica estadio 5 en hemodiálisis.</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 9: MONITOREO NUTRICIONAL -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-monitoreo">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>📊</span> 5. Monitoreo y Seguimiento Nutricional</h2>
+            <p class="card-subtitle">Estrategias de control protocolizadas a corto, mediano y largo plazo</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><strong>Monitoreo a Corto Plazo (Primeras 24 a 72 horas):</strong></label>
+          <textarea class="form-control" id="monitCorto" rows="4">En la fase inicial de adaptación al soporte nutricional enteral post-pilórico por Sonda Nasoyeyunal (SNY), se evaluará prioritariamente la tolerancia gastrointestinal midiendo la presencia o ausencia de síntomas de emesis (náuseas, vómitos, distensión abdominal o regurgitación) ante el avance progresivo del volumen infusionado. En paralelo, se llevará un balance hídrico estricto de 24 horas junto al control diario del peso seco pre y post hemodiálisis para asegurar el cumplimiento estricto de la restricción de líquidos (600-650 ml/día) y evitar la sobrecarga de volumen. A nivel bioquímico de urgencia, se monitorizará el potasio sérico (meta < 5.0 mEq/L), sodio, fósforo y magnesio para prevenir arritmias cardíacas y descartar el síndrome de realimentación. Finalmente, se verificará clínicamente la permeabilidad y la correcta posición post-pilórica de la sonda nasoyeyunal para evitar complicaciones mecánicas o riesgos de aspiración.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label><strong>Monitoreo a Medio Plazo (1 a 4 semanas):</strong></label>
+          <textarea class="form-control" id="monitMediano" rows="4">A mediano plazo, el seguimiento bioquímico se centrará en la medición semanal de la prealbúmina sérica (meta > 15–20 mg/dL) como indicador de recuperación proteica visceral aguda, la albúmina sérica mensual, el perfil lipídico y los electrolitos clave (calcio corregido, fósforo < 5.5 mg/dL y magnesio). Se evaluará la adecuación del volumen administrado respecto a la prescripción objetivo (1635 kcal/día y 65.4 g de proteína/día). Asimismo, se monitorizará la evolución de la composición corporal mediante el peso seco, la fuerza de agarre por dinamometría y los perímetros musculares del brazo para confirmar la detención del catabolismo muscular. En el aspecto digestivo, se registrará el patrón de deposiciones (frecuencia y consistencia según la escala de Bristol) y se valorará la factibilidad de iniciar pruebas de tolerancia por vía oral en caso de objetivar una remisión de la gastroparesia.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label><strong>Monitoreo a Largo Plazo (Mayor a 1 mes):</strong></label>
+          <textarea class="form-control" id="monitLargo" rows="4">En la etapa de mantenimiento a largo plazo, el objetivo primordial será la reversión del Desgaste Proteico-Energético (DPE) evidenciada por la normalización paulatina de la albúmina sérica (meta > 3.8 g/dL) y la recuperación de la reserva de masa magra y grasa. Se realizará un control riguroso del Metabolismo Óseo Mineral asociado a la ERC mediante el seguimiento de los niveles de fósforo, calcio e hidroxi-vitamina D / PTH, ajustando la efectividad de los quelantes de fósforo. Del mismo modo, se reevaluará periódicamente la capacidad funcional a través de la Escala Clínica de Fragilidad (ECF) con la meta de migrar de la categoría 4 (Vulnerable) a la 3 (Estable) y mejorar la autonomía de la paciente. Por último, se evaluará trimestralmente la respuesta al tratamiento de la anemia (meta de hemoglobina entre 10 y 11.5 g/dL) en respuesta al uso de eritropoyetina y terapia con hierro.</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 10: CONCLUSIONES E INFORME COMPLETO -->
+    <!-- ========================================================================= -->
+    <section class="tab-pane" id="tab-informe">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title"><span>📑</span> 6. Conclusiones y Vista Previa del Informe Final</h2>
+            <p class="card-subtitle">Síntesis clínica global lista para entrega académica o inclusión en historia clínica</p>
+          </div>
+          <div>
+            <button class="btn btn-success" onclick="window.print()">
+              🖨️ Imprimir / Exportar a PDF
+            </button>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.05rem; color: var(--primary); margin-bottom: 0.75rem;">Conclusiones del Abordaje Nutricional:</h3>
+        <div class="form-group">
+          <textarea class="form-control" id="informeConclusiones" rows="8">1. Eficiencia del Soporte Nutricional Enteral Post-Pilórico:
+La prescripción de Nutrición Enteral Total por Sonda Nasoyeyunal (SNY) mediante infusión continua representa la vía de abordaje de elección en esta paciente. Al sobrepasar el píloro, se supera la estasis y el retardo del vaciamiento gástrico secundarios a la gastroparesia, permitiendo cubrir el 100% de los requerimientos calórico-proteicos sin desencadenar sintomatología emética ni riesgo de aspiración.
+
+2. Manejo Específico del Desgaste Proteico-Energético (DPE) en Hemodiálisis:
+El estado hipercatabólico, sumado a las pérdidas de aminoácidos en el dializado y la hipoalbuminemia severa (1.6 g/dL), justifica la formulación de una dieta hiperproteica (1.2 g/kg/día). Esta intervención es fundamental para detener la pérdida de masa magra, reponer las reservas viscerales y mejorar la fuerza funcional (dinamometría) de la paciente.
+
+3. Restricción Hídrica y Control del Perfil Electrolítico Renal:
+Dado el estado de oligoanuria (50 mL/día de diuresis residual), la adecuación del volumen total a 650 mL/día es crucial para evitar complicaciones hemodinámicas por sobrecarga de volumen (edema pulmonar e hipertensión). Asimismo, el control estricto de potasio (<3000 mg/día) y fósforo (800 mg/día) en la mezcla enteral previene descompensaciones electrocardiográficas y detiene la progresión de la osteodistrofia renal.
+
+4. Prevención del Deterioro Funcional y Fragilidad:
+La integración de la evaluación funcional (marcha de 0.5 m/s, SARC-F de 4 puntos y ECF de 4 puntos) demuestra que el compromiso nutricional impacta directamente en la autonomía física. Un monitoreo estructurado a corto, mediano y largo plazo permitirá revertir el estado de vulnerabilidad, reduciendo el riesgo de morbimortalidad y mejorando la calidad de vida en hemodiálisis.</textarea>
+        </div>
+
+        <!-- Ficha de Firmas al Imprimir -->
+        <div style="margin-top: 3rem; display: flex; justify-content: space-around; text-align: center;">
+          <div style="border-top: 1px solid #475569; width: 220px; padding-top: 0.5rem; font-size: 0.85rem;">
+            <strong>Firma del Evaluador</strong><br>
+            Lic. en Nutrición y Dietética
+          </div>
+          <div style="border-top: 1px solid #475569; width: 220px; padding-top: 0.5rem; font-size: 0.85rem;">
+            <strong>Docente Responsable</strong><br>
+            USIL - Nutrición Clínica
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal para Abrir en Celular / Red Local con Código QR -->
+  <div class="modal-overlay" id="mobileModal" onclick="cerrarModalMovil(event)">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>📱 Abrir en otro dispositivo (Celular / Tablet)</h3>
+        <button class="modal-close-btn" onclick="cerrarModalMovil()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.95rem; color: #475569; margin-bottom: 0.75rem;">
+          Escanea este código QR con la cámara de tu celular para abrir y usar la plataforma en tu dispositivo:
+        </p>
+        <div class="qr-box" id="qrcodeContainer">
+          <!-- Se genera dinámicamente con qrcode.min.js -->
+        </div>
+        <div class="url-copy-container">
+          <input type="text" class="url-copy-input" id="mobileUrlInput" readonly value="http://192.168.18.186:8080">
+          <button class="btn btn-secondary btn-sm" onclick="copiarUrlMovil()">📋 Copiar</button>
+        </div>
+        <div class="alert-box alert-info" style="text-align: left; margin-top: 1rem; font-size: 0.85rem;">
+          <div>📶</div>
+          <div>
+            <strong>Instrucciones Wi-Fi:</strong> Tu celular o tablet debe estar conectado a la misma red Wi-Fi que esta computadora (o compartir zona Wi-Fi). Abre el navegador del móvil e ingresa la dirección mostrada arriba.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

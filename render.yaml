@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: nutricion-pan-usil
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: TIDB_HOST
+        value: gateway01.us-west-2.prod.aws.tidbcloud.com
+      - key: TIDB_PORT
+        value: "4000"
+      - key: TIDB_USER
+        value: 2bn1VRXAJySSG6k.nutricion_app
+      - key: TIDB_PASSWORD
+        value: NutricionPan2026!
+      - key: TIDB_DATABASE
+        value: nutricion_pan_db
